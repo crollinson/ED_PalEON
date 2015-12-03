@@ -1,6 +1,6 @@
 #Process netCDF PalEON met files into HDF5 files for ED2:
 #
-#This works with files in the format site_metvar_year_month.nc (i.e. Ha1_lwdown_1850_01.nc)
+#This works with files in the regional met driver rasters that can then be run site-by-site
 #It loads the netCDF file, formats the data into HDF5 format, and renames variables and the date 
 #to be in the ED2 HDF5 format with the correct dimensions.  
 #
@@ -12,8 +12,9 @@
 #install.packages("/usr4/spclpgm/jmatthes/zlibbioc_1.6.0.tar.gz",repos=NULL,type="source",lib="/usr4/spclpgm/jmatthes/")
 #install.packages("/usr4/spclpgm/jmatthes/rhdf5_2.4.0.tar.gz",repos=NULL,type="source",lib="/usr4/spclpgm/jmatthes/")
 #
-#Original: Jaclyn Hatala Matthes, 1/7/14, jaclyn.hatala.matthes@gmail.com
-#Edits: Christy Rollinson, January 2015, crollinson@gmail.com
+#Original (Sites): Jaclyn Hatala Matthes, 1/7/14, jaclyn.hatala.matthes@gmail.com
+#Edits (Sites): Christy Rollinson, January 2015, crollinson@gmail.com
+#Edits (Region): Christy Rollinson, 2 December 2015, crollinson@gmail.com
 
 library(ncdf4)
 library(rhdf5)
@@ -49,7 +50,12 @@ month.txt <- c("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV"
       nc_close(nc.file)
       
       # var <- array(var,dim=dim(var))                   
-      
+      var2 <- array(dim=c(dim(var)[3],dim(var)[1],dim(var)[2]))                   
+
+	  for(i in 1:dim(var)[3]){
+	    var2[i,,] <- var[,,i]
+	  }   
+
       #process year and month for naming
       filesplit <- strsplit(in.files[f],"_")
       year  <- as.numeric(filesplit[[1]][2])+1000 ###CAREFUL - I HAD TO ADD 1000 FOR PALEON
@@ -60,7 +66,7 @@ month.txt <- c("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV"
       #write HDF5 file
       out.file <- paste(out.path,"/",ed2.vars[v],"/",ed2.vars[v],"_",year,month.txt[month.num],".h5",sep="")
       h5createFile(out.file)
-      h5write(var,out.file,ed2.vars[v])
+      h5write(var2,out.file,ed2.vars[v])
       h5write(time,out.file,"time")
       h5write(lon,out.file,"lon")
       h5write(lat,out.file,"lat")
@@ -81,8 +87,8 @@ nc_close(co2.in)
     var.path <- file.path(in.path,"tair")
     in.files <- list.files(var.path)
 
-    for(f in 1:length(in.files)){
-      
+   for(f in 1:length(in.files)){
+    	      
       #open and read netcdf file
       nc.file <- nc_open(file.path(var.path,in.files[f]))
       var     <- ncvar_get(nc.file,"tair")
@@ -93,7 +99,8 @@ nc_close(co2.in)
       
       # Overwriting the tair data with co2 in ALL cells
       # i.e. constant co2 across space and time for that month
-      var[,,] <- co2.mo[f]
+      var2 <- array(dim=c(dim(var)[3],dim(var)[1],dim(var)[2]))                   
+      var2[,,] <- co2.mo[f]
       
       #process year and month for naming
       filesplit <- strsplit(in.files[f],"_")
@@ -105,7 +112,7 @@ nc_close(co2.in)
       #write HDF5 file
       out.file <- paste(out.path,"/","co2","/","co2","_",year,month.txt[month.num],".h5",sep="")
       h5createFile(out.file)
-      h5write(var,out.file,"co2")
+      h5write(var2,out.file,"co2")
       h5write(time,out.file,"time")
       h5write(lon,out.file,"lon")
       h5write(lat,out.file,"lat")

@@ -30,7 +30,7 @@ $ED_NL
    !---------------------------------------------------------------------------------------!
    !     Start of simulation. Information must be given in UTC time.                       !
    !---------------------------------------------------------------------------------------!
-   NL%IMONTHA  = 01
+   NL%IMONTHA  = 06
    NL%IDATEA   = 01
    NL%IYEARA   = 1850
    NL%ITIMEA   = 0000
@@ -566,7 +566,7 @@ $ED_NL
    NL%THSUMS_DATABASE  = '/projectnb/dietzelab/EDI/ed_inputs/'
    NL%ED_MET_DRIVER_DB = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/PL_MET_HEADER'
    NL%SOILSTATE_DB     = '/projectnb/dietzelab/EDI/ed_inputs/STW1996OCT.dat'
-   NL%SOILDEPTH_DB     = '/projectnb/dietzelab/paleon/ED_runs/phase2_env/soil_depths.dat'
+   NL%SOILDEPTH_DB     = '/projectnb/dietzelab/paleon/ED_runs/phase2_env_drivers/soil_depths.dat'
    !---------------------------------------------------------------------------------------!
 
 
@@ -1432,7 +1432,7 @@ $ED_NL
    NL%IMETTYPE    = 1
    NL%ISHUFFLE    = 0
    NL%METCYC1     = 1850
-   NL%METCYCF     = 3010
+   NL%METCYCF     = 1869
    NL%IMETAVG     = 2
    NL%IMETRAD     = 1
    NL%INITIAL_CO2 = 279

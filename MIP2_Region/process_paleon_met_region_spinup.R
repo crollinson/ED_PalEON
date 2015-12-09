@@ -6,7 +6,7 @@
 #
 #It requires the rhdf5 library, which is not available on CRAN, but by can be installed locally:
 #source("http://bioconductor.org/biocLite.R")
-#a
+#biocLite("rhdf5")
 #
 #on GEO CLUSTER (local install of rhdf5): 
 #install.packages("/usr4/spclpgm/jmatthes/zlibbioc_1.6.0.tar.gz",repos=NULL,type="source",lib="/usr4/spclpgm/jmatthes/")
@@ -24,9 +24,13 @@ in.path  <- "/projectnb/dietzelab/paleon/met_regional/phase2_met_regional_v2"
 out.path <- "/projectnb/dietzelab/paleon/ED_runs/met_drivers/phase2_met"
 dir.create(file.path(out.path), showWarnings = FALSE)
 
+# sites <- c("PHA",   "PHO",  "PUN",  "PBL",  "PDL",  "PMB")
+# lat   <- c(42.54,   45.25,  46.22,  46.28,  47.17,  43.61)
+# lon   <- c(-72.18, -68.73, -89.53, -94.58, -95.17, -82.83)
 orig.vars <- c("lwdown", "precipf", "psurf", "qair", "swdown", "tair", "wind")
 ed2.vars  <- c( "dlwrf",   "prate",  "pres",   "sh",  "vbdsf",  "tmp", "ugrd")
 month.txt <- c("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC")
+vars.stat <- c("hgt", "vddsf", "nbdsf", "nddsf")
 
 
   for(v in 1:length(orig.vars)){
@@ -35,9 +39,7 @@ month.txt <- c("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV"
     in.files <- list.files(var.path)
     dir.create(file.path(out.path,ed2.vars[v]), showWarnings = FALSE)
 
-    # for(f in 1:length(in.files)){
-    # for(f in 1:(20*12)){
-    for(f in 21:length(in.files)){
+    for(f in 1:(20*12)){
 
       #open and read netcdf file
       nc.file <- nc_open(file.path(var.path,in.files[f]))
@@ -73,6 +75,7 @@ month.txt <- c("JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV"
       h5write(lon,out.file,"lon")
       h5write(lat[order(lat, decreasing=T)],out.file,"lat")
       # H5Fclose(out.file) # don't need this because of how we created & wrote the files
+
     }
   }
 
@@ -89,9 +92,7 @@ nc_close(co2.in)
     var.path <- file.path(in.path,"tair")
     in.files <- list.files(var.path)
 
-    # for(f in 1:length(in.files)){
-    # for(f in 1:(20*12)){
-    for(f in 21:length(in.files)){
+    for(f in 1:(20*12)){
 
       #open and read netcdf file
       nc.file <- nc_open(file.path(var.path,in.files[f]))

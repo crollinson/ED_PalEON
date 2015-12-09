@@ -30,11 +30,12 @@
 module load nco/4.3.4
 
 # Define constants & file paths for the script
-file_dir=/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1
+file_dir=/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/
 grid_order=/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/Paleon_MIP_Phase2_ED_Order.csv
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc
-n=1
+file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc
+n=4
 
 # Get the list of what grid cells have already been done
 pushd $file_dir
@@ -42,7 +43,7 @@ pushd $file_dir
 popd
 
 # Extract the file names we should be making form the csv file
-cells=($(awk -F ',' 'NR>1 {print "lat" $1 "lon" $2}' $grid_order))
+cells=($(awk -F ',' 'NR>1 {print "lat" $2 "lon" $1}' $grid_order))
 lat=($(awk -F ',' 'NR>1 {print $2}' $grid_order))
 lon=($(awk -F ',' 'NR>1 {print $1}' $grid_order))
 
@@ -55,7 +56,8 @@ lon=($(awk -F ',' 'NR>1 {print $1}' $grid_order))
 # done
 
 # An alternate way to do it that works if we don't skip anything
-n_done=$((${#file_done[@]}))
+#n_done=$((${#file_done[@]}))
+n_done=0
 n_cells=${#cells[@]}
 cells=(${cells[@]:$n_done:$n})
 lat=(${lat[@]:$n_done:$n})
@@ -70,24 +72,92 @@ do
 
 	lat_now=${lat[FILE]}
 	lon_now=${lon[FILE]}
+
+	# -----------------------------------------------------------------------------
+	# Extracting and setting soil  parameters
+	# 1) extract and store as a temporary clay & sand .nc file
+	# 2) extract those single values and store it as an object
+	# 3) convert percentages into fraction; cm to m
+	# 4) subsetting soil layers based on soil depth
+	# 5) file cleanup: get rid of temp clay & sand
+	# -----------------------------------------------------------------------------
+	# List of baseline soil parameters
+	SLZ_BASE=(-4.00 -3.00 -2.17 -1.50 -1.10 -0.80 -0.60 -0.45 -0.30 -0.20 -0.12 -0.06)
+	SLMSTR_BASE=(1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00)
+	STGOFF_BASE=(0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00 0.00)
+	NZG=${#SLZ_BASE[@]}
+	depth_min=(-0.15) # Setting an artificial minimum soil depth of 15 cm; note: this gets us a min of 3 soil layers
+
+
+	# Get cell bounding box 
 	lat_min=$(bc<<<"$lat_now-0.25")
 	lat_max=$(bc<<<"$lat_now+0.25")
 	lon_min=$(bc<<<"$lon_now-0.25")
 	lon_max=$(bc<<<"$lon_now+0.25")
 
-	# Extract percent clay and percent sand
-	# 1) extract and store as a temporary clay & sand .nc file
-	# 2) extract those single values and store it as an object
-	# 3) convert percentage into a fraction
-	# 4) file cleanup: get rid of temp clay & sand
+	# 1) extract and store as a temporary clay & sand .nc file	
 	ncea -O -d latitude,$lat_min,$lat_max -d longitude,$lon_min,$lon_max $file_clay clay_temp.nc 
 	ncea -O -d latitude,$lat_min,$lat_max -d longitude,$lon_min,$lon_max $file_sand sand_temp.nc 
+	ncea -O -d latitude,$lat_min,$lat_max -d longitude,$lon_min,$lon_max $file_depth depth_temp.nc 
+
+	# 2) extract those single values and store it as an object
 	clay=$(ncdump clay_temp.nc |awk '/t_clay =/ {nextline=NR+1}{if(NR==nextline){print $1}}')
 	sand=$(ncdump sand_temp.nc |awk '/t_sand =/ {nextline=NR+1}{if(NR==nextline){print $1}}')
+	depth=$(ncdump depth_temp.nc |awk '/soil_depth =/ {nextline=NR+1}{if(NR==nextline){print $1}}')
+
+	# 3) convert percentages into fraction; cm to m
 	clay=$(bc<<<"$clay*0.01")
 	sand=$(bc<<<"$sand*0.01")
+	depth=$(bc<<<"$depth*-0.01")
 
-	rm -f clay_temp.nc sand_temp.nc
+	# ---------------------------------------------
+	# 4) subsetting soil layers based on soil depth; deepest layer = soil_depth
+	# ---------------------------------------------
+	# If the actual soil depth is less than what we specified as the minimum, use our 
+	# artificial minimum (default = 0.15 cm)
+
+	if [[(("${depth}" < "${depth_min}"))]]
+	then
+		depth=$depth_min
+	fi
+
+	SLZ=()
+	SLMSTR=()
+	STGOFF=()
+	for ((i=0; i<$NZG; i++));
+	do
+	if [[(("${SLZ_BASE[$i]}" < "${depth}"))]]
+	then
+		SLZ=(${SLZ[@]} ${SLZ_BASE[$i]},)
+		SLMSTR=(${SLMSTR[@]} ${SLMSTR_BASE[$i]},)
+		STGOFF=(${STGOFF[@]} ${STGOFF_BASE[$i]},)
+	fi
+	done
+
+	# Defining some new index numbers
+	NZG=${#SLZ[@]} # Number soil layers
+	nz_last=$(($NZG - 1)) # index num of the last layer
+
+	# Replace the deepest soil layer with soil depth
+	SLZ=($depth, ${SLZ[@]:1:$nz_last})
+
+	# Getting rid of trailing commas
+	SLZ[$nz_last]=${SLZ[$nz_last]:0:5}
+	SLMSTR[$nz_last]=${SLMSTR[$nz_last]:0:4}
+	STGOFF[$nz_last]=${STGOFF[$nz_last]:0:4}
+
+	# Flattening the array into a single "value"
+	SLZ=$(echo ${SLZ[@]})
+	SLMSTR=$(echo ${SLMSTR[@]})
+	STGOFF=$(echo ${STGOFF[@]})
+	echo ${SLZ}
+	echo ${SLMSTR}
+	echo ${STGOFF}
+	# ---------------------------------------------
+
+	# 5) file cleanup: get rid of temp clay & sand
+	rm -f clay_temp.nc sand_temp.nc depth_temp.nc
+	# -----------------------------------------------------------------------------
 
 	# File Paths
     new_analy="'${file_dir}${SITE}/analy/${SITE}'"
@@ -118,11 +188,14 @@ do
         sed -i "s/POI_LON  =.*/POI_LON  = $lon_now/" ED2IN # set site longitude
         sed -i "s/SLXCLAY =.*/SLXCLAY = $clay/" ED2IN # set fraction soil clay
         sed -i "s/SLXSAND =.*/SLXSAND = $sand/" ED2IN # set fraction soil sand
-
+        sed -i "s/NZG =.*/NZG = $NZG/" ED2IN # set number soil layers
+        sed -i "s/SLZ     =.*/SLZ = $SLZ/" ED2IN # set soil depths
+        sed -i "s/SLMSTR  =.*/SLMSTR = $SLMSTR/" ED2IN # set initial soil moisture
+        sed -i "s/STGOFF  =.*/STGOFF = $STGOFF/" ED2IN # set initial soil temp offset
 
 	    sed -i "s,$oldbase.*,$newbase,g" paleon_ed2_smp_geo.sh #change path in submit script
 	    sed -i "s,TEST,${SITE}${rep},g" paleon_ed2_smp_geo.sh #change job name
 		
-		qsub paleon_ed2_smp_geo.sh
+# 		qsub paleon_ed2_smp_geo.sh
 	popd
 done

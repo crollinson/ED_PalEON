@@ -3,7 +3,8 @@
 #$ -j y 
 #$ -S /bin/bash         
 #$ -V 
-#$ -pe omp 12
+#$ -pe omp 4
+#$ -v OMP_NUM_THREADS=4
 #$ -m e
 #$ -M crollinson@gmail.com
 #$ -l h_rt=72:00:00

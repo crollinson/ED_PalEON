@@ -19,9 +19,9 @@
 #    Things to be Modified per site:
 #     -  NL%POI_LAT  =  
 #     -  NL%POI_LON  = 
-#     -  NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/XXXXX/analy/XXXXX'
-#     -  NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/XXXXX/histo/XXXXX'
-#     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
+#     -  NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
@@ -29,9 +29,10 @@
 
 module load nco/4.3.4
 
-# Define constants & file paths for the script
-file_dir=/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/
-grid_order=/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/Paleon_MIP_Phase2_ED_Order.csv
+# Define constants & file paths for the scripts
+# -- file_dir = where you want the
+file_dir=/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/
+grid_order=/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/0_setup/Paleon_MIP_Phase2_ED_Order.csv
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc
 file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc
@@ -196,6 +197,6 @@ do
 	    sed -i "s,$oldbase.*,$newbase,g" paleon_ed2_smp_geo.sh #change path in submit script
 	    sed -i "s,TEST,${SITE}${rep},g" paleon_ed2_smp_geo.sh #change job name
 		
-# 		qsub paleon_ed2_smp_geo.sh
+ 		qsub paleon_ed2_smp_geo.sh
 	popd
 done

@@ -32,11 +32,13 @@ module load nco/4.3.4
 # Define constants & file paths for the scripts
 ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt
 file_dir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/
-grid_order=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup/Paleon_MIP_Phase2_ED_Order.csv
+setup_dir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc
 file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc
 n=4
+
+mkdir -p $file_dir
 
 # Get the list of what grid cells have already been done
 pushd $file_dir
@@ -44,9 +46,9 @@ pushd $file_dir
 popd
 
 # Extract the file names we should be making form the csv file
-cells=($(awk -F ',' 'NR>1 {print "lat" $2 "lon" $1}' $grid_order))
-lat=($(awk -F ',' 'NR>1 {print $2}' $grid_order))
-lon=($(awk -F ',' 'NR>1 {print $1}' $grid_order))
+cells=($(awk -F ',' 'NR>1 {print "lat" $2 "lon" $1}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
+lat=($(awk -F ',' 'NR>1 {print $2}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
+lon=($(awk -F ',' 'NR>1 {print $1}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
 
 # # One way to remove cells is to loop through all file names to explicitly make sure 
 # # we're not duplicating or skipping anything.  This is the way to go if we've messed with
@@ -178,9 +180,9 @@ do
 		# Creating the default file structure and copying over the base files to be modified
 		mkdir -p histo analy
 		ln -s $ed_exec
-		cp ../ED2IN_SpinInit_Base ED2IN
-		cp ../PalEON_Phase2.v1.xml .
-		cp ../paleon_ed2_smp_geo.sh .
+		cp ../../ED2IN_SpinInit_Base ED2IN
+		cp $setup_dir/PalEON_Phase2.v1.xml .
+		cp ../../paleon_ed2_smp_geo.sh .
 
 		# ED2IN Changes
 	    sed -i "s,$old_analy,$new_analy,g" ED2IN #change output paths

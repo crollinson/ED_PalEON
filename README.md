@@ -18,7 +18,7 @@ Note: While this repository has the base scripts for the site-level runs, many o
 
 
 --------------------------
-###  0. Install ED (github)
+##  00. Install ED (github)
 
 The version of ED that we’re using for the PalEON regional runs can be clone from 
 github: 
@@ -30,7 +30,7 @@ https://github.com/EDmodel/ED2/wiki
 Installation Instructions should can be found here, but are also fairly straight-
 forward: https://github.com/EDmodel/ED2/wiki/Quick-start
 
-Basic Installation steps
+##### Basic Installation steps
 1. Clone ED using directions above
 2. navigate to build folder: $ cd ED2/ED/build/bin
 3. create include.mk.opt and place it in the ED2/ED/build/bin folder 
@@ -47,3 +47,39 @@ Github (https://github.com/EDmodel/ED2/issues).  This is also a great place to
 look first if you encounter issues to see if its a known issue with known solutions.
 
 --------------------------
+
+## 0. Format drivers, etc.
+
+This assumes that you have already downloaded the met and environmental drivers from 
+iPlant (de.iplantcollaborative.org.  If you do not have access to the drivers, sign 
+up for an iPlant account (free) and email your username to a PalEON modeling admin to
+get read/write permissions to the folder.
+
+1. Execute
+
+--------------------------
+
+## 1. ED initial spin to approximate steady state (ED, bash) 
+
+The first part of the ED spinup protocol requires you to run the model for a long period
+of time to get a rought demography distribution and soil carbon flux values to approximate
+a steady state.  This part must be done with disturbance off.
+
+##### File paths you will need to change in start_new_batch.sh
+- file_dir   = where you want the ED outputs to write to)
+- grid_order = path to the setup file with the order in which PalEON grid cells should be completed
+- file_[clay/sand/depth] = these should all be in the regional environmental drivers you downloaded from iPlant
+
+
+--------------------------
+
+## 2. Semi-Analytical Solution (SAS) for steady-state approximation (R)
+
+
+--------------------------
+
+## 3. ED final spin to get final steady state conditions with disturbance settings (ED, bash)
+
+--------------------------
+
+## 4. ED PalEON Runs

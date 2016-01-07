@@ -19,9 +19,9 @@
 #    Things to be Modified per site:
 #     -  NL%POI_LAT  =  
 #     -  NL%POI_LON  = 
-#     -  NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
-#     -  NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
-#     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
+#     -  NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
@@ -30,9 +30,9 @@
 module load nco/4.3.4
 
 # Define constants & file paths for the scripts
-# -- file_dir = where you want the
-file_dir=/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/1_spin_initial/phase2_spininit.v1/
-grid_order=/projectnb/dietzelab/paleon/ED_runs/MIP_phase2/0_setup/Paleon_MIP_Phase2_ED_Order.csv
+ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt
+file_dir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/
+grid_order=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup/Paleon_MIP_Phase2_ED_Order.csv
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc
 file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc
@@ -177,9 +177,9 @@ do
 	pushd ${file_path}
 		# Creating the default file structure and copying over the base files to be modified
 		mkdir -p histo analy
-		ln -s /usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt
+		ln -s $ed_exec
 		cp ../ED2IN_SpinInit_Base ED2IN
-		cp ../PalEON_Phase1a.v4.xml .
+		cp ../PalEON_Phase2.v1.xml .
 		cp ../paleon_ed2_smp_geo.sh .
 
 		# ED2IN Changes

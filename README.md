@@ -48,6 +48,7 @@ trouble shoot.  Additional problems can also be raised on the ED2 “Issues” o
 Github (https://github.com/EDmodel/ED2/issues).  This is also a great place to 
 look first if you encounter issues to see if its a known issue with known solutions.
 
+##### NOTE: there are additional files you'll need to get from the Dietze Lab to run ED.  I will eventually put these on iPlant, but for now email me and I'll send them to you.  They're relatively small files.
 
 ## 0. Format drivers, etc. (R)
 
@@ -75,6 +76,7 @@ start_new_batch.sh should contain everything you need to setup and execute the E
 *** Note: This requires the netCDF Operators (nco) software version 4.3.4 (http://nco.sourceforge.net). At BU, this is loaded as a module (line 30 of start_new_batch.sh)
 
 ##### File paths, etc. you will need to change in start_new_batch.sh
+- line 33: file path to the ED executable
 - line 34: file_dir   = where you want the ED outputs to write to (line 34)
 - line 35: grid_order = path to the setup file with the order in which PalEON grid cells should be completed (line 35)
 - line 36-38: file_[clay/sand/depth] = these should all be in the regional environmental drivers you downloaded from iPlant (lines 36-38)

@@ -9,6 +9,11 @@ steps necessary to format files, perform the spinup (3 stages), and complete the
 Below is the necessary workflow with notes about where file paths need to be updated 
 for your local machine.
 
+I've tried to note in the workflow whether steps are exectuted ED, R, or shell.  For
+the BU computing cluster, there is a queue for long runs, and so most of these steps 
+have qsub submission scripts (most are titled submit_[...]) so that you can run these
+steps "detached" because most of the steps take hours to days to runs.  
+
 Note: While this repository has the base scripts for the site-level runs, many of the 
       file paths will not line up since this repository was made with the intention of
       helping distribute the effort for the regional runs
@@ -44,26 +49,38 @@ Github (https://github.com/EDmodel/ED2/issues).  This is also a great place to
 look first if you encounter issues to see if its a known issue with known solutions.
 
 
-## 0. Format drivers, etc.
+## 0. Format drivers, etc. (R)
 
 This assumes that you have already downloaded the met and environmental drivers from 
 iPlant (de.iplantcollaborative.org.  If you do not have access to the drivers, sign 
 up for an iPlant account (free) and email your username to a PalEON modeling admin to
 get read/write permissions to the folder.
 
-1. Execute
+1. Reformat PalEON met drivers for ED by running process_paleon_met_region.R
+
+      note: this step can take a while so you can run process_paleon_met_region_spinup.R 
+            to run just the spinup met so you can start the spinup process
 
 
-## 1. ED initial spin to approximate steady state (ED, bash) 
+## 1. ED initial spin to approximate steady state (bash, ED) 
 
 The first part of the ED spinup protocol requires you to run the model for a long period
 of time to get a rought demography distribution and soil carbon flux values to approximate
 a steady state.  This part must be done with disturbance off.
 
-##### File paths you will need to change in start_new_batch.sh
-- file_dir   = where you want the ED outputs to write to)
-- grid_order = path to the setup file with the order in which PalEON grid cells should be completed
-- file_[clay/sand/depth] = these should all be in the regional environmental drivers you downloaded from iPlant
+start_new_batch.sh should contain everything you need to setup and execute the ED runs. 
+
+*** Note: When people other than myself start running ED for PalEON, we'll need to come up with something that creates dummy directories to keep everybody on track and not have multiple people running the same cell.
+
+*** Note: This requires the netCDF Operators (nco) software version 4.3.4 (http://nco.sourceforge.net). At BU, this is loaded as a module (line 30 of start_new_batch.sh)
+
+##### File paths, etc. you will need to change in start_new_batch.sh
+- line 34: file_dir   = where you want the ED outputs to write to (line 34)
+- line 35: grid_order = path to the setup file with the order in which PalEON grid cells should be completed (line 35)
+- line 36-38: file_[clay/sand/depth] = these should all be in the regional environmental drivers you downloaded from iPlant (lines 36-38)
+- line 39: n = the number of sites/cells you want to run at a time; this will depend on how many cores you can use per site and how many cores are available to you.  At BU, 1 site running with 12 threads takes ~2 weeks from start to finish and I can run 4-5 sites at once.
+- line 200: Comment out if you do not want the initial spin to be executed with the qsub script immediately. This step works at BU, but may need to be adjusted for whereever you're doing the runs
+
 
 
 ## 2. Semi-Analytical Solution (SAS) for steady-state approximation (R)

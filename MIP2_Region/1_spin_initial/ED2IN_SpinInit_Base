@@ -303,8 +303,8 @@ $ED_NL
    ! FFILOUT -- Path and prefix for analysis files (all but history/restart).              !
    ! SFILOUT -- Path and prefix for history files.                                         !
    !---------------------------------------------------------------------------------------!
-   NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/TEST/analy/TEST'
-   NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/TEST/histo/TEST'
+   NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/analy/TEST'
+   NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/histo/TEST'
    !---------------------------------------------------------------------------------------!
 
 
@@ -383,7 +383,7 @@ $ED_NL
    !              path+prefix will be used, as the history for every grid must have come   !
    !              from the same simulation.                                                !
    !---------------------------------------------------------------------------------------!
-   NL%SFILIN   = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/TEST/histo/TEST'
+   NL%SFILIN   = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/histo/TEST'
    !---------------------------------------------------------------------------------------!
 
 
@@ -562,9 +562,9 @@ $ED_NL
    NL%LU_DATABASE      = '/projectnb/dietzelab/EDI/ed_inputs/glu/glu-'
    NL%PLANTATION_FILE  = ''
    NL%THSUMS_DATABASE  = '/projectnb/dietzelab/EDI/ed_inputs/'
-   NL%ED_MET_DRIVER_DB = '/projectnb/dietzelab/paleon/ED_runs/phase2_spininit.v1/PL_MET_HEADER'
+   NL%ED_MET_DRIVER_DB = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup/PL_MET_HEADER'
    NL%SOILSTATE_DB     = '/projectnb/dietzelab/EDI/ed_inputs/STW1996OCT.dat'
-   NL%SOILDEPTH_DB     = '/projectnb/dietzelab/paleon/ED_runs/phase2_env_drivers/soil_depths.dat'
+   NL%SOILDEPTH_DB     = ''
    !---------------------------------------------------------------------------------------!
 
 

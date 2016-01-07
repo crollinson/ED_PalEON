@@ -30,14 +30,26 @@
 module load nco/4.3.4
 
 # Define constants & file paths for the scripts
-ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt
-file_dir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/
-setup_dir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup
-file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc
-file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc
-file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc
+BU_base_spin=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # The base original file paths in all of my scripts
+BU_base_EDI=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs on the BU server
+
+file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+EDI_base=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs for you
+
+ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
+setup_dir=${file_base}/0_setup # Where some constant setup files are
+
+file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
+file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
+file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
+
 n=4
 
+# Make sure the file paths on the Met Header have been updated for the current file structure
+sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER
+
+# Making the file directory if it doesn't already exist
 mkdir -p $file_dir
 
 # Get the list of what grid cells have already been done
@@ -184,7 +196,10 @@ do
 		cp $setup_dir/PalEON_Phase2.v1.xml .
 		cp ../../paleon_ed2_smp_geo.sh .
 
-		# ED2IN Changes
+		# ED2IN Changes	    
+	    sed -i "s,$BU_base_spin,$file_base,g" ED2IN #change the baseline file path everywhere
+	    sed -i "s,$BU_base_EDI,$EDI_base,g" ED2IN #change the baseline file path for ED Inputs
+
 	    sed -i "s,$old_analy,$new_analy,g" ED2IN #change output paths
 	    sed -i "s,$old_histo,$new_histo,g" ED2IN #change output paths
         sed -i "s/POI_LAT  =.*/POI_LAT  = $lat_now/" ED2IN # set site latitude
@@ -196,6 +211,8 @@ do
         sed -i "s/SLMSTR  =.*/SLMSTR = $SLMSTR/" ED2IN # set initial soil moisture
         sed -i "s/STGOFF  =.*/STGOFF = $STGOFF/" ED2IN # set initial soil temp offset
 
+		# submission script changes
+	    sed -i "s,$BU_base_spin,$file_base,g" paleon_ed2_smp_geo.sh #change the baseline file path in submit
 	    sed -i "s,$oldbase.*,$newbase,g" paleon_ed2_smp_geo.sh #change path in submit script
 	    sed -i "s,TEST,${SITE}${rep},g" paleon_ed2_smp_geo.sh #change job name
 		

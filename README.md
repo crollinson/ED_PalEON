@@ -1,10 +1,7 @@
 # ED_PalEON: Scripts to Execute PalEON MIP ED Runs
-
 Christy Rollinson (crollinson@gmail.com)
-
 7 January, 2016
 
---------------------------
 
 This folder contains all of the scripts necessary to execute the PalEON MIP Phase 2 
 regional runs on a cell-by-cell basis.  For this to work properly, there are several 
@@ -16,8 +13,8 @@ Note: While this repository has the base scripts for the site-level runs, many o
       file paths will not line up since this repository was made with the intention of
       helping distribute the effort for the regional runs
 
-
 --------------------------
+
 ##  00. Install ED (github)
 
 The version of ED that we’re using for the PalEON regional runs can be clone from 
@@ -46,7 +43,6 @@ trouble shoot.  Additional problems can also be raised on the ED2 “Issues” o
 Github (https://github.com/EDmodel/ED2/issues).  This is also a great place to 
 look first if you encounter issues to see if its a known issue with known solutions.
 
---------------------------
 
 ## 0. Format drivers, etc.
 
@@ -57,7 +53,6 @@ get read/write permissions to the folder.
 
 1. Execute
 
---------------------------
 
 ## 1. ED initial spin to approximate steady state (ED, bash) 
 
@@ -71,15 +66,11 @@ a steady state.  This part must be done with disturbance off.
 - file_[clay/sand/depth] = these should all be in the regional environmental drivers you downloaded from iPlant
 
 
---------------------------
-
 ## 2. Semi-Analytical Solution (SAS) for steady-state approximation (R)
 
 
---------------------------
 
 ## 3. ED final spin to get final steady state conditions with disturbance settings (ED, bash)
 
---------------------------
 
 ## 4. ED PalEON Runs

@@ -1329,7 +1329,7 @@ $ED_NL
    !                              TREEFALL_DISTURBANCE_RATE is internally adjusted so the  !
    !                              average patch age is still 1/TREEFALL_DISTURBANCE_RATE   !
    !---------------------------------------------------------------------------------------!
-   NL%TREEFALL_DISTURBANCE_RATE  = 0.004
+   NL%TREEFALL_DISTURBANCE_RATE  = 0.000
    NL%TIME2CANOPY                = 0.
    !---------------------------------------------------------------------------------------!
 

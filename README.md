@@ -48,13 +48,9 @@ trouble shoot.  Additional problems can also be raised on the ED2 “Issues” o
 Github (https://github.com/EDmodel/ED2/issues).  This is also a great place to 
 look first if you encounter issues to see if its a known issue with known solutions.
 
-<<<<<<< HEAD
 ##### NOTE: there are additional files you'll need to get from the Dietze Lab to run ED.  
 I will eventually put these on iPlant, but for now email me and I'll send them to you.  
 They're relatively small files.
-=======
-##### NOTE: there are additional files you'll need to get from the Dietze Lab to run ED.  I will eventually put these on iPlant, but for now email me and I'll send them to you.  They're relatively small files.
->>>>>>> origin/master
 
 ## 0. Format drivers, etc. (R)
 

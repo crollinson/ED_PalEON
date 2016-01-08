@@ -48,6 +48,9 @@ trouble shoot.  Additional problems can also be raised on the ED2 “Issues” o
 Github (https://github.com/EDmodel/ED2/issues).  This is also a great place to 
 look first if you encounter issues to see if its a known issue with known solutions.
 
+##### NOTE: there are additional files you'll need to get from the Dietze Lab to run ED.  
+I will eventually put these on iPlant, but for now email me and I'll send them to you.  
+They're relatively small files.
 
 ## 0. Format drivers, etc. (R)
 
@@ -70,20 +73,50 @@ a steady state.  This part must be done with disturbance off.
 
 start_new_batch.sh should contain everything you need to setup and execute the ED runs. 
 
-*** Note: When people other than myself start running ED for PalEON, we'll need to come up with something that creates dummy directories to keep everybody on track and not have multiple people running the same cell.
+*** Note: When people other than myself start running ED for PalEON, we'll need to come up 
+with something that creates dummy directories to keep everybody on track and not have 
+multiple people running the same cell.
 
-*** Note: This requires the netCDF Operators (nco) software version 4.3.4 (http://nco.sourceforge.net). At BU, this is loaded as a module (line 30 of start_new_batch.sh)
+*** Note: This requires the netCDF Operators (nco) software version 4.3.4 
+(http://nco.sourceforge.net). At BU, this is loaded as a module (line 30 of 
+start_new_batch.sh)
 
 ##### File paths, etc. you will need to change in start_new_batch.sh
+- line 33: file path to the ED executable
 - line 34: file_dir   = where you want the ED outputs to write to (line 34)
-- line 35: grid_order = path to the setup file with the order in which PalEON grid cells should be completed (line 35)
-- line 36-38: file_[clay/sand/depth] = these should all be in the regional environmental drivers you downloaded from iPlant (lines 36-38)
-- line 39: n = the number of sites/cells you want to run at a time; this will depend on how many cores you can use per site and how many cores are available to you.  At BU, 1 site running with 12 threads takes ~2 weeks from start to finish and I can run 4-5 sites at once.
-- line 200: Comment out if you do not want the initial spin to be executed with the qsub script immediately. This step works at BU, but may need to be adjusted for whereever you're doing the runs
+- line 35: grid_order = path to the setup file with the order in which PalEON grid cells 
+  should be completed
+- line 36-38: file_[clay/sand/depth] = these should all be in the regional environmental 
+  drivers you downloaded from iPlant
+- line 39: n = the number of sites/cells you want to run at a time; this will depend on 
+   how many cores you can use per site and how many cores are available to you.  At BU, 1 
+   site running with 12 threads takes ~2 weeks from start to finish and I can run 4-5 sites
+   at once.
+- line 200: Comment out if you do not want the initial spin to be executed with the qsub 
+  script immediately. This step works at BU, but may need to be adjusted for whereever you're 
+  doing the runs
 
 
 
 ## 2. Semi-Analytical Solution (SAS) for steady-state approximation (R)
+To speed up ED finding (at least somewhat) stable carbon pools, we have implemented the semi-
+analytical solution (SAS).  This process uses the equations in the model to approximate steady-
+state soil carbon pools and then uses the vegetation structure at given time slices and the 
+prescribed disturbance rate to approximate the landscape equilibrium vegetation structure.
+
+More details on this approach can be found in two papers by Xia et al:
+1. Xia, J.Y., Y.Q. Luo, Y.-P. Wang, E.S. Weng, and O. Hararuk. 2012. A semi-analytical 
+   solution to accelerate spin-up of a coupled carbon and nitrogen land model to 
+   steady state. Geoscientific Model Development 5:1259-1271.
+
+2. Xia, J., Y. Luo, Y.-P. Wang, and O. Hararuk. 2013. Traceable components of terrestrial 
+   carbon storage capacity in biogeochemical models.  Global Change Biology 19:2104-2116
+
+##### File paths, etc. you will need to change in compile_SAS_runs.R
+- line 102: in.base = location of directory where the spin initial files for each site are 
+  located; should end with /MIP2_Region/1_spininitial/phase2_spininit.v1
+— line 103: out.base = location where the ED initialization files produced by the SAS script 
+  will be written; should end with /MIP2_Region/2_SAS/SAS_init_files/
 
 
 

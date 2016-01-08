@@ -99,6 +99,7 @@ start_new_batch.sh)
 
 
 ## 2. Semi-Analytical Solution (SAS) for steady-state approximation (R)
+
 To speed up ED finding (at least somewhat) stable carbon pools, we have implemented the semi-
 analytical solution (SAS).  This process uses the equations in the model to approximate steady-
 state soil carbon pools and then uses the vegetation structure at given time slices and the 
@@ -112,6 +113,10 @@ More details on this approach can be found in two papers by Xia et al:
 2. Xia, J., Y. Luo, Y.-P. Wang, and O. Hararuk. 2013. Traceable components of terrestrial 
    carbon storage capacity in biogeochemical models.  Global Change Biology 19:2104-2116
 
+*** Note: It took a lot of trial & error to get a generalized script that put things even
+somewhat close at the site level, so I’m giving things extra long initial spin & post-SAS
+transient runs to try and fix that problem.
+
 ##### File paths, etc. you will need to change in compile_SAS_runs.R
 - line 102: in.base = location of directory where the spin initial files for each site are 
   located; should end with /MIP2_Region/1_spininitial/phase2_spininit.v1
@@ -120,7 +125,14 @@ More details on this approach can be found in two papers by Xia et al:
 
 
 
-## 3. ED final spin to get final steady state conditions with disturbance settings (ED, bash)
+## 3. ED final spin to get final steady state conditions with disturbance settings (bash, ED)
+
+Following the spinup and SAS calculations, the models will need a set of transient runs with 
+disturbance turned on to reach a final (somewhat) steady state. Most of the legwork for setting
+up individual sites was done for the initial spin, so this should be pretty straight forward.
+
+##### File paths, etc. you will need to change in compile_SAS_runs.R
+- line 24: file_base = base file path leading up to wherever this github repository is stored locally
 
 
 ## 4. ED PalEON Runs

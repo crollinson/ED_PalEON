@@ -111,7 +111,7 @@ sites    <- sites.init[!(sites.init %in% sites.SAS)] # sites that need the SAS
 site.lat <- as.numeric(substr(sites,4,8)) # lat from SAS run
 site.lon <- as.numeric(substr(sites,12,17)) # insert site longitude(s) here
 
-blckyr  <- 25 #number of years to chunk data by
+blckyr  <- 50 #number of years to chunk data by
 disturb <- 0.005 # the treefall disturbance rate you will prescribe in the actual runs (or close to it)
 yrs.met <- 20 # The number of met years in the spinup loop
 
@@ -191,12 +191,8 @@ for(s in 1:length(sites)){
 	# NOTE:  I've been plyaing around with finding the best temp & soil moisture to initialize things
 	#        with; if using the means from the spin met cycle work best, insert them here
 	#---------------------------------------
-	met.yrz <- yearz-1
-	met.yra <- met.yrz-yrs.met
 	month.begin = 1
     month.end = 12
-
-    print(paste0(" Finding Mean Met : ",met.yra, " - ", met.yrz))
       
     tempk.air <- tempk.soil <- moist.soil <- moist.soil.mx <- vector()
 	for(y in yrs){
@@ -272,7 +268,7 @@ for(s in 1:length(sites)){
       colnames(css.tmp) <- c("year","patch","cohort","dbh","ht","pft","n","bdead","balive","Avgrg")
       
       #save big .css matrix
-      if(y==yeara){
+      if(y==yrs[1]){
         css.big <- css.tmp
       } else{
         css.big <- rbind(css.big,css.tmp)
@@ -324,24 +320,24 @@ for(s in 1:length(sites)){
   # soil_tempk_y <- soil_tempk_m <- swc_max_m <- swc_max_y <- swc_m <- swc_y <- vector()
 
   # switch to the histo directory
-  dat.dir    <- paste(base,s,"/histo/",sep="")
+  dat.dir    <- paste(in.base,sites[s],"/histo/",sep="")
   mon.files  <- dir(dat.dir, "-S-") # monthly files only  
   
   #Get time window
-  yeara <- as.numeric(strsplit(mon.files,"-")[[1]][3]) #first year
-  yearz <- as.numeric(strsplit(mon.files,"-")[[length(mon.files)]][3]) #last year
+  yeara <- as.numeric(strsplit(mon.files,"-")[[1]][4]) #first year
+  yearz <- as.numeric(strsplit(mon.files,"-")[[length(mon.files)]][4]) #last year
 
-  montha <- as.numeric(strsplit(mon.files,"-")[[1]][4]) #first month
-  monthz <- as.numeric(strsplit(mon.files,"-")[[length(mon.files)]][4]) #last month
+  montha <- as.numeric(strsplit(mon.files,"-")[[1]][5]) #first month
+  monthz <- as.numeric(strsplit(mon.files,"-")[[length(mon.files)]][5]) #last month
   
   for (y in yrs){      
       #calculate month start/end based on year 
-      if (y == yeara){
+      if (y == yrs[1]){
         month.begin = montha
       }else{
         month.begin = 1
       }
-      if (y == yearz){
+      if (y == yrs[length(yrs)]){
         month.end = monthz
       }else{
         month.end = 12
@@ -354,8 +350,8 @@ for(s in 1:length(sites)){
         day.now   <- sprintf("%2.2i",1)
         hour.now  <- sprintf("%6.6i",0)
         
-        dat.dir     <- paste(base,s,"/histo/",sep="")
-        file.now    <- paste(s,"spin","-S-",year.now,"-",month.now,"-",day.now,"-"
+        dat.dir     <- paste(in.base,sites[s],"/histo/",sep="")
+        file.now    <- paste(sites[s],"-S-",year.now,"-",month.now,"-",day.now,"-"
                              ,hour.now,"-",sufx,sep="")
         
         cat(" - Reading file :",file.now,"...","\n")

@@ -141,7 +141,7 @@ for(s in 1:length(sites)){
 
   #Get time window
   yeara  <- as.numeric(strsplit(ann.files,"-")[[1]][4]) #first year
-  yearz  <- as.numeric(strsplit(ann.files,"-")[[length(ann.files)]][4]) #last year
+  yearz  <- as.numeric(strsplit(ann.files,"-")[[length(ann.files)]][4]) #last full year
   yrs    <- seq(yeara+1, yearz, by=blckyr) # The years we're going to use as time steps for the demography
   nsteps <- length(yrs) # The number of blocks = the number steps we'll have
 
@@ -168,7 +168,7 @@ for(s in 1:length(sites)){
  # 	.css and .pss files for each site
  #---------------------------------------
   #create an emtpy storage for the patch info
-  pss.big <- matrix(nrow=floor((yearz-yeara+1)/blckyr)+1,ncol=14) # save every X yrs according to chunks specified above
+  pss.big <- matrix(nrow=length(yrs),ncol=14) # save every X yrs according to chunks specified above
   colnames(pss.big) <- c("site","year","patch","dst","age","area","water","fsc","stsc","stsl",
                          "ssc","psc","msn","fsn")
 
@@ -184,6 +184,7 @@ for(s in 1:length(sites)){
 		area.dist[i] <- sum(dgeom((stand.age[i]):(stand.age[i+1]-1),disturb))
 	}
 	area.dist[length(area.dist)] <- 1 - sum(area.dist[1:(length(area.dist)-1)])
+	pss.big[,"area"] <- area.dist
 	#---------------------------------------  
   
 	#---------------------------------------
@@ -298,7 +299,6 @@ for(s in 1:length(sites)){
                   
       nc_close(now)
   }
-  pss.big[,"area"] <- area.dist
   #---------------------------------------  
 
   #---------------------------------------  

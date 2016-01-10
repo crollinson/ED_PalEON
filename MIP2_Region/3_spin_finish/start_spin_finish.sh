@@ -44,18 +44,20 @@ popd
 
 # This will probably be slow later on, but will probably be the best way to make sure we're
 # not skipping any sites
+# NOTE: NEED TO COMMENT THIS PART OUT FIRST TIME THROUGH 
+#       because it doesn't like no matches in file_done
 for REMOVE in ${file_done[@]}
 do 
 	cells=(${cells[@]/$REMOVE/})
 done
 
-for (SITE in ${cells[@]}) 
+for SITE in ${cells[@]}
 do
 	# Site Name and Lat/Lon
 	echo $SITE
 	
 	# Make a new folder for this site
-	file_path=${finish_dir}/${SITE}
+	file_path=${finish_dir}/${SITE}/
 	mkdir -p ${file_path} 
 	
 	pushd ${file_path}
@@ -70,7 +72,7 @@ do
 	    sed -i "s,$init_dir,$finish_dir,g" ED2IN #change the baseline file path everywhere
         sed -i "s/NL%EXPNME =.*/NL%EXPNME = 'PalEON Spin Finish'/" ED2IN # change the experiment name
         sed -i "s/NL%IED_INIT_MODE   = 0/NL%IED_INIT_MODE   = 3/" ED2IN # change from bare ground to .css/.pss run
-        sed -i "s,SFILIN   = .*,SFILIN   = '${SAS_dir}${SITE}/',g" ED2IN # set initial file path to the SAS spin folder
+        sed -i "s,SFILIN   = .*,SFILIN   = '${SAS_dir}${SITE}/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
         sed -i "s/NL%INCLUDE_FIRE    = 0.*/NL%INCLUDE_FIRE    = 2/" ED2IN # turn on fire
         sed -i "s/NL%SM_FIRE         = 0.*/NL%SM_FIRE         = 0.007/" ED2IN # adjust fire threshold
         sed -i "s/NL%TREEFALL_DISTURBANCE_RATE  = 0.*/NL%TREEFALL_DISTURBANCE_RATE  = 0.004/" ED2IN # turn on treefall

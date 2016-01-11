@@ -38,12 +38,12 @@ do
 	    sed -i "s,site=.*,site='$SITE',g" extract_output_general.R #site=.*
 	    sed -i "s,path.base <-.*,path.base <- '$file_base',g" extract_output_general.R #raw.dir <- .*
 	    sed -i "s,raw.dir <-.*,raw.dir <- '$file_dir/${SITE}',g" extract_output_general.R #raw.dir <- .*
-	    sed -i "s,new.dir <-.*,new.dir <- '$out_dir/${SITE}',g" extract_ED_output.R #new.dir <- .*
+	    sed -i "s,new.dir <-.*,new.dir <- '$out_dir/${SITE}',g" extract_output_general.R #new.dir <- .*
 		
 		# Modify submission script for the site	    
 #  		R CMD BATCH extract_ED_output.R
-	    sed -i "s,TEST,qaqc_$SITE,g" extract_output_general.R #site=.*
-	    sed -i "s,/dummy/path,$out_dir/${SITE},g" extract_output_general.R #site=.*
+	    sed -i "s,TEST,qaqc_$SITE,g" submit_ED_extraction.sh #site=.*
+	    sed -i "s,/dummy/path,$out_dir/${SITE},g" submit_ED_extraction.sh #site=.*
 
 		qsub sumbit_ED_extraction.sh
 	popd

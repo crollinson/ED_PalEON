@@ -239,17 +239,17 @@ var.names <- c("PFT", "poolname", "SoilDepth", "Fcomp", "BA", "Dens", "Mort", "A
 	  # Establishment Rate
 
 	  # # Mortality Rate
+	  mort  <- cbind(NA, pft, patch.co)
 	  # mort <- cbind(apply(ncvar_get(ncT, "MORT_RATE_CO"),2, sum)*dens.co[,1], pft, patch.co)
-	  # mort2 <- aggregate(mort[,1], by=list(mort[,2], mort[,3]), sum); names(mort2) <- c("pft", "patch", "mort")
-	  # mort2 <- merge(mort2, patch.area.df)
-	  # mort3 <- tapply(mort2$mort*mort2$area, list(mort2$pft), FUN=sum)
-	  # mort3 <- data.frame(mort=mort3, PFT=names(mort3))
-	  # mort.pft <- merge(PFTs, mort3, all.x=T, all.y=T)
-	  # mort.pft$mort <- as.numeric(paste(mort.pft$mort))
-	  # mort.pft[is.na(mort.pft)] <- 0
-	  # mort.pft$mort <- mort.pft$mort*10000
-	  # out <- add(mort.pft$mort, 7)
-	  out <- add(NA, 7)
+	  mort2 <- aggregate(mort[,1], by=list(mort[,2], mort[,3]), sum); names(mort2) <- c("pft", "patch", "mort")
+	  mort2 <- merge(mort2, patch.area.df)
+	  mort3 <- tapply(mort2$mort*mort2$area, list(mort2$pft), FUN=sum)
+	  mort3 <- data.frame(mort=mort3, PFT=names(mort3))
+	  mort.pft <- merge(PFTs, mort3, all.x=T, all.y=T)
+	  mort.pft$mort <- as.numeric(paste(mort.pft$mort))
+	  mort.pft[is.na(mort.pft)] <- 0
+	  mort.pft$mort <- mort.pft$mort*10000
+	  out <- add(mort.pft$mort, 7)
 	  
 	  ## ----------------
 	  ## Carbon Pools

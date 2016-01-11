@@ -6,8 +6,8 @@ source(file.path(path.base, "0_setup", "model2netcdf.ED2.paleon.R"), chdir = TRU
 
 
 site="TEST"
-site.lat <- as.numeric(substr(site,4,8)) # lat from SAS run
-site.lon <- as.numeric(substr(site,12,17)) # insert site longitude(s) here
+sitelat <- as.numeric(substr(site,4,8)) # lat from SAS run
+sitelon <- as.numeric(substr(site,12,17)) # insert site longitude(s) here
 block.yr=100 # number of years you want to write into each file
 
 
@@ -29,7 +29,7 @@ for(i in 1:length(flist)){
   
 start.run <- as.Date(paste0(min(yr), "-01-01"), "%Y-%m-%d")
 end.run <- as.Date(paste0(max(yr), "-01-01"), "%Y-%m-%d")
-bins <- c(as.numeric(strftime(start.loop, '%Y')), seq(from=as.numeric(paste0(substr(as.numeric(strftime(start.loop, "%Y"))+block.yr, 1, 2), "00")), to=as.numeric(strftime(end.loop, '%Y')), by=block.yr)) # Creating a vector with X year bins for the time period of interest
+bins <- c(as.numeric(strftime(start.run, '%Y')), seq(from=as.numeric(paste0(substr(as.numeric(strftime(start.run, "%Y"))+block.yr, 1, 2), "00")), to=as.numeric(strftime(end.run, '%Y')), by=block.yr)) # Creating a vector with X year bins for the time period of interest
 
 print(paste0("----------  Processing Site: ", site, "  ----------")) 
   

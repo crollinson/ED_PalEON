@@ -208,13 +208,13 @@
 
 	  <!-- Nitrogen Params -->	
       <c2n_leaf>
-                39.50000      </c2n_leaf>	<!-- Pecan -->
+                78.03262      </c2n_leaf>	<!-- ED -->
 
 	  <!-- Photosynthesis Params -->	
       <cuticular_cond>
               1000.0000      </cuticular_cond>	<!--  ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	<!-- ED Default -->
       <dark_respiration_factor>
                  0.02029      </dark_respiration_factor> 	<!-- Ryan Kelly/Pecan (South Pine) -->
       <leaf_width>
@@ -326,13 +326,13 @@
                  0.10000      </treefall_lt>
 	  <!-- Nitrogen Params -->	
       <c2n_leaf>
-                39.72000      </c2n_leaf>	<!-- Pecan -->
+               108.45074      </c2n_leaf>	<!-- ED -->
 
 	  <!-- Photosynthesis Params -->	
       <cuticular_cond>
               1000.0000      </cuticular_cond>	<!--  ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	<!-- ED Default -->
       <dark_respiration_factor>
                  0.07987	  </dark_respiration_factor> <!-- Same as North Pine -->
       <leaf_width>
@@ -415,7 +415,7 @@
       <rho>
                  0.00000      </rho>
       <SLA>
-                42.80000      </SLA> <!-- Pecan -->
+                28.46075      </SLA> <!-- Jackie -->
 <!-- 
 
 	  <!~~ Derived Params ~~>	
@@ -450,7 +450,7 @@
       <cuticular_cond>
              10000.00000      </cuticular_cond> 	<!-- ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	<!-- ED Default -->
       <dark_respiration_factor>
                  0.03399      </dark_respiration_factor>  <!-- Jackie -->
       <leaf_width>
@@ -535,7 +535,7 @@
       <rho>
                  0.00000      </rho>
       <SLA>
-                29.36710      </SLA> <!-- Pecan -->
+                29.83671      </SLA> <!-- ED -->
 <!-- 
 
 	  <!~~ Derived Params ~~>	
@@ -565,13 +565,13 @@
 
 	  <!-- Nitrogen Params -->	
       <c2n_leaf>
-                24.84000      </c2n_leaf> <!-- Pecan -->
+                19.34693      </c2n_leaf> <!-- Pecan -->
 
 	  <!-- Photosynthesis Params -->	
       <cuticular_cond>
              20000.00000      </cuticular_cond> 	<!-- ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	<!-- ED Default -->
       <dark_respiration_factor>
                  0.01204      </dark_respiration_factor>  <!-- ED -->
       <leaf_width>
@@ -684,13 +684,13 @@
 
 	  <!-- Nitrogen Params -->	
       <c2n_leaf>
-                21.37300      </c2n_leaf>	<!-- Pecan -->
+                18.07512      </c2n_leaf>	<!-- ED -->
 
 	  <!-- Photosynthesis Params -->	
       <cuticular_cond>
              10000.00000      </cuticular_cond> 	<!-- Jackie -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	<!-- ED Default -->
       <dark_respiration_factor>
                  0.02000      </dark_respiration_factor>  <!-- ED Default -->
       <leaf_width>

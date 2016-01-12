@@ -518,13 +518,12 @@ names(out) <- var.names
     ## write NCDF File
 print(paste0("----------  Creating ncdf File  ----------")) 
 
-nc <- nc_create(file.path(new.dir, paste(site, "ED2", yrs[yrs==bins[y]]-1000, "nc", sep=".")), var)
-    #varfile <- file(file.path(new.dir, paste(site, "ED2", yrs[yrs==bins[y]], "nc", "var", sep=".")), "w")
+yr.real <- ifelse(bins[y]-1000<1000, paste0(0, bins[y]-1000), bins[y]-1000)
+
+nc <- nc_create(file.path(new.dir, paste(site, "ED2", yr.real, "nc", sep=".")), var)
     for(i in 1:length(var)) {
       ncvar_put(nc, var[[i]], out[[i]])
-      #cat(paste(var[[i]]$name, var[[i]]$longname), file=varfile, sep="\n")
     }
-    #close(varfile)
     nc_close(nc)
     rm(out, nc, var, pft, dim.t, dim.lat, dim.lon, dim.string, dim.pft, dim.pft2, dim.cpools, dim.cpools2, dim.soil)
 }  ## end bin loop

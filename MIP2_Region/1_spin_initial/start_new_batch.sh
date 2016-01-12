@@ -194,7 +194,7 @@ do
 		ln -s $ed_exec
 		cp ../../ED2IN_SpinInit_Base ED2IN
 		cp $setup_dir/PalEON_Phase2.v1.xml .
-		cp ../../paleon_ed2_smp_geo.sh .
+		cp $setup_dir/paleon_ed2_smp_geo.sh .
 
 		# ED2IN Changes	    
 	    sed -i "s,$BU_base_spin,$file_base,g" ED2IN #change the baseline file path everywhere
@@ -212,9 +212,8 @@ do
         sed -i "s/STGOFF  =.*/STGOFF = $STGOFF/" ED2IN # set initial soil temp offset
 
 		# submission script changes
-	    sed -i "s,$BU_base_spin,$file_base,g" paleon_ed2_smp_geo.sh #change the baseline file path in submit
-	    sed -i "s,$oldbase.*,$newbase,g" paleon_ed2_smp_geo.sh #change path in submit script
-	    sed -i "s,TEST,${SITE}${rep},g" paleon_ed2_smp_geo.sh #change job name
+	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh #site=.*
+	    sed -i "s,TEST,${SITE}$,g" paleon_ed2_smp_geo.sh #change job name
 		
  		qsub paleon_ed2_smp_geo.sh
 	popd

@@ -17,3 +17,6 @@ MIP2_Region/.history
 *.history
 
 */*/test_files
+
+*/*/spin*_qaqc.v*
+*/*/phase2_spin*.v*

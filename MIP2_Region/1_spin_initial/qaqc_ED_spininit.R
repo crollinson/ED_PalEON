@@ -32,7 +32,7 @@ library(ggplot2); library(grid)
 # -----------------------
 # A. Location of the files we want to look at
 # -----------------------
-ed.out <- "~/Dropbox/PalEON_CR/ED_PalEON/MIP2_Region/1_spin_initial/spininit_qaqc.v1"
+ed.out <- "~/Desktop/Research/PalEON_CR/ED_PalEON/MIP2_Region/1_spin_initial/spininit_qaqc.v1"
 # -----------------------
 
 # -----------------------
@@ -48,7 +48,7 @@ summary(sites)
 # C. Map the qaqc sites (can be skipped)
 # -----------------------
 # Paleon Mask (to graph the qaqc locations)
-paleon.domain <- data.frame(rasterToPoints(raster("~/Dropbox/PalEON_CR/env_regional/env_paleon/domain_mask/paleon_domain.nc")))
+paleon.domain <- data.frame(rasterToPoints(raster("~/Desktop/Research/PalEON_CR/env_regional/env_paleon/domain_mask/paleon_domain.nc")))
 summary(paleon.domain)
 
 ggplot() + 
@@ -151,9 +151,9 @@ for(s in 1:nrow(sites)){
     	}
     } else {
     	if(v %in% c(soil.var[!(soil.var=="SoilDepth")], var.diversity[!(var.diversity=="PFT")])){
-    	  ed[[v]] <- abind(ed[[v]], ed.var.list[[v]], along=3)
+    	  ed[[v]] <- abind(ed[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]])),,], ed.var.list[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]])),], along=3)
     	} else {
-	      ed[[v]] <- cbind(ed[[v]], ed.var.list[[v]])
+	      ed[[v]] <- cbind(ed[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]])),], ed.var.list[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]]))])
     	}
     }
 	
@@ -195,8 +195,8 @@ pfts.ed <- c("5-Grass", "6-North Pine", "8-Late Conifer", "9-Early Hardwood", "1
 pdf(file.path(ed.out, "AGB_byPFT.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$AGB)/2,ncol(ed$AGB)/2))
 for(i in 1:ncol(ed$AGB)){
-plot(ed$AGB[,i], type="l", col="black", lwd=2, ylim=c(0, max(ed$AGB)))
-	text(x=10000, y=quantile(ed$AGB, 0.75), dimnames(ed$AGB)[[2]][i], cex=1.5)
+plot(ed$AGB[,i], type="l", col="black", lwd=2, ylim=c(0, max(ed$AGB, na.rm=T)))
+	text(x=10000, y=quantile(ed$AGB, 0.75, na.rm=T), dimnames(ed$AGB)[[2]][i], cex=1.5)
 	lines(ed$AGB[,i]*ed$Fcomp[, 5,i], type="l", col=pft.colors[1], lwd=1.5)
 	lines(ed$AGB[,i]*ed$Fcomp[, 6,i], type="l", col=pft.colors[2], lwd=1.5)
 	lines(ed$AGB[,i]*ed$Fcomp[, 8,i], type="l", col=pft.colors[3], lwd=1.5)

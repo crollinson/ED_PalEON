@@ -212,7 +212,7 @@ do
         sed -i "s/STGOFF  =.*/STGOFF = $STGOFF/" ED2IN # set initial soil temp offset
 
 		# submission script changes
-	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh #site=.*
+	    sed -i "s,/dummy/path,${file_path},g" paleon_ed2_smp_geo.sh #site=.*
 	    sed -i "s,TEST,${SITE}$,g" paleon_ed2_smp_geo.sh #change job name
 		
  		qsub paleon_ed2_smp_geo.sh

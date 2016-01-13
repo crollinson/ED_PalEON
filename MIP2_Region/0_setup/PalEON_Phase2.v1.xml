@@ -230,7 +230,7 @@
       <Vm0>
                 36.00000      </Vm0>	<!-- Pecan N. Pine -->
       <water_conductance>
-                 0.00457	  </water_conductance> 	<!-- Ryan -->
+                 0.00001	  </water_conductance> 	<!-- ED -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -348,7 +348,7 @@
       <Vm0>
                 36.00000      </Vm0>	<!-- Pecan N. Pine -->
       <water_conductance>
-                 0.00448	  </water_conductance> 	<!-- Ryan -->
+                 0.00001	  </water_conductance> 	<!-- ED -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -466,7 +466,7 @@
       <Vm0>
                 56.31656	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.0047	  </water_conductance> 	<!--  Ryan Kelley M. Hardwood (Pecan) -->
+                 0.00001	  </water_conductance> 	<!-- ED -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -569,7 +569,7 @@
 
 	  <!-- Photosynthesis Params -->	
       <cuticular_cond>
-             20000.00000      </cuticular_cond> 	<!-- ED Default -->
+             10000.00000      </cuticular_cond> 	<!-- ED Default -->
       <D0>
                  0.15000      </D0>	<!-- Jackie -->
       <dark_respiration_factor>
@@ -587,7 +587,7 @@
       <Vm0>
                 63.96669	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.0047	  </water_conductance> 	<!--  Ryan Kelley (Pecan) -->
+                 0.00001	  </water_conductance> 	<!-- ED -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -706,7 +706,7 @@
       <Vm0>
                 69.79149	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.0043	  </water_conductance>	<!-- Ryan Kelley (Pecan) -->
+                 0.00001	  </water_conductance> 	<!-- ED -->
 
 	  <!-- Radiation Params -->	
       <clumping>

@@ -32,7 +32,7 @@ library(ggplot2); library(grid)
 # -----------------------
 # A. Location of the files we want to look at
 # -----------------------
-ed.out <- "~/Desktop/Research/PalEON_CR/ED_PalEON/MIP2_Region/1_spin_initial/spininit_qaqc.v1"
+ed.out <- "~/Dropbox/PalEON_CR/ED_PalEON/MIP2_Region/1_spin_initial/spininit_qaqc.v1"
 # -----------------------
 
 # -----------------------
@@ -48,7 +48,7 @@ summary(sites)
 # C. Map the qaqc sites (can be skipped)
 # -----------------------
 # Paleon Mask (to graph the qaqc locations)
-paleon.domain <- data.frame(rasterToPoints(raster("~/Desktop/Research/PalEON_CR/env_regional/env_paleon/domain_mask/paleon_domain.nc")))
+paleon.domain <- data.frame(rasterToPoints(raster("~/Dropbox/PalEON_CR/env_regional/env_paleon/domain_mask/paleon_domain.nc")))
 summary(paleon.domain)
 
 ggplot() + 
@@ -153,7 +153,7 @@ for(s in 1:nrow(sites)){
     	if(v %in% c(soil.var[!(soil.var=="SoilDepth")], var.diversity[!(var.diversity=="PFT")])){
     	  ed[[v]] <- abind(ed[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]])),,], ed.var.list[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]])),], along=3)
     	} else {
-	      ed[[v]] <- cbind(ed[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]])),], ed.var.list[[v]][1:min(nrow(ed[[v]]), nrow(ed.var.list[[v]]))])
+	      ed[[v]] <- cbind(ed[[v]][1:min(nrow(ed[[v]]), length(ed.var.list[[v]])),], ed.var.list[[v]][1:min(nrow(ed[[v]]), length(ed.var.list[[v]]))])
     	}
     }
 	
@@ -216,8 +216,8 @@ summary(ed$LAI)
 pdf(file.path(ed.out, "LAI.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$LAI)/2,ncol(ed$LAI)/2))
 for(i in 1:ncol(ed$LAI)){
-plot(ed$LAI[,i], type="l", col="black", lwd=1, ylim=c(0, max(ed$LAI)))
-	text(x=10000, y=quantile(ed$LAI, 0.99), dimnames(ed$LAI)[[2]][i], cex=1.5)
+plot(ed$LAI[,i], type="l", col="black", lwd=1, ylim=c(0, max(ed$LAI, na.rm=T)))
+	text(x=10000, y=quantile(ed$LAI, 0.99, na.rm=T), dimnames(ed$LAI)[[2]][i], cex=1.5)
 }
 dev.off()
 # -----------------------
@@ -226,12 +226,14 @@ dev.off()
 # C. GPP
 # -----------------------
 summary(ed$GPP/sec2yr)
+head(ed$GPP)
+
 
 pdf(file.path(ed.out, "GPP.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$GPP)/2,ncol(ed$GPP)/2))
 for(i in 1:ncol(ed$GPP)){
-plot(ed$GPP[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$GPP)/sec2yr)
-	text(x=10000, y=quantile(ed$GPP, 0.999)/sec2yr, dimnames(ed$GPP)[[2]][i], cex=1.5)
+plot(ed$GPP[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$GPP, na.rm=T)/sec2yr)
+	text(x=10000, y=quantile(ed$GPP, 0.999, na.rm=T)/sec2yr, dimnames(ed$GPP)[[2]][i], cex=1.5)
 }
 dev.off()
 # -----------------------
@@ -245,8 +247,8 @@ summary(ed$NPP)
 pdf(file.path(ed.out, "NPP.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$NPP)/2,ncol(ed$NPP)/2))
 for(i in 1:ncol(ed$NPP)){
-plot(ed$NPP[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$NPP)/sec2yr)
-	text(x=10000, y=quantile(ed$NPP, 0.999)/sec2yr, dimnames(ed$NPP)[[2]][i], cex=1.5)
+plot(ed$NPP[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$NPP, na.rm=T)/sec2yr)
+	text(x=10000, y=quantile(ed$NPP, 0.999, na.rm=T)/sec2yr, dimnames(ed$NPP)[[2]][i], cex=1.5)
 }
 dev.off()
 # -----------------------
@@ -260,8 +262,8 @@ summary(ed$NEE)
 pdf(file.path(ed.out, "NEE.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$NEE)/2,ncol(ed$NEE)/2))
 for(i in 1:ncol(ed$NEE)){
-plot(ed$NEE[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$NEE)/sec2yr)
-	text(x=10000, y=quantile(ed$NEE, 0.999)/sec2yr, dimnames(ed$NEE)[[2]][i], cex=1.5)
+plot(ed$NEE[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$NEE, na.rm=T)/sec2yr)
+	text(x=10000, y=quantile(ed$NEE, 0.999, na.rm=T)/sec2yr, dimnames(ed$NEE)[[2]][i], cex=1.5)
 abline(h=0, col="red2")
 }
 dev.off()
@@ -278,8 +280,8 @@ summary(ed$AutoResp/sec2yr)
 pdf(file.path(ed.out, "AutoResp.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$AutoResp)/2,ncol(ed$AutoResp)/2))
 for(i in 1:ncol(ed$AutoResp)){
-plot(ed$AutoResp[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$AutoResp)/sec2yr)
-	text(x=10000, y=quantile(ed$AutoResp, 0.999)/sec2yr, dimnames(ed$AutoResp)[[2]][i], cex=1.5)
+plot(ed$AutoResp[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$AutoResp, na.rm=T)/sec2yr)
+	text(x=10000, y=quantile(ed$AutoResp, 0.999, na.rm=T)/sec2yr, dimnames(ed$AutoResp)[[2]][i], cex=1.5)
 }
 dev.off()
 # -----------------------
@@ -294,8 +296,8 @@ summary(ed$HeteroResp/sec2yr)
 pdf(file.path(ed.out, "HeteroResp.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$HeteroResp)/2,ncol(ed$HeteroResp)/2))
 for(i in 1:ncol(ed$HeteroResp)){
-plot(ed$HeteroResp[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$HeteroResp)/sec2yr)
-	text(x=10000, y=quantile(ed$HeteroResp, 0.999)/sec2yr, dimnames(ed$HeteroResp)[[2]][i], cex=1.5)
+plot(ed$HeteroResp[,i]/sec2yr, type="l", col="black", lwd=1, ylim=range(ed$HeteroResp, na.rm=T)/sec2yr)
+	text(x=10000, y=quantile(ed$HeteroResp, 0.999, na.rm=T)/sec2yr, dimnames(ed$HeteroResp)[[2]][i], cex=1.5)
 }
 dev.off()
 # -----------------------

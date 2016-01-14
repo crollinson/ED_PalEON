@@ -230,7 +230,7 @@
       <Vm0>
                 36.00000      </Vm0>	<!-- Pecan N. Pine -->
       <water_conductance>
-                 0.00001	  </water_conductance> 	<!-- ED -->
+                 0.000457	  </water_conductance> 	<!-- Ryan * 0.1 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -348,7 +348,7 @@
       <Vm0>
                 36.00000      </Vm0>	<!-- Pecan N. Pine -->
       <water_conductance>
-                 0.00001	  </water_conductance> 	<!-- ED -->
+                 0.000448	  </water_conductance> 	<!-- Ryan * 0.1 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -452,7 +452,7 @@
       <D0>
                  0.15000      </D0>	<!-- Jackie -->
       <dark_respiration_factor>
-                 0.03399      </dark_respiration_factor>  <!-- Jackie -->
+                 0.01913      </dark_respiration_factor>  <!-- Pecan -->
       <leaf_width>
                  0.05000      </leaf_width>	<!-- Jackie -->
       <photosyn_pathway>
@@ -466,7 +466,7 @@
       <Vm0>
                 56.31656	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.00001	  </water_conductance> 	<!-- ED -->
+                 0.000497	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -513,9 +513,9 @@
 
 	  <!-- Allocation Params -->	
       <b1Bl>
-                 0.01736      </b1Bl>	<!-- Average Early & Late -->
+                 0.04800      </b1Bl>	<!-- ED Default -->
       <b2Bl>
-                 1.95792      </b2Bl>	<!-- Average Early & Late -->
+                 1.45500      </b2Bl>	<!-- ED Default -->
       <b1Bs>
                  0.16170      </b1Bs>
       <b2Bs>
@@ -587,7 +587,7 @@
       <Vm0>
                 63.96669	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.00001	  </water_conductance> 	<!-- ED -->
+                 0.000473	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -706,7 +706,7 @@
       <Vm0>
                 69.79149	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.00001	  </water_conductance> 	<!-- ED -->
+                 0.000431	  </water_conductance> 	<!-- Ryan * 0.1 -->
 
 	  <!-- Radiation Params -->	
       <clumping>

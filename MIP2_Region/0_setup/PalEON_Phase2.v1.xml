@@ -214,7 +214,7 @@
       <cuticular_cond>
               1000.0000      </cuticular_cond>	<!--  ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	
       <dark_respiration_factor>
                  0.02029      </dark_respiration_factor> 	<!-- Ryan Kelly/Pecan (South Pine) -->
       <leaf_width>
@@ -230,7 +230,7 @@
       <Vm0>
                 36.00000      </Vm0>	<!-- Pecan N. Pine -->
       <water_conductance>
-                 0.000457	  </water_conductance> 	<!-- Ryan * 0.1 -->
+                 0.0000457	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -348,7 +348,7 @@
       <Vm0>
                 36.00000      </Vm0>	<!-- Pecan N. Pine -->
       <water_conductance>
-                 0.000448	  </water_conductance> 	<!-- Ryan * 0.1 -->
+                 0.0000448	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -450,7 +450,7 @@
       <cuticular_cond>
              10000.00000      </cuticular_cond> 	<!-- ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>
       <dark_respiration_factor>
                  0.01913      </dark_respiration_factor>  <!-- Pecan -->
       <leaf_width>
@@ -466,7 +466,7 @@
       <Vm0>
                 56.31656	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.000497	  </water_conductance> 	<!-- Ryan * 0.01 -->
+                 0.0000497	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -535,7 +535,7 @@
       <rho>
                  0.00000      </rho>
       <SLA>
-                29.36710      </SLA> <!-- Pecan -->
+                39.73958      </SLA> <!-- Pecan Temperate Decid -->
 <!-- 
 
 	  <!~~ Derived Params ~~>	
@@ -571,7 +571,7 @@
       <cuticular_cond>
              10000.00000      </cuticular_cond> 	<!-- ED Default -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	
       <dark_respiration_factor>
                  0.01204      </dark_respiration_factor>  <!-- ED -->
       <leaf_width>
@@ -587,7 +587,7 @@
       <Vm0>
                 63.96669	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.000473	  </water_conductance> 	<!-- Ryan * 0.01 -->
+                 0.0000473	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>
@@ -690,7 +690,7 @@
       <cuticular_cond>
              10000.00000      </cuticular_cond> 	<!-- Jackie -->
       <D0>
-                 0.15000      </D0>	<!-- Jackie -->
+                 0.15000      </D0>	
       <dark_respiration_factor>
                  0.02000      </dark_respiration_factor>  <!-- ED Default -->
       <leaf_width>
@@ -706,7 +706,7 @@
       <Vm0>
                 69.79149	  </Vm0> <!-- Pecan -->
       <water_conductance>
-                 0.000431	  </water_conductance> 	<!-- Ryan * 0.1 -->
+                 0.0000431	  </water_conductance> 	<!-- Ryan * 0.01 -->
 
 	  <!-- Radiation Params -->	
       <clumping>

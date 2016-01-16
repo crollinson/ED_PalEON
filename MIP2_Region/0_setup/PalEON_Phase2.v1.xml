@@ -415,7 +415,7 @@
       <rho>
                  0.00000      </rho>
       <SLA>
-                28.46075      </SLA> <!-- Pecan -->
+                28.46075      </SLA> <!-- Jackie -->
 <!-- 
 
 	  <!~~ Derived Params ~~>	
@@ -513,9 +513,9 @@
 
 	  <!-- Allocation Params -->	
       <b1Bl>
-                 0.04800      </b1Bl>	<!-- ED Default -->
+                 0.01736      </b1Bl>	<!-- Average of Early & Late -->
       <b2Bl>
-                 1.45500      </b2Bl>	<!-- ED Default -->
+                 1.95792      </b2Bl>	<!-- Average of Early & Late -->
       <b1Bs>
                  0.16170      </b1Bs>
       <b2Bs>
@@ -523,7 +523,7 @@
       <b1Ht>
                 25.18000      </b1Ht> <!-- ED Default -->
       <b2Ht>
-                -0.04964      </b2Ht>	<!-- ED Default -->
+                -0.05969      </b2Ht>	<!-- Average of Early & Late -->
       <hgt_min>
                  1.50000      </hgt_min>
       <q>

@@ -513,9 +513,9 @@
 
 	  <!-- Allocation Params -->	
       <b1Bl>
-                 0.01736      </b1Bl>	<!-- Average of Early & Late -->
+                 0.04800      </b1Bl>	<!-- ED Default -->
       <b2Bl>
-                 1.95792      </b2Bl>	<!-- Average of Early & Late -->
+                 1.45500      </b2Bl>	<!-- ED Default -->
       <b1Bs>
                  0.16170      </b1Bs>
       <b2Bs>
@@ -523,7 +523,7 @@
       <b1Ht>
                 25.18000      </b1Ht> <!-- ED Default -->
       <b2Ht>
-                -0.05969      </b2Ht>	<!-- Average of Early & Late -->
+                -0.04964      </b2Ht>	<!-- ED Default -->
       <hgt_min>
                  1.50000      </hgt_min>
       <q>
@@ -565,7 +565,7 @@
 
 	  <!-- Nitrogen Params -->	
       <c2n_leaf>
-                24.84000      </c2n_leaf> <!-- Pecan -->
+                20.00000      </c2n_leaf> <!-- Rough Average of Early & Late -->
 
 	  <!-- Photosynthesis Params -->	
       <cuticular_cond>

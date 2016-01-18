@@ -32,7 +32,7 @@ library(ggplot2); library(grid)
 # -----------------------
 # A. Location of the files we want to look at
 # -----------------------
-ed.out <- "~/Dropbox/PalEON_CR/ED_PalEON/MIP2_Region/1_spin_initial/spininit_qaqc.v1"
+ed.out <- "~/Desktop/Research/PalEON_CR/ED_PalEON/MIP2_Region/1_spin_initial/spininit_qaqc.v1"
 # -----------------------
 
 # -----------------------
@@ -44,19 +44,19 @@ sites$lon <- as.numeric(substr(sites$site, 12,17))
 summary(sites)
 # -----------------------
 
-# -----------------------
-# C. Map the qaqc sites (can be skipped)
-# -----------------------
-# Paleon Mask (to graph the qaqc locations)
-paleon.domain <- data.frame(rasterToPoints(raster("~/Dropbox/PalEON_CR/env_regional/env_paleon/domain_mask/paleon_domain.nc")))
-summary(paleon.domain)
+# # -----------------------
+# # C. Map the qaqc sites (can be skipped)
+# # -----------------------
+# # Paleon Mask (to graph the qaqc locations)
+# paleon.domain <- data.frame(rasterToPoints(raster("~/Desktop/Research/PalEON_CR/env_regional/env_paleon/domain_mask/paleon_domain.nc")))
+# summary(paleon.domain)
 
-ggplot() + 
-	geom_raster(data=paleon.domain, aes(x=x, y=y), fill="gray50") +
-	geom_point(data=sites, aes(x=lon, y=lat), size=8, color="red2") +
-	coord_equal(ratio=1) +
-	theme_bw()
-# -----------------------
+# ggplot() + 
+	# geom_raster(data=paleon.domain, aes(x=x, y=y), fill="gray50") +
+	# geom_point(data=sites, aes(x=lon, y=lat), size=8, color="red2") +
+	# coord_equal(ratio=1) +
+	# theme_bw()
+# # -----------------------
 	
 # -----------------------
 # D. Get some useful info about the output
@@ -196,7 +196,7 @@ pdf(file.path(ed.out, "AGB_byPFT.pdf"), height=11, width=8.5)
 par(mfrow=c(ncol(ed$AGB)/2,ncol(ed$AGB)/2))
 for(i in 1:ncol(ed$AGB)){
 plot(ed$AGB[,i], type="l", col="black", lwd=2, ylim=c(0, max(ed$AGB, na.rm=T)))
-	text(x=10000, y=quantile(ed$AGB, 0.75, na.rm=T), dimnames(ed$AGB)[[2]][i], cex=1.5)
+	text(x=500, y=quantile(ed$AGB, 0.99, na.rm=T), dimnames(ed$AGB)[[2]][i], cex=1.5)
 	lines(ed$AGB[,i]*ed$Fcomp[, 5,i], type="l", col=pft.colors[1], lwd=1.5)
 	lines(ed$AGB[,i]*ed$Fcomp[, 6,i], type="l", col=pft.colors[2], lwd=1.5)
 	lines(ed$AGB[,i]*ed$Fcomp[, 8,i], type="l", col=pft.colors[3], lwd=1.5)
@@ -346,6 +346,21 @@ plot(ed$tair[,i], type="l", col="black", lwd=0.33, ylim=range(ed$tair, na.rm=T))
 	lines(ed$SoilTemp[,12,i], type="l", col="blue", lwd=0.25)
 	# lines(ed$SoilTemp[,8,i], type="l", col="green", lwd=0.75)
 	# lines(ed$SoilTemp[,6,i], type="l", col="red", lwd=0.5)
+}
+dev.off()
+# -----------------------
+
+# -----------------------
+# I. Soil Carbon
+# -----------------------
+# ed$TotSoilCarb
+summary(ed$TotSoilCarb)
+
+pdf(file.path(ed.out, "SoilTemp.pdf"), height=11, width=8.5)
+par(mfrow=c(ncol(ed$TotSoilCarb)/2,ncol(ed$TotSoilCarb)/2))
+for(i in 1:ncol(ed$TotSoilCarb)){
+plot(ed$TotSoilCarb[,i], type="l", col="black", lwd=0.33, ylim=range(ed$TotSoilCarb, na.rm=T))
+	text(x=10000, y=quantile(ed$TotSoilCarb,0.999, na.rm=T), dimnames(ed$TotSoilCarb)[[2]][i], cex=1.5)
 }
 dev.off()
 # -----------------------

@@ -481,10 +481,10 @@ for(s in 1:length(sites)){
 	# -------------------
 	# Do the carbon and fast nitrogen pools
 	# -------------------
-    fsc_ss <- median(fsc_in_y)/(fsc_loss * A_decomp)
-    ssl_ss <- median(ssl_in_y)/(ssl_loss * A_decomp * Lc) # Structural soil C
+    fsc_ss <- fsc_in_y[length(fsc_in_y)]/(fsc_loss * A_decomp)
+    ssl_ss <- ssl_in_y[length(ssl_in_y)]/(ssl_loss * A_decomp * Lc) # Structural soil C
 	ssc_ss <- ((ssl_loss * A_decomp * Lc * ssl_ss)*(1 - r_stsc))/(ssc_loss * A_decomp )
-    fsn_ss <- median(fsn_in_y)/(fsc_loss * A_decomp)
+    fsn_ss <- fsn_in_y[length(fsn_in_y)]/(fsc_loss * A_decomp)
 	# -------------------
 
 	# -------------------
@@ -493,11 +493,12 @@ for(s in 1:length(sites)){
     #ED2: csite%mineralized_N_loss  = csite%total_plant_nitrogen_uptake(ipa)             
     # + csite%today_Af_decomp(ipa) * Lc * K1 * csite%structural_soil_C(ipa)                     
     # * ( (1.0 - r_stsc) / c2n_slow - 1.0 / c2n_structural)
-    msn_loss <- median(pln_up_y) + A_decomp*Lc*ssl_loss*median(ssl_in_y)*
+    msn_loss <- pln_up_y[length(pln_up_y)] + 
+    			A_decomp*Lc*ssl_loss*ssl_in_y[length(ssl_in_y)]*
                 ((1.0-r_stsc)/c2n_slow - 1.0/c2n_structural)
 
     #fast_N_loss + slow_C_loss/c2n_slow
-    msn_med  <- fsc_loss*A_decomp*median(fsn_in_y)+ (ssc_loss * A_decomp)/c2n_slow 
+    msn_med  <- fsc_loss*A_decomp*fsn_in_y[length(fsn_in_y)]+ (ssc_loss * A_decomp)/c2n_slow 
       
     msn_ss   <- msn_med/msn_loss
 	# -------------------

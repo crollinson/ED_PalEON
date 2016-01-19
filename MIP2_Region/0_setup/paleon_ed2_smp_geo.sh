@@ -5,6 +5,8 @@
 #$ -V 
 #$ -pe omp 4
 #$ -v OMP_NUM_THREADS=4
+#$ -q "geo*"
+#$ -l hostname=!scc-c*&!scc-t*
 #$ -m e
 #$ -M crollinson@gmail.com
 #$ -l h_rt=120:00:00

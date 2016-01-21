@@ -86,8 +86,10 @@ do
 	    sed -i "s,$spin_dir,$runs_dir,g" ED2IN #change the baseline file path everywhere
         sed -i "s/NL%EXPNME =.*/NL%EXPNME = 'PalEON Runs (Land Use off)'/" ED2IN # change the experiment name
 
+        sed -i "s/NL%RUNTYPE  = 'INITIAL'.*/NL%RUNTYPE  = 'HISTORY'/" ED2IN # change from bare ground to .css/.pss run
+
         sed -i "s/NL%IED_INIT_MODE   = .*/NL%IED_INIT_MODE   = 5/" ED2IN # change from bare ground to .css/.pss run
-        sed -i "s,SFILIN   = .*,SFILIN   = '${runs_dir}${SITE}/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
+        sed -i "s,SFILIN   = .*,SFILIN   = '${runs_dir}${SITE}/histo/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
 
         sed -i "s/NL%IYEARA   = .*/NL%IYEARA   = 1850/" ED2IN # Set runs start year
         sed -i "s/NL%IMONTHA  = .*/NL%IMONTHA  = 01/" ED2IN # Set runs start month

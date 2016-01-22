@@ -25,8 +25,6 @@ ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Execut
 spin_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Directory of initial spin files
 runs_dir=${file_base}/4_runs/phase2_runs.v1/ # Where the transient runs will go
 
-spin_dir=${file_base}/1_spin_initial/phase2_spininit.v1/
-
 # Making the file directory if it doesn't already exist
 mkdir -p $runs_dir
 

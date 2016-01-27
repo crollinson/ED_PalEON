@@ -65,10 +65,10 @@ lon=($(awk -F ',' 'NR>1 {print $1}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv)
 # # One way to remove cells is to loop through all file names to explicitly make sure 
 # # we're not duplicating or skipping anything.  This is the way to go if we've messed with
 # # cell orders, but can be quite slow.
-# for REMOVE in ${file_done[@]}
-# do 
-# 	cells=(${cells[@]/$REMOVE/})
-# done
+for REMOVE in ${file_done[@]}
+do 
+	cells=(${cells[@]/$REMOVE/})
+done
 
 # An alternate way to do it that works if we don't skip anything
 #n_done=$((${#file_done[@]}))

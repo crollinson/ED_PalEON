@@ -72,7 +72,7 @@ do
 	    sed -i "s,$init_dir,$finish_dir,g" ED2IN #change the baseline file path everywhere
         sed -i "s/NL%EXPNME =.*/NL%EXPNME = 'PalEON Spin Finish'/" ED2IN # change the experiment name
 
-        sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = 2851/" ED2IN # Set last year
+        sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = 2351/" ED2IN # Set last year
         sed -i "s/NL%IMONTHZ  = .*/NL%IMONTHZ  = 01/" ED2IN # Set last month
         sed -i "s/NL%IDATEZ   = .*/NL%IDATEZ   = 01/" ED2IN # Set last day
 

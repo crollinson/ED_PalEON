@@ -26,7 +26,8 @@
 #     -  NL%SLXSAND = 
 
 
-
+# Load the necessary hdf5 library
+module load hdf5/1.6.10
 module load nco/4.3.4
 
 # Define constants & file paths for the scripts

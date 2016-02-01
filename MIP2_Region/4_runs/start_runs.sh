@@ -17,6 +17,8 @@
 #   Modify run date
 #   met dates 
 
+# Load the necessary hdf5 library
+module load hdf5/1.6.10
 
 # Define constants & file paths for the scripts
 file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be

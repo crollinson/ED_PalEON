@@ -18,6 +18,8 @@
 #   turn on disturbance (fire, treefall)
 #   all fille paths from initial spin to final spin
 
+# Load the necessary hdf5 library
+module load hdf5/1.6.10
 
 # Define constants & file paths for the scripts
 # Note: do not need to re

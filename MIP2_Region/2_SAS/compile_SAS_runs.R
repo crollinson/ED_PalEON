@@ -104,10 +104,20 @@ out.base <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/2_SAS/SAS_init_file
 
 if(!dir.exists(out.base)) dir.create(out.base)
 
-sites.init <- dir(in.base) # site that have the spininitial done
-sites.SAS  <- dir(out.base)  # sites that have an SAS solution
+sites.init <- dir(in.base) # site that have at least some spininitial
+sites.SAS  <- dir(out.base)  # sites that already have an SAS solution
 
-sites    <- sites.init[!(sites.init %in% sites.SAS)] # sites that need the SAS
+sites    <- sites.init[!(sites.init %in% sites.SAS)] # sites that need the 
+
+# Sites that have finished the spin initial
+spin.end <- 2851
+init.done <-  dir(file.path(in.base, sites, "analy"), paste0("Y-", spin.end)) # finding which sites are done with spine
+
+sites <- sites[which(sites %in% substr(init.done, 1, 17))]
+
+sites.working <- sites[which(sites %in% substr(init.done, 1, 17))]
+print(paste0("**** Sites NOT done: ", sites.working))
+
 site.lat <- as.numeric(substr(sites,4,8)) # lat from SAS run
 site.lon <- as.numeric(substr(sites,12,17)) # insert site longitude(s) here
 

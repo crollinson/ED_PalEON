@@ -24,16 +24,19 @@ file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want th
 ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 spin_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Directory of initial spin files
 runs_dir=${file_base}/4_runs/phase2_runs.v1/ # Where the transient runs will go
+finalyear=2351 # The last year of the spin finish
+
+n=3 # number of sites to start in this batch
 
 # Making the file directory if it doesn't already exist
 mkdir -p $runs_dir
 
-# Get the list of what grid cells have already finished spinups
+# Get the list of what grid cells already have at least started full runs
 pushd $runs_dir
 	file_done=(lat*)
 popd
 
-# Get the list of what grid cells have SAS solutions
+# Get the list of what grid cells have at least started the spin finish
 pushd $spin_dir
 	cells=(lat*)
 popd
@@ -48,9 +51,27 @@ do
 	cells=(${cells[@]/$REMOVE/})
 done
 
+# Filter sites that have successfully complete the spinfinish
 for SITE in ${cells[@]}
 do
+	#get dates of last histo file
+    path=${spin_dir}${SITE}
+    lastday=`ls -l -rt ${path}/histo| tail -1 | rev | cut -c15-16 | rev`
+    lastmonth=`ls -l -rt ${path}/histo| tail -1 | rev | cut -c18-19 | rev`
+    lastyear=`ls -l -rt ${path}/histo| tail -1 | rev | cut -c21-24 | rev`
+
+	# If the last year isn't the last year of the spin finish, don't do it for now
+	if [[(("${lastyear}" < "${finalyear}"))]]
+	then
+		echo "  Site not done: $SITE"
+		cells=(${cells[@]/$SITE/})
+	fi
+done
+
+for ((FILE=0; FILE<$n; FILE++)) # This is a way of doing it so that we don't have to modify N
+do
 	# Site Name and Lat/Lon
+	SITE=${cells[FILE]}
 	echo $SITE
 	
 	# Make a new folder for this site

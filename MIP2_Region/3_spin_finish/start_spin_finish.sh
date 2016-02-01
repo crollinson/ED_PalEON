@@ -28,6 +28,8 @@ init_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Directory of initial 
 SAS_dir=${file_base}/2_SAS/SAS_init_files.v1/ # Directory of SAS initialization files
 finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Where the transient runs will go
 
+n=3
+
 # Making the file directory if it doesn't already exist
 mkdir -p $finish_dir
 
@@ -51,9 +53,11 @@ do
 	cells=(${cells[@]/$REMOVE/})
 done
 
-for SITE in ${cells[@]}
+
+for ((FILE=0; FILE<$n; FILE++)) # This is a way of doing it so that we don't have to modify N
 do
 	# Site Name and Lat/Lon
+	SITE=${cells[FILE]}
 	echo $SITE
 	
 	# Make a new folder for this site

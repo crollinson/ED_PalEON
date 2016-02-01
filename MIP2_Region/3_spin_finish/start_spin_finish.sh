@@ -65,7 +65,8 @@ do
 	# Make a new folder for this site
 	file_path=${finish_dir}/${SITE}/
 	mkdir -p ${file_path} 
-	
+	chmod -r a+rwx ${file_path}
+
 	pushd ${file_path}
 		# Creating the default file structure and copying over the base files to be modified
 		mkdir -p histo analy

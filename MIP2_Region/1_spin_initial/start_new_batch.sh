@@ -26,7 +26,8 @@
 #     -  NL%SLXSAND = 
 
 
-
+# Load the necessary hdf5 library
+module load hdf5/1.6.10
 module load nco/4.3.4
 
 # Define constants & file paths for the scripts
@@ -44,7 +45,7 @@ file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/pa
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
 file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
 
-n=4
+n=3
 
 # Make sure the file paths on the Met Header have been updated for the current file structure
 sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER
@@ -62,16 +63,16 @@ cells=($(awk -F ',' 'NR>1 {print "lat" $2 "lon" $1}' ${setup_dir}/Paleon_MIP_Pha
 lat=($(awk -F ',' 'NR>1 {print $2}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
 lon=($(awk -F ',' 'NR>1 {print $1}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
 
-# # One way to remove cells is to loop through all file names to explicitly make sure 
-# # we're not duplicating or skipping anything.  This is the way to go if we've messed with
-# # cell orders, but can be quite slow.
+# One way to remove cells is to loop through all file names to explicitly make sure 
+# we're not duplicating or skipping anything.  This is the way to go if we've messed with
+# cell orders, but can be quite slow.
 for REMOVE in ${file_done[@]}
 do 
 	cells=(${cells[@]/$REMOVE/})
 done
 
 # An alternate way to do it that works if we don't skip anything
-#n_done=$((${#file_done[@]}))
+# n_done=$((${#file_done[@]}))
 n_done=0
 n_cells=${#cells[@]}
 cells=(${cells[@]:$n_done:$n})

@@ -18,6 +18,8 @@
 #   turn on disturbance (fire, treefall)
 #   all fille paths from initial spin to final spin
 
+# Load the necessary hdf5 library
+module load hdf5/1.6.10
 
 # Define constants & file paths for the scripts
 # Note: do not need to re
@@ -27,6 +29,8 @@ ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Execut
 init_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Directory of initial spin files
 SAS_dir=${file_base}/2_SAS/SAS_init_files.v1/ # Directory of SAS initialization files
 finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Where the transient runs will go
+
+n=3
 
 # Making the file directory if it doesn't already exist
 mkdir -p $finish_dir
@@ -51,9 +55,11 @@ do
 	cells=(${cells[@]/$REMOVE/})
 done
 
-for SITE in ${cells[@]}
+
+for ((FILE=0; FILE<$n; FILE++)) # This is a way of doing it so that we don't have to modify N
 do
 	# Site Name and Lat/Lon
+	SITE=${cells[FILE]}
 	echo $SITE
 	
 	# Make a new folder for this site

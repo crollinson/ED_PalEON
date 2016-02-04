@@ -15,7 +15,8 @@ BASE=$(ED_ROOT)/build/
 # For 64-bit
 #HDF5HOME=/usr/local/hdf5/pgi
 #HDF5HOME=/project/earth/packages/hdf5-1.8.11
-HDF5HOME=/project/earth/packages/hdf5-1.6.10
+#HDF5HOME=/project/earth/packages/hdf5-1.6.10
+HDF5HOME=/opt/apps/intel15/hdf5/1.8.16/x86_64/
 USE_HDF5=1
 HDF5_INCS=-I${HDF5HOME}/include
 HDF5_LIBS=-L${HDF5HOME}/lib -lhdf5 -lm -lhdf5_fortran -lhdf5 -lhdf5_hl -lz
@@ -49,8 +50,8 @@ F_COMP=mpif90
 #F_COMP = gfortran
 #F_OPTS= -V -FR -O2 -recursive -static -Vaxlib  -check all -g -fpe0 -ftz  -debug extended \
 #        -debug inline_debug_info -debug-parameters all -traceback -ftrapuv
-#F_Opts= -03
-F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
+F_Opts= -03
+#F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
 C_COMP=mpicc
 #C_OPTS= -O2 -DLITTLE  -g -static -traceback -debug extended
 C_OPTS = -03 -DLITTLE

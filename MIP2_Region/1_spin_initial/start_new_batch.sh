@@ -188,7 +188,6 @@ do
 	file_path=${file_dir}/${SITE}
 
 	mkdir -p ${file_path} 
-	chmod -r a+rwx ${file_path}
 	
 	pushd ${file_path}
 		# Creating the default file structure and copying over the base files to be modified
@@ -215,8 +214,11 @@ do
 
 		# submission script changes
 	    sed -i "s,/dummy/path,${file_path},g" paleon_ed2_smp_geo.sh #site=.*
-	    sed -i "s,TEST,${SITE}$,g" paleon_ed2_smp_geo.sh #change job name
+	    sed -i "s,TEST,${SITE},g" paleon_ed2_smp_geo.sh #change job name
 		
  		qsub paleon_ed2_smp_geo.sh
 	popd
+	
+	chmod -r a+rwx ${file_path}
+
 done

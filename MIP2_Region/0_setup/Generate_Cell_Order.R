@@ -103,12 +103,12 @@ ggplot() +
 	geom_point(data=p1 , aes(x=x, y=y), size=4, color="black"      ) +
 	geom_point(data=p2a, aes(x=x, y=y), size=3, color="cyan3"      ) +
 	geom_point(data=p2b, aes(x=x, y=y), size=3, color="blue"       ) +
-	geom_point(data=p3a, aes(x=x, y=y), size=2, color="red"        ) +
-	geom_point(data=p3b, aes(x=x, y=y), size=2, color="coral2"     ) +
-	geom_point(data=p4a, aes(x=x, y=y), size=1.5, color="darkgreen") +
-	geom_point(data=p4b, aes(x=x, y=y), size=1.5, color="green3"   ) +
-	geom_point(data=p5 , aes(x=x, y=y), size=1, color="gray30"     ) +
-	geom_point(data=p6a , aes(x=x, y=y), size=1, color="gray80"    ) +
+	# geom_point(data=p3a, aes(x=x, y=y), size=2, color="red"        ) +
+	# geom_point(data=p3b, aes(x=x, y=y), size=2, color="coral2"     ) +
+	# geom_point(data=p4a, aes(x=x, y=y), size=1.5, color="darkgreen") +
+	# geom_point(data=p4b, aes(x=x, y=y), size=1.5, color="green3"   ) +
+	# geom_point(data=p5 , aes(x=x, y=y), size=1, color="gray30"     ) +
+	# geom_point(data=p6a , aes(x=x, y=y), size=1, color="gray80"    ) +
 	coord_equal(ratio=1) +
 	theme_bw()
 

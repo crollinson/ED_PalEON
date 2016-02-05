@@ -130,9 +130,13 @@ do
 
 		# submission script changes
 	    sed -i "s,$spin_dir,$runs_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
-		sed -i "s/omp .*/omp 16/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
-		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=16/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
  		qsub paleon_ed2_smp_geo.sh
 	popd
+
+	chmod -r a+rwx ${file_path}
+
 done
+

@@ -363,15 +363,6 @@ plot(ed$TotSoilCarb[,i], type="l", col="black", lwd=0.33, ylim=range(ed$TotSoilC
 	text(x=10000, y=quantile(ed$TotSoilCarb,0.999, na.rm=T), dimnames(ed$TotSoilCarb)[[2]][i], cex=1.5)
 }
 dev.off()
-
-# Looking at just the last 40 years (2 met cycles)
-pdf(file.path(ed.out, "SoilCarb_Last40.pdf"), height=11, width=8.5)
-par(mfrow=c(ncol(ed$TotSoilCarb)/2,ncol(ed$TotSoilCarb)/2))
-for(i in 1:ncol(ed$TotSoilCarb)){
-plot(ed$TotSoilCarb[(length(ed$TotSoilCarb[,i])-12*40):length(ed$TotSoilCarb[,i]),i], type="l", col="black", lwd=0.33, ylim=range(ed$TotSoilCarb[(length(ed$TotSoilCarb[,i])-12*40):length(ed$TotSoilCarb[,i]),], na.rm=T), ylab="TotSoilCarb (MgC/HA)")
-	text(x=10000, y=quantile(ed$TotSoilCarb,0.999, na.rm=T), dimnames(ed$TotSoilCarb)[[2]][i], cex=1.5)
-}
-dev.off()
 # -----------------------
 
 # ----------------------------------------

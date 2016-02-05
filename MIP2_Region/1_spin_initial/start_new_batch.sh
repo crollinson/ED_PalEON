@@ -217,12 +217,9 @@ do
 	    sed -i "s,TEST,${SITE},g" paleon_ed2_smp_geo.sh #change job name
 		
  		qsub paleon_ed2_smp_geo.sh
-	popd
-<<<<<<< HEAD
-done
-=======
-	
-	chmod -r a+rwx ${file_path}
+	popd	
+
+	chmod -R a+rwx ${file_path}
 
 done
->>>>>>> db7cc5a642f59c638415f95bad4cc1a74ab8f745
+

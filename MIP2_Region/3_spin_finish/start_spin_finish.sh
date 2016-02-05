@@ -96,6 +96,6 @@ do
  		qsub paleon_ed2_smp_geo.sh
 	popd
 
-	chmod -r a+rwx ${file_path}
+	chmod -R a+rwx ${file_path}
 	
 done

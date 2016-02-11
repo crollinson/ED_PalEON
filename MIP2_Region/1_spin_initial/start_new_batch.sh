@@ -32,12 +32,12 @@ module load nco/4.5.2
 
 # Define constants & file paths for the scripts
 BU_base_spin=/work/03911/tg832103/ED_PalEON/MIP2_Region # The base original file paths in all of my scripts
-BU_base_EDI=work/03911/tg832103/ED_drivers/ # The location of basic ED Inputs on the BU server
+BU_base_EDI=/work/03911/tg832103/ED_drivers/ # The location of basic ED Inputs on the BU server
 
 file_base=/work/03911/tg832103/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 EDI_base=work/03911/tg832103/ED_drivers/ # The location of basic ED Inputs for you
 
-ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+ed_exec=/work/03911/tg832103/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
 setup_dir=${file_base}/0_setup # Where some constant setup files are
 
@@ -188,7 +188,6 @@ do
 	file_path=${file_dir}/${SITE}
 
 	mkdir -p ${file_path} 
-	chmod -r a+rwx ${file_path}
 	
 	pushd ${file_path}
 		# Creating the default file structure and copying over the base files to be modified
@@ -219,4 +218,6 @@ do
 		
  		qsub paleon_ed2_smp_geo.sh
 	popd
+
+	chmod -R g+rwx ${file_path}
 done

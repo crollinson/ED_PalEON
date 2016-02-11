@@ -20,8 +20,8 @@ library(ncdf4)
 library(rhdf5)
 library(abind)
 
-in.path  <- "/projectnb/dietzelab/paleon/met_regional/phase2_met_regional_v2"
-out.path <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met"
+in.path  <- "/work/03911/tg832103/ED_PalEON/MIP2_Region/phase2_met_regional_v2"
+out.path <- "/work/03911/tg832103/ED_PalEON/MIP2_Region/phase2_met"
 dir.create(file.path(out.path), showWarnings = FALSE)
 
 orig.vars <- c("lwdown", "precipf", "psurf", "qair", "swdown", "tair", "wind")

@@ -15,7 +15,7 @@
 cells=(lat42.75lon-72.25 lat46.25lon-94.75 lat45.25lon-68.75 lat46.25lon-89.75)
 
 # Define the baseline file path of interest
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/work/03911/tg832103/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
 # Where the files we want to qa/qc actually are and where they'll go
 setup_dir=${file_base}/0_setup # Where some constant setup files are

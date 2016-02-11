@@ -19,9 +19,9 @@
 #    Things to be Modified per site:
 #     -  NL%POI_LAT  =  
 #     -  NL%POI_LON  = 
-#     -  NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
-#     -  NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
-#     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%FFILOUT = '/work/03911/tg832103/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
+#     -  NL%SFILOUT = '/work/03911/tg832103/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%SFILIN  = '/work/03911/tg832103/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
@@ -31,19 +31,19 @@ module load hdf5/1.6.10
 module load nco/4.3.4
 
 # Define constants & file paths for the scripts
-BU_base_spin=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # The base original file paths in all of my scripts
-BU_base_EDI=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs on the BU server
+BU_base_spin=/work/03911/tg832103/ED_PalEON/MIP2_Region # The base original file paths in all of my scripts
+BU_base_EDI=work/03911/tg832103/ED_drivers/ # The location of basic ED Inputs on the BU server
 
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
-EDI_base=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs for you
+file_base=/work/03911/tg832103/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
+EDI_base=work/03911/tg832103/ED_drivers/ # The location of basic ED Inputs for you
 
 ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
 setup_dir=${file_base}/0_setup # Where some constant setup files are
 
-file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
-file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
-file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
+file_clay=/work/03911/tg832103/paleon_drivers/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
+file_sand=/work/03911/tg832103/paleon_drivers/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
+file_depth=/work/03911/tg832103/paleon_drivers/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
 
 n=3
 

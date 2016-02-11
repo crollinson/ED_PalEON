@@ -1,6 +1,6 @@
 # Script to extract monthly output from ED and put it into a netcdf 
 
-path.base <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region"
+path.base <- "/work/03911/tg832103/ED_PalEON/MIP2_Region"
 
 source(file.path(path.base, "0_setup", "model2netcdf.ED2.paleon.R"), chdir = TRUE)
 

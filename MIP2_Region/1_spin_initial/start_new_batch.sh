@@ -27,8 +27,8 @@
 
 
 # Load the necessary hdf5 library
-module load hdf5/1.6.10
-module load nco/4.3.4
+module load hdf5/1.8.16
+module load nco/4.5.2
 
 # Define constants & file paths for the scripts
 BU_base_spin=/work/03911/tg832103/ED_PalEON/MIP2_Region # The base original file paths in all of my scripts

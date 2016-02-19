@@ -133,7 +133,7 @@ do
 		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
- 		qsub paleon_ed2_smp_geo.sh
+# 		qsub paleon_ed2_smp_geo.sh
 	popd
 
 	chmod -R a+rwx ${file_path}

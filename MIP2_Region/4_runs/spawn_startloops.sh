@@ -33,8 +33,7 @@
 #      $$ qsub paleon_ed2_smp_geo.sh
 #      -- can we extract the job ID so we can keep tracking it?
 # 4. Wait until the runs have timed out and/or the job is no longer running
-#      a. wait [time_long] then do restart check
-#      b. wait [time_short] then check & see if job is still running using qstat 
+#      a. wait [time_short] then check & see if job is still running using qstat 
 # 5. After job has stopped, extract the last year (run.end) & check to see if we need 
 #    to restart the runs:
 #      a. if run.end == sim.finish (3010), We're done, everything happy
@@ -47,3 +46,60 @@
 #     c. if run.end < sim.finish & run.end > run.start, everything's fine & we just need to restart
 #          $$ qsub spawn_startloops.sh
 #          -- can I call a file within itself?
+
+USER=crolli # or whoever is in charge of this site
+SITE=latXXXlon-XXX # Site can be indexed off some file name
+SITE=lat37.75lon-87.25
+finalyear=3010
+outdir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/
+site_path=${outdir}${SITE}/
+
+# 1. Figuring out where we're restarting from
+startday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
+startmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
+startyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
+
+# 2. Editing the ED2IN to restart
+sed -i "s/IYEARA   =.*/IYEARA   = ${startyear}   ! Year/" ED2IN 
+sed -i "s/IDATEA   =.*/IDATEA   = ${startday}     ! Day/" ED2IN 
+sed -i "s/IMONTHA  =.*/IMONTHA  = ${startmonth}     ! Month/" ED2IN 
+sed -i "s/IYEARH   =.*/IYEARH   = ${startyear}   ! Year/" ED2IN 
+sed -i "s/IDATEH   =.*/IDATEH   = ${startday}     ! Day/" ED2IN 
+sed -i "s/IMONTHH  =.*/IMONTHH  = ${startmonth}     ! Month/" ED2IN 
+sed -i 's/IED_INIT_MODE   =.*/IED_INIT_MODE   = 5/' ED2IN
+sed -i "s/RUNTYPE  =.*/RUNTYPE  = 'HISTORY'/" ED2IN
+
+# 3. Submit the job!
+qsub paleon_ed2_geo.sh	
+
+
+# 4. Enter a loop checking the status
+while true
+do
+    sleep 300 #only run every 5 minutes
+	chmod -R a+rwx site_path # First make sure everyone can read/write/use ALL of these files!
+
+    runstat=$(qstat -j ${SITE$} | wc -l)
+
+    #if run has stopped go to step 5
+    if [[ "${runstat}" -eq 0 ]] # If run has stopped, go to step 5
+    then
+		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
+	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
+	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
+
+		# Check cases    
+	    if [["${lastyear}" -eq "${finalyear}" ]]
+    	then # case a: we're done and everything's happy
+    		echo "We're done! Mission Accomplished"
+    	else
+    		if [["${lastyear}" -eq "${finalyear}" ]]
+	    	then # case b: we're crashing, don't keep trying without changing something
+	    		echo "Houston we have a problem!"
+	    	else # case c: we're not done, but so far so good
+				echo "We stopped for gas.  Restarting with sunny skies"
+	    	fi
+    	fi
+    fi # No else because we just keep going until we're not running anymore
+    done
+done

@@ -27,6 +27,7 @@ ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Execut
 spin_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Directory of initial spin files
 runs_dir=${file_base}/4_runs/phase2_runs.v1/ # Where the transient runs will go
 finalyear=2351 # The last year of the spin finish
+USER=crolli
 
 n=3 # number of sites to start in this batch
 
@@ -87,7 +88,7 @@ do
 		cp ${spin_dir}${SITE}/ED2IN .
 		cp ${spin_dir}${SITE}/PalEON_Phase2.v1.xml .
 		cp ${spin_dir}${SITE}/paleon_ed2_smp_geo.sh .
-
+		cp ../spawn_startloops.sh .
 
 	    #Copy the last January (so we start at the appropriate phenological state)
 	    lastday=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c15-16 | rev`
@@ -132,8 +133,16 @@ do
 	    sed -i "s,$spin_dir,$runs_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
 		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/h_rt=.*/h_rt=100:00:00/" paleon_ed2_smp_geo.sh # Sets the run time below the max
 
- 		qsub paleon_ed2_smp_geo.sh
+		# spawn restarts changes
+		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
+		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
+
+	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
+	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+
+		qsub sub_spawn_restarts.sh
 	popd
 
 	chmod -R a+rwx ${file_path}

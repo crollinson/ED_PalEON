@@ -49,7 +49,6 @@
 
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
-SITE=lat37.75lon-87.25
 finalyear=3010
 outdir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/
 site_path=${outdir}${SITE}/
@@ -90,14 +89,26 @@ do
 
 		# Check cases    
 	    if [["${lastyear}" -eq "${finalyear}" ]]
-    	then # case a: we're done and everything's happy
-    		echo "We're done! Mission Accomplished"
+    	then # case a: we're done and everything's happy, send an email telling me so
+    		EMAIL_TXT=$(echo "We're done, Mission Accomplished! Runs finished without problems")
+    		
+    		EMAIL_SUB=$(echo 'ED Run Succeeded : ' ${SITE}) 
+	    	
+	    	mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
+    		
     	else
     		if [["${lastyear}" -eq "${finalyear}" ]]
-	    	then # case b: we're crashing, don't keep trying without changing something
-	    		echo "Houston we have a problem!"
+	    	then # case b: we're crashing, don't keep trying without changing something (send email)
+	    		EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
+	    		echo 'Last Year/Mo/day :' $lastyear $lastmonth $lastday)
+	    		
+	    		EMAIL_SUB=$(echo 'ED Run Fail: ' ${SITE}) 
+	    		
+	    		mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
+	    		
 	    	else # case c: we're not done, but so far so good
 				echo "We stopped for gas.  Restarting with sunny skies"
+				qsub sub_spawn_restarts.sh
 	    	fi
     	fi
     fi # No else because we just keep going until we're not running anymore

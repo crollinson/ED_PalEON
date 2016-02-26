@@ -81,14 +81,14 @@ do
     runstat=$(qstat -j ${SITE$} | wc -l)
 
     #if run has stopped go to step 5
-    if [[ "${runstat}" -eq 0 ]] # If run has stopped, go to step 5
+    if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
     then
 		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
 	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
 	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
 
 		# Check cases    
-	    if [["${lastyear}" -eq "${finalyear}" ]]
+	    if [[(("${lastyear}" -eq "${finalyear}"))]]
     	then # case a: we're done and everything's happy, send an email telling me so
     		EMAIL_TXT=$(echo "We're done, Mission Accomplished! Runs finished without problems")
     		
@@ -97,14 +97,9 @@ do
 	    	mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
     		
     	else
-    		if [["${lastyear}" -eq "${finalyear}" ]]
-	    	then # case b: we're crashing, don't keep trying without changing something (send email)
-	    		EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
-	    		echo 'Last Year/Mo/day :' $lastyear $lastmonth $lastday)
-	    		
-	    		EMAIL_SUB=$(echo 'ED Run Fail: ' ${SITE}) 
-	    		
-	    		mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
+    		if [[(("${lastyear}" -eq "${startyear}"))]]
+	    	then # case b: we're crashing, try again with lower integration step
+	    		qsub sub_adjust_integration.sh
 	    		
 	    	else # case c: we're not done, but so far so good
 				echo "We stopped for gas.  Restarting with sunny skies"

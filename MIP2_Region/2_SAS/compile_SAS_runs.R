@@ -134,7 +134,7 @@ for(s in 1:length(sites)){
  
  init.done <-  dir(file.path(in.base, sites[s], "analy"), paste0("Y-", spin.end)) # finding which sites are done with spine
  
- if(length(init.done)==0) print(paste0("**** Site NOT done: ")); next
+ if(length(init.done)==0){ print(paste0("**** Site NOT done: ")); next}
  
  
  

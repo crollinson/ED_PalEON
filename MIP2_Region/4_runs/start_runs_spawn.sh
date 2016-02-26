@@ -88,7 +88,11 @@ do
 		cp ${spin_dir}${SITE}/ED2IN .
 		cp ${spin_dir}${SITE}/PalEON_Phase2.v1.xml .
 		cp ${spin_dir}${SITE}/paleon_ed2_smp_geo.sh .
-		cp ../spawn_startloops.sh .
+		cp ../spawn_startloops.sh . # copy the restarts
+		cp ../sub_spawn_restarts.sh .
+
+		cp ../adjust_integration_restart.sh . # copy what to do if we crash
+		cp ../sub_adjust_integration.sh .
 
 	    #Copy the last January (so we start at the appropriate phenological state)
 	    lastday=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c15-16 | rev`
@@ -138,9 +142,14 @@ do
 		# spawn restarts changes
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
-
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+
+		# adjust integration step changes
+		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
+		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
+	    sed -i "s,TEST,check_${SITE},g" sub_adjust_integration.sh # change job name
 
 		qsub sub_spawn_restarts.sh
 	popd

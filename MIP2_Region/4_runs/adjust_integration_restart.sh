@@ -50,7 +50,7 @@ sed -i "s/DTLSM  =.*/DTLSM  = 320/" ED2IN
 sed -i "s/RADFRQ  =.*/RADFRQ  = 320/" ED2IN 
 
 # 3. Submit the job!
-qsub paleon_ed2_geo.sh	
+qsub paleon_ed2_smp_geo.sh	
 
 # 4. Check for it to get through the finish point
 # 4. Enter a loop checking the status

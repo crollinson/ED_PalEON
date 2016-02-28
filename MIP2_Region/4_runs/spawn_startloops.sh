@@ -1,3 +1,4 @@
+#!bin/bash
 # Script to start runs with default check & restart before the Wallclock runs out
 
 # Pseudocode to figure out the necessary workflow
@@ -69,16 +70,16 @@ sed -i 's/IED_INIT_MODE   =.*/IED_INIT_MODE   = 5/' ED2IN
 sed -i "s/RUNTYPE  =.*/RUNTYPE  = 'HISTORY'/" ED2IN
 
 # 3. Submit the job!
-qsub paleon_ed2_geo.sh	
+qsub paleon_ed2_smp_geo.sh	
 
 
 # 4. Enter a loop checking the status
 while true
 do
     sleep 300 #only run every 5 minutes
-	chmod -R a+rwx site_path # First make sure everyone can read/write/use ALL of these files!
+	chmod -R a+rwx ${site_path} # First make sure everyone can read/write/use ALL of these files!
 
-    runstat=$(qstat -j ${SITE$} | wc -l)
+    runstat=$(qstat -j ${SITE} | wc -l)
 
     #if run has stopped go to step 5
     if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5

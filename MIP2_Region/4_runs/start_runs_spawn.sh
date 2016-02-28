@@ -88,11 +88,11 @@ do
 		cp ${spin_dir}${SITE}/ED2IN .
 		cp ${spin_dir}${SITE}/PalEON_Phase2.v1.xml .
 		cp ${spin_dir}${SITE}/paleon_ed2_smp_geo.sh .
-		cp ../spawn_startloops.sh . # copy the restarts
-		cp ../sub_spawn_restarts.sh .
+		cp ../../spawn_startloops.sh . # copy the restarts
+		cp ../../sub_spawn_restarts.sh .
 
-		cp ../adjust_integration_restart.sh . # copy what to do if we crash
-		cp ../sub_adjust_integration.sh .
+		cp ../../adjust_integration_restart.sh . # copy what to do if we crash
+		cp ../../sub_adjust_integration.sh .
 
 	    #Copy the last January (so we start at the appropriate phenological state)
 	    lastday=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c15-16 | rev`

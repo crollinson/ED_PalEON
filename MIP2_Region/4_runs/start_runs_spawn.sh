@@ -138,7 +138,7 @@ do
 		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/h_rt=.*/h_rt=100:00:00/" paleon_ed2_smp_geo.sh # Sets the run time below the max
-		sed -i "s/-N .*/${SITE}/" paleon_ed2_smp_geo.sh
+		sed -i "s/-N .*/-N ${SITE}/" paleon_ed2_smp_geo.sh
 
 		# spawn restarts changes
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh

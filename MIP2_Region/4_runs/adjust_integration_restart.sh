@@ -76,6 +76,7 @@ do
 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
 
             qsub sub_spawn_restarts.sh # Go back to checking this as normal
+    		break
     	else
     		if [[(("${lastmonth}" -eq "${startmonth}"))]] # We're not making progress!
 	    	then # case b: we're crashing, don't keep trying without changing something (send email)

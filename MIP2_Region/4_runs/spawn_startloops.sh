@@ -105,6 +105,7 @@ do
 	    	else # case c: we're not done, but so far so good
 				echo "We stopped for gas.  Restarting with sunny skies"
 				qsub sub_spawn_restarts.sh
+	    		break
 	    	fi
     	fi
     fi # No else because we just keep going until we're not running anymore

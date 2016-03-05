@@ -86,6 +86,7 @@ do
 	    		
 	    		mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
 	    		break
+	    	fi
     	fi
     fi # No else because we just keep going until we're not running anymore
     done

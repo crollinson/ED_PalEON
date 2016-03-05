@@ -85,6 +85,7 @@ do
 	    		EMAIL_SUB=$(echo 'ED Run Fail: ' ${SITE}) 
 	    		
 	    		mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
+	    		break
     	fi
     fi # No else because we just keep going until we're not running anymore
     done

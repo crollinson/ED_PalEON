@@ -96,7 +96,7 @@ do
     		EMAIL_SUB=$(echo 'ED Run Succeeded : ' ${SITE}) 
 	    	
 	    	mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
-    		
+    		break
     	else
     		if [[(("${lastyear}" -eq "${startyear}"))]]
 	    	then # case b: we're crashing, try again with lower integration step

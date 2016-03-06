@@ -76,7 +76,7 @@ do
 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
 
             qsub sub_spawn_restarts.sh # Go back to checking this as normal
-    		break
+    		exit
     	else
     		if [[(("${lastmonth}" -eq "${startmonth}"))]] # We're not making progress!
 	    	then # case b: we're crashing, don't keep trying without changing something (send email)
@@ -86,10 +86,11 @@ do
 	    		EMAIL_SUB=$(echo 'ED Run Fail: ' ${SITE}) 
 	    		
 	    		mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
-	    		break
+	    		exit
 	    	fi
     	fi
     fi # No else because we just keep going until we're not running anymore
     done
 done
 
+exit

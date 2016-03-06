@@ -96,18 +96,20 @@ do
     		EMAIL_SUB=$(echo 'ED Run Succeeded : ' ${SITE}) 
 	    	
 	    	mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
-    		break
+    		exit
     	else
     		if [[(("${lastyear}" -eq "${startyear}"))]]
 	    	then # case b: we're crashing, try again with lower integration step
 	    		qsub sub_adjust_integration.sh
-	    		
+	    		exit
 	    	else # case c: we're not done, but so far so good
 				echo "We stopped for gas.  Restarting with sunny skies"
 				qsub sub_spawn_restarts.sh
-	    		break
+	    		exit
 	    	fi
     	fi
     fi # No else because we just keep going until we're not running anymore
     done
 done
+
+exit

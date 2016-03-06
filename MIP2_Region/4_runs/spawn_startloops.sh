@@ -95,7 +95,7 @@ do
     		
     		EMAIL_SUB=$(echo 'ED Run Succeeded : ' ${SITE}) 
 	    	
-	    	mail -s $EMAIL_SUB crollinson@gmail.com <<< $EMAIL_TEXT
+	    	echo -e $EMAIL_TXT | mail -s $EMAIL_SUB crollinson@gmail.com
     		exit
     	else
     		if [[(("${lastyear}" -eq "${startyear}"))]]

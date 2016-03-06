@@ -50,7 +50,7 @@
 
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
-finalyear=3010
+finalyear=3011 # the last year in the histo should actually be jan 1 3011
 outdir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/
 site_path=${outdir}${SITE}/
 
@@ -58,6 +58,7 @@ site_path=${outdir}${SITE}/
 startday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
 startmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
 startyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
+
 
 # 2. Editing the ED2IN to restart
 sed -i "s/IYEARA   =.*/IYEARA   = ${startyear}   ! Year/" ED2IN 
@@ -111,5 +112,3 @@ do
     fi # No else because we just keep going until we're not running anymore
     done
 done
-
-exit

@@ -1,3 +1,4 @@
+#!bin/bash
 # Script to get past crashes because of integration errors
 #  Sometimes the model hits an unstable state and can't solve
 #  To solve this problem, we need to manually adjust the model timestep 
@@ -7,7 +8,7 @@
 
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
-finalyear=3010
+finalyear=3011
 outdir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/
 site_path=${outdir}${SITE}/
 
@@ -45,7 +46,7 @@ else
 fi
 
 sed -i "s/IMONTHZ  =.*/IMONTHZ  = ${finalmonth}/" ED2IN 
-sed -i "s/IYEARZ   =.*/IMONTHZ  = ${finalyear}/" ED2IN 
+sed -i "s/IYEARZ   =.*/IYEARZ  = ${finalyear}/" ED2IN 
 sed -i "s/DTLSM  =.*/DTLSM  = 320/" ED2IN 
 sed -i "s/RADFRQ  =.*/RADFRQ  = 320/" ED2IN 
 
@@ -59,38 +60,39 @@ do
     sleep 300 #only run every 5 minutes
 	chmod -R a+rwx site_path # First make sure everyone can read/write/use ALL of these files!
 
-    runstat=$(qstat -j ${SITE$} | wc -l)
+    runstat=$(qstat -j ${SITE} | wc -l)
 
     #if run has stopped go to step 5
-    if [[ "${runstat}" -eq 0 ]] # If run has stopped, go to step 5
+    if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
     then
+		echo 'NOT RUNNING!'
 		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
 	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
 	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
 
 	    if [[(("lastmonth" -eq "finalmonth"))]] # NEED To match year & Month
     	then # # 5. If we succeeded, put the end point back to where it should be
+    		echo 'WE ARE DONE!'
     		sed -i "s/IMONTHZ  =.*/IMONTHZ  = 01/" ED2IN 
-			sed -i "s/IYEARZ   =.*/IMONTHZ  = 3011/" ED2IN 
+			sed -i "s/IYEARZ   =.*/IYEARZ  = 3011/" ED2IN 
 			sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
 
             qsub sub_spawn_restarts.sh # Go back to checking this as normal
+
     		exit
     	else
-    		if [[(("${lastmonth}" -eq "${startmonth}"))]] # We're not making progress!
-	    	then # case b: we're crashing, don't keep trying without changing something (send email)
-	    		EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
-	    		echo 'Last Year/Mo/day :' $lastyear $lastmonth $lastday)
+	    	echo 'WE HAVE A PROBLEM!'
+
+	    	EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
+	    	echo 'Last Year/Mo/day ' $lastyear $lastmonth $lastday)
 	    		
-	    		EMAIL_SUB=$(echo 'ED Run Fail: ' ${SITE}) 
+	    	EMAIL_SUB=$(echo 'ED Run Fail ' ${SITE})
 	    		
-		    	echo -e $EMAIL_TXT | mail -s $EMAIL_SUB crollinson@gmail.com
-	    		exit
-	    	fi
+		    echo -e $EMAIL_TXT | mail -s $EMAIL_SUB crollinson@gmail.com
+
+	    	exit
     	fi
     fi # No else because we just keep going until we're not running anymore
     done
 done
-
-exit

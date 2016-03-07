@@ -150,7 +150,7 @@ do
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
-	    sed -i "s,TEST,check_${SITE},g" sub_adjust_integration.sh # change job name
+	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
 
 		qsub sub_spawn_restarts.sh
 	popd

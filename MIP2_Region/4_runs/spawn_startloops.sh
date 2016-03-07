@@ -94,18 +94,22 @@ do
     	then # case a: we're done and everything's happy, send an email telling me so
     		EMAIL_TXT=$(echo "We're done, Mission Accomplished! Runs finished without problems")
     		
-    		EMAIL_SUB=$(echo 'ED Run Succeeded : ' ${SITE}) 
+    		EMAIL_SUB=$(echo 'ED Run Succeeded ' ${SITE}) 
 	    	
 	    	echo -e $EMAIL_TXT | mail -s $EMAIL_SUB crollinson@gmail.com
+    		
     		exit
     	else
     		if [[(("${lastyear}" -eq "${startyear}"))]]
 	    	then # case b: we're crashing, try again with lower integration step
+	    		echo "something's wrong. trying again with a smaller timestep"
 	    		qsub sub_adjust_integration.sh
+	    	
 	    		exit
 	    	else # case c: we're not done, but so far so good
 				echo "We stopped for gas.  Restarting with sunny skies"
 				qsub sub_spawn_restarts.sh
+	    	
 	    		exit
 	    	fi
     	fi

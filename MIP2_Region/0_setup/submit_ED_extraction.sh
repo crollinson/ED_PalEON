@@ -9,4 +9,4 @@
 #$ -q "geo*"
 #$ -N TEST
 #cd /dummy/path
-R CMD BATCH extract_output_general.R
+R CMD BATCH extract_output_paleon.R

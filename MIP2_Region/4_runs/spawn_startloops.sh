@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # Script to start runs with default check & restart before the Wallclock runs out
 
 # Pseudocode to figure out the necessary workflow
@@ -50,7 +50,7 @@
 
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
-finalyear=3011 # the last year in the histo should actually be jan 1 3011
+finalyear=3010 # the last year in the histo should actually be jan 1 3011
 outdir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/
 site_path=${outdir}${SITE}/
 
@@ -90,13 +90,16 @@ do
 	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
 
 		# Check cases    
-	    if [[(("${lastyear}" -eq "${finalyear}"))]]
+	    if [[(("${lastyear}" -gt "${finalyear}"))]]
     	then # case a: we're done and everything's happy, send an email telling me so
-    		EMAIL_TXT=$(echo "We're done, Mission Accomplished! Runs finished without problems")
+    		# Send an email saying the site is done
+    		email_file='status_mail.txt'
+    		echo "We're done, Mission Accomplished! Runs finished without problems -- " ${SITE} >> $email_file
+    		EMAIL_SUB=$(echo ${SITE}_'ED_Run_Succeeded!') 
+	    	mail -s $EMAIL_SUB crollinson@gmail.com < $email_file
+	    	rm -f $email_file
     		
-    		EMAIL_SUB=$(echo 'ED Run Succeeded ' ${SITE}) 
-	    	
-	    	echo -e $EMAIL_TXT | mail -s $EMAIL_SUB crollinson@gmail.com
+    		qsub sub_post_process.sh
     		
     		exit
     	else

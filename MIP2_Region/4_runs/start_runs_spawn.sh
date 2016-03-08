@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # This file takes the ending point for the spin finish (transient runs) and starts the 
 # full PalEON Simulations
 # Christy Rollinson, crollinson@gmail.com
@@ -85,16 +85,21 @@ do
 		# Creating the default file structure and copying over the base files to be modified
 		mkdir -p histo analy
 		ln -s $ed_exec
+		
+		# Copy the essential run files
 		cp ${spin_dir}${SITE}/ED2IN .
 		cp ${spin_dir}${SITE}/PalEON_Phase2.v1.xml .
 		cp ${spin_dir}${SITE}/paleon_ed2_smp_geo.sh .
-		cp ../../spawn_startloops.sh . # copy the restarts
+		
+		# copy the files to automatically restart
+		cp ../../spawn_startloops.sh . 
 		cp ../../sub_spawn_restarts.sh .
 
-		cp ../../adjust_integration_restart.sh . # copy what to do if we crash
+		# copy the files that try a smaller timestep if we crash
+		cp ../../adjust_integration_restart.sh . 
 		cp ../../sub_adjust_integration.sh .
-
-	    #Copy the last January (so we start at the appropriate phenological state)
+		
+	    # Copy the last January histo so we start at the appropriate phenological state
 	    lastday=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c15-16 | rev`
 	    lastmonth=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c18-19 | rev`
 	    lastyear=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c21-24 | rev`
@@ -152,10 +157,47 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
 	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
 
+		# copy & edit the files that clean up the previous step
+		cp ../../cleanup_spinfinish.sh
+		cp ../../sub_cleanup_spinfinish.sh
+	    sed -i "s,/DUMMY/PATH,${spin_dir}${SITE}/,g" cleanup_spinfinish.sh # set the file path
+		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spinfinish.sh 		
+	    sed -i "s/spin_last=.*/spin_last=${lastyear}/" cleanup_spinfinish.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spinfinish.sh # set the file path
+	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spinfinish.sh # change job name
+
+
+
+		# copy & edit the files that do all of the post-run housekeeping
+		cp ../../sub_post_process.sh
+		cp ../../post_process.sh
+		cp ../../../0_setup/submit_ED_extraction.sh
+		cp ../../../0_setup/extract_output_paleon.R
+		cp ../../sub_cleanup_runs.sh
+		cp ../../cleanup_runs.sh
+	    sed -i "s,TEST,post_${SITE},g" sub_post_process.sh # change job name
+	    sed -i "s,/dummy/path,${file_path},g" sub_post_process.sh # set the file path
+
+		sed -i "s/SITE=.*/SITE=${SITE}/" post_process.sh 		
+		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process.sh 		
+
+	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
+	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction # set the file path
+
+		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R
+	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction # set the file path
+
+	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spinfinish.sh # set the file path
+	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spinfinish.sh # change job name
+
+		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_runs.sh 		
+
 		qsub sub_spawn_restarts.sh
+
+		qsub sub_cleanup_spinfinish.sh
+
 	popd
 
 	chmod -R a+rwx ${file_path}
 
 done
-

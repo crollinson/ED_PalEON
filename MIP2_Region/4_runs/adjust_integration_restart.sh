@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 # Script to get past crashes because of integration errors
 #  Sometimes the model hits an unstable state and can't solve
 #  To solve this problem, we need to manually adjust the model timestep 
@@ -82,14 +82,16 @@ do
 
     		exit
     	else
-	    	echo 'WE HAVE A PROBLEM!'
-
+	    	echo 'WE HAVE A SERIOUS PROBLEM!'
+	    	
 	    	EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
 	    	echo 'Last Year/Mo/day ' $lastyear $lastmonth $lastday)
-	    		
-	    	EMAIL_SUB=$(echo 'ED Run Fail ' ${SITE})
-	    		
-		    echo -e $EMAIL_TXT | mail -s $EMAIL_SUB crollinson@gmail.com
+	    	fail_mail='fail_mail.txt'
+    		echo $EMAIL_TXT >> $fail_mail
+    		EMAIL_SUB=$(echo ${SITE}_'ED_Run_FAIL!')  
+
+	    	mail -s $EMAIL_SUB crollinson@gmail.com < $fail_mail
+	    	rm -f $fail_mail
 
 	    	exit
     	fi

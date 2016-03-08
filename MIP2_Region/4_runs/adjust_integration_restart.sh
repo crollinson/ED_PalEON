@@ -74,7 +74,7 @@ do
     	then # # 5. If we succeeded, put the end point back to where it should be
     		echo 'WE ARE DONE!'
     		sed -i "s/IMONTHZ  =.*/IMONTHZ  = 01/" ED2IN 
-			sed -i "s/IYEARZ   =.*/IYEARZ  = 3011/" ED2IN 
+			sed -i "s/IYEARZ   =.*/IYEARZ   = 3011/" ED2IN 
 			sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
 

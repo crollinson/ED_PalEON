@@ -1,22 +1,22 @@
 # Script to extract monthly output from ED and put it into a netcdf 
 
-path.base <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region"
+mod2paleon <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup/model2netcdf.ED2.paleon.R"
 
-source(file.path(path.base, "0_setup", "model2netcdf.ED2.paleon.R"), chdir = TRUE)
+source(mod2paleon, chdir = TRUE)
 
 
 site="TEST"
-sitelat <- as.numeric(substr(site,4,8)) # lat from SAS run
-sitelon <- as.numeric(substr(site,12,17)) # insert site longitude(s) here
+sitelat <- as.numeric(substr(site,4,8)) # lat from site name
+sitelon <- as.numeric(substr(site,12,17)) # lon from site name
 block.yr=100 # number of years you want to write into each file
 
 
-raw.dir <- file.path(path.base, "1_spin_initial/phase2_spininit.v1", site)
-new.dir <- file.path(path.base, "1_spin_initial/spininit_qaqc.v1", site)
+site.dir <- /dummy/path
+out.dir  <- file.path(site.dir, paste0(site, "_paleon")
 
-if(!dir.exists(new.dir)) dir.create(new.dir)
+if(!dir.exists(out.dir)) dir.create(out.dir)
 
-flist <- dir(file.path(raw.dir, "analy/"),"-E-") # Getting a list of what has been done
+flist <- dir(file.path(site.dir, "analy/"),"-E-") # Getting a list of what has been done
   
 # Getting a list of years that have been completed
 yr <- rep(NA,length(flist)) # create empty vector the same length as the file list
@@ -33,4 +33,4 @@ bins <- c(as.numeric(strftime(start.run, '%Y')), seq(from=as.numeric(paste0(subs
 
 print(paste0("----------  Processing Site: ", site, "  ----------")) 
   
-model2netcdf.ED2.paleon(site, raw.dir, new.dir, sitelat, sitelon, start.run, end.run, bins)
+model2netcdf.ED2.paleon(site, site.dir, out.dir, sitelat, sitelon, start.run, end.run, bins)

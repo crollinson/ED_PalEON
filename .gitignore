@@ -23,6 +23,7 @@ MIP2_Region/.history
 */*/crash_logs/*
 */*/logs/
 */*/*_qaqc.v*
+*/*/test_output
 MIP2_Region/0_setup/Paleon_MIP_Phase2_ED_Order_Status.csv
 
 *.xlsx

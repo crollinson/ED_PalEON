@@ -29,7 +29,7 @@ runs_dir=${file_base}/4_runs/phase2_runs.v1/ # Where the transient runs will go
 finalyear=2351 # The last year of the spin finish
 USER=crolli
 
-n=3 # number of sites to start in this batch
+n=1 # number of sites to start in this batch
 
 # Making the file directory if it doesn't already exist
 mkdir -p $runs_dir

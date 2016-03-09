@@ -32,6 +32,10 @@ https://github.com/EDmodel/ED2/wiki
 Installation Instructions should can be found here, but are also fairly straight-
 forward: https://github.com/EDmodel/ED2/wiki/Quick-start
 
+##### Installing ED requires the following programs/modeles
+1. hdf5 library (v1.6.10 or greater)
+2. fortran openmpi compiler
+
 ##### Basic Installation steps
 1. Clone ED using directions above
 2. navigate to build folder: $ cd ED2/ED/build/bin
@@ -41,7 +45,13 @@ forward: https://github.com/EDmodel/ED2/wiki/Quick-start
    — If you are generating your own make file, make sure sure you install using 
      fopenmp to run ED multi-threaded, which makes things MUCH faster
 4. generate dependencies: $ ./generate_deps.sh
-5. run the install (this may take 5-15+ minutes): ./install.sh
+5. run the install (this may take 5-15+ minutes): ./install.sh 
+
+#### NOTE: on some servers, compiling stalls at ed_state_vars.f90.  If this happens:
+1. cancel the install
+2. copy and paste the following code and run (compiles ed_state_vars.f90 with different options)
+   - `mpif90 -c -DUSE_INTERF=1 -DUSENC=0 -DPC_LINUX1 -DUSE_HDF5=1 -DUSE_COLLECTIVE_MPIO=0 -DUSE_MPIWTIME=1 -FR -O1 -recursive -Vaxlib -traceback  -I../../src/include -I   -DRAMS_MPI ed_state_vars.F90`
+3. when that finishes, continue the install (./install.sh)
 
 If you encounter any errors when trying to install, email me and we can try to 
 trouble shoot.  Additional problems can also be raised on the ED2 “Issues” on 
@@ -51,6 +61,14 @@ look first if you encounter issues to see if its a known issue with known soluti
 ##### NOTE: there are additional files you'll need to get from the Dietze Lab to run ED.  
 I will eventually put these on iPlant, but for now email me and I'll send them to you.  
 They're relatively small files.
+ 
+ 
+
+##### Running ED will require the following programs & libraries installed and active:
+1. hdf5 (v1.6.10 or greater)
+2. nco
+3. R (packages: ncdf4, zoo, raster, ggplot2, abind, rhdf5, chron, colorspace)
+   - rhdf5 will need to be installed from Bioconductor: http://bioconductor.org/packages/release/bioc/html/rhdf5.html
 
 ## 0. Format drivers, etc. (R)
 

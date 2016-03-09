@@ -24,7 +24,7 @@ Note: While this repository has the base scripts for the site-level runs, many o
 
 The version of ED that we’re using for the PalEON regional runs can be clone from 
 github: 
-$ git clone -b paleon_region_v1 https://github.com/crollinson/ED2.git
+   - 'git clone -b paleon_region_v1 https://github.com/crollinson/ED2.git'
 
 For more information on ED, please scope out the ED Wiki on github:
 https://github.com/EDmodel/ED2/wiki

@@ -6,8 +6,7 @@ Christy Rollinson (crollinson@gmail.com)
 This folder contains all of the scripts necessary to execute the PalEON MIP Phase 2 
 regional runs on a cell-by-cell basis.  For this to work properly, there are several 
 steps necessary to format files, perform the spinup (3 stages), and complete the runs.
-Details about each of the steps is now located in the wiki (part of this Github 
-repository).  
+Details about each of the steps is now located in the [github wiki](https://github.com/crollinson/ED_PalEON/wiki).  
 
 The master branch of this repository is configured for Boston University's *geo* 
 computing cluster. Please create a new branch for new computing locations. A list of

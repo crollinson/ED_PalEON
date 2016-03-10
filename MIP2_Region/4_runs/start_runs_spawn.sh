@@ -26,7 +26,10 @@ file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want th
 ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 spin_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Directory of initial spin files
 runs_dir=${file_base}/4_runs/phase2_runs.v1/ # Where the transient runs will go
-finalyear=2351 # The last year of the spin finish
+setup_dir=${file_base}/0_setup/
+finalspin=2351 # The last year of the spin finish
+finalrun=3010 # The last full year of the runs
+
 USER=crolli
 
 n=1 # number of sites to start in this batch
@@ -64,7 +67,7 @@ do
     lastyear=`ls -l -rt ${path}/histo| tail -1 | rev | cut -c21-24 | rev`
 
 	# If the last year isn't the last year of the spin finish, don't do it for now
-	if [[(("${lastyear}" < "${finalyear}"))]]
+	if [[(("${lastyear}" < "${finalspin}"))]]
 	then
 		echo "  Site not done: $SITE"
 		cells=(${cells[@]/$SITE/})
@@ -92,12 +95,12 @@ do
 		cp ${spin_dir}${SITE}/paleon_ed2_smp_geo.sh .
 		
 		# copy the files to automatically restart
-		cp ../../spawn_startloops.sh . 
-		cp ../../sub_spawn_restarts.sh .
+		cp ${setup_dir}spawn_startloops.sh . 
+		cp ${setup_dir}sub_spawn_restarts.sh .
 
 		# copy the files that try a smaller timestep if we crash
-		cp ../../adjust_integration_restart.sh . 
-		cp ../../sub_adjust_integration.sh .
+		cp ${setup_dir}adjust_integration_restart.sh . 
+		cp ${setup_dir}sub_adjust_integration.sh .
 		
 	    # Copy the last January histo so we start at the appropriate phenological state
 	    lastday=`ls -l -rt ${spin_dir}${SITE}/histo| tail -1 | rev | cut -c15-16 | rev`
@@ -148,6 +151,9 @@ do
 		# spawn restarts changes
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
+		sed -i "s/finalyear=.*/finalyear=${finalrun}/" spawn_startloops.sh 		
+		sed -i "s,sub_post_process.sh/sub_post_process_runs.sh/" spawn_startloops.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
 
@@ -158,8 +164,8 @@ do
 	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
 
 		# copy & edit the files that clean up the previous step
-		cp ../../cleanup_spinfinish.sh
-		cp ../../sub_cleanup_spinfinish.sh
+		cp ../../cleanup_spinfinish.sh .
+		cp ../../sub_cleanup_spinfinish.sh .
 	    sed -i "s,/DUMMY/PATH,${spin_dir}${SITE}/,g" cleanup_spinfinish.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spinfinish.sh 		
 	    sed -i "s/spin_last=.*/spin_last=${lastyear}/" cleanup_spinfinish.sh 		
@@ -169,23 +175,23 @@ do
 
 
 		# copy & edit the files that do all of the post-run housekeeping
-		cp ../../sub_post_process.sh
-		cp ../../post_process.sh
-		cp ../../../0_setup/submit_ED_extraction.sh
-		cp ../../../0_setup/extract_output_paleon.R
-		cp ../../sub_cleanup_runs.sh
-		cp ../../cleanup_runs.sh
-	    sed -i "s,TEST,post_${SITE},g" sub_post_process.sh # change job name
-	    sed -i "s,/dummy/path,${file_path},g" sub_post_process.sh # set the file path
+		cp ../../sub_post_process_runs.sh .
+		cp ../../post_process_runs.sh .
+		cp ${setup_dir}submit_ED_extraction.sh .
+		cp ${setup_dir}extract_output_paleon.R .
+		cp ../../sub_cleanup_runs.sh .
+		cp ../../cleanup_runs.sh .
+	    sed -i "s,TEST,post_${SITE},g" sub_post_process_runs.sh # change job name
+	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_runs.sh # set the file path
 
-		sed -i "s/SITE=.*/SITE=${SITE}/" post_process.sh 		
-		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_runs.sh 		
+		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_runs.sh 		
 
 	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
-	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction # set the file path
+	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
 
 		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R
-	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction # set the file path
+	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path
 
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spinfinish.sh # set the file path
 	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spinfinish.sh # change job name

@@ -26,5 +26,4 @@ MIP2_Region/.history
 */*/test_output
 
 *.xlsx
-
-MIP2_Region/0_setup/.Rhistory
+*.Rhistory

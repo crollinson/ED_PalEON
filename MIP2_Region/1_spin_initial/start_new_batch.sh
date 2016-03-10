@@ -13,8 +13,8 @@
 
 
 # Order of Operations
-# 1) Read in file order
-# 2) determine which cells have already been done (directory names in file.dir)
+# 1) Sync file with order sites & status/location 
+# 2) Add file directories for any sites that are remote so we don't repeat them
 # 3) loop through the next n cells and adjust base ED2IN for specific characters
 #    Things to be Modified per site:
 #     -  NL%POI_LAT  =  
@@ -24,6 +24,9 @@
 #     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
+
+# Note: Step 1 fetches from the most recent git
+
 
 
 # Load the necessary hdf5 library
@@ -40,12 +43,16 @@ EDI_base=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs for you
 ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
 setup_dir=${file_base}/0_setup # Where some constant setup files are
+site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
+
 
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
 file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
 
-n=3
+finalyear=2851
+finalfull=2850
+n=1
 
 # Make sure the file paths on the Met Header have been updated for the current file structure
 sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER
@@ -53,31 +60,12 @@ sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER
 # Making the file directory if it doesn't already exist
 mkdir -p $file_dir
 
-# Get the list of what grid cells have already been done
-pushd $file_dir
-	file_done=(lat*)
-popd
+# Extract the file names of sites that haven't been started yet
+sites_done=($(awk -F ',' 'NR>1 && $6!="" {print $4}' ${site_file})) # Get sites that have
+cells=($(awk -F ',' 'NR>1 && $6=="" {print $4}' ${site_file}))
+lat=($(awk -F ',' 'NR>1 && $6=="" {print $3}' ${site_file}))
+lon=($(awk -F ',' 'NR>1 && $6=="" {print $2}' ${site_file}))
 
-# Extract the file names we should be making form the csv file
-cells=($(awk -F ',' 'NR>1 {print "lat" $2 "lon" $1}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
-lat=($(awk -F ',' 'NR>1 {print $2}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
-lon=($(awk -F ',' 'NR>1 {print $1}' ${setup_dir}/Paleon_MIP_Phase2_ED_Order.csv))
-
-# One way to remove cells is to loop through all file names to explicitly make sure 
-# we're not duplicating or skipping anything.  This is the way to go if we've messed with
-# cell orders, but can be quite slow.
-for REMOVE in ${file_done[@]}
-do 
-	cells=(${cells[@]/$REMOVE/})
-done
-
-# An alternate way to do it that works if we don't skip anything
-# n_done=$((${#file_done[@]}))
-n_done=0
-n_cells=${#cells[@]}
-cells=(${cells[@]:$n_done:$n})
-lat=(${lat[@]:$n_done:$n})
-lon=(${lon[@]:$n_done:$n})
 
 # for FILE in $(seq 0 (($n-1)))
 for ((FILE=0; FILE<$n; FILE++)) # This is a way of doing it so that we don't have to modify N
@@ -201,6 +189,7 @@ do
 	    sed -i "s,$BU_base_spin,$file_base,g" ED2IN #change the baseline file path everywhere
 	    sed -i "s,$BU_base_EDI,$EDI_base,g" ED2IN #change the baseline file path for ED Inputs
 
+        sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = $finalyear/" ED2IN # Set last year
 	    sed -i "s,$old_analy,$new_analy,g" ED2IN #change output paths
 	    sed -i "s,$old_histo,$new_histo,g" ED2IN #change output paths
         sed -i "s/POI_LAT  =.*/POI_LAT  = $lat_now/" ED2IN # set site latitude
@@ -215,8 +204,42 @@ do
 		# submission script changes
 	    sed -i "s,/dummy/path,${file_path},g" paleon_ed2_smp_geo.sh #site=.*
 	    sed -i "s,TEST,${SITE},g" paleon_ed2_smp_geo.sh #change job name
+
+		# spawn restarts changes
+		cp $setup_dir/spawn_startloops.sh .
+		cp $setup_dir/sub_spawn_restarts.sh .
+		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
+		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
+		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
+	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
+	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+
+		# adjust integration step changes
+		cp $setup_dir/adjust_integration_restart.sh .
+		cp $setup_dir/sub_adjust_integration.sh .
+		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
+		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
+	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
 		
- 		qsub paleon_ed2_smp_geo.sh
+		# post-processing
+		cp ../../post_process_spininit.sh .
+		cp ../../sub_post_process_spininit.sh .
+		cp ${setup_dir}submit_ED_extraction.sh .
+		cp ${setup_dir}extract_output_paleon.R .
+	    sed -i "s,TEST,post_${SITE},g" sub_post_process_spininit.sh # change job name
+	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spininit.sh # set the file path
+		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit.sh 		
+		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spininit.sh 		
+
+	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
+	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
+		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R
+	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path
+
+
+ 		qsub sub_spawn_restarts.sh
 	popd	
 
 	chmod -R a+rwx ${file_path}

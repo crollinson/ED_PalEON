@@ -140,7 +140,7 @@ do
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spininit.sh 		
 	    sed -i "s/spin_last=.*/spin_last=${lastyear}/" cleanup_spininit.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spininit.sh # set the file path
-	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spininit.sh # change job name
+	    sed -i "s,TEST,clean_${SITE}_spininit,g" sub_cleanup_spininit.sh # change job name
 
  		qsub sub_spawn_restarts.sh
  		

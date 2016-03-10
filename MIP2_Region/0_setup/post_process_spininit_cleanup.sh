@@ -27,13 +27,13 @@ do
 		# 2. Check to see if we have all output
 		lastyear=`ls -l -rt ${paleon_out}| tail -1 | rev | cut -c4-7 | rev`
 		
-		if [[(("${lastyear}" -eq 1300))]]
+		if [[(("${lastyear}" -eq 1800))]]
 		then
 	    	echo 'Yay, things are working! Time to move on.'
 	    	
-	    	# don't do the clean up now because we want to make sure the next 
-	    	# step starts first
-	    	# sh cleanup_spinfinish.sh
+	    	# don't do the clean up now because we need to do the 
+	    	# SAS first
+	    	sh cleanup_spininit.sh
 
 	    	exit
 		else

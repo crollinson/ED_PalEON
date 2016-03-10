@@ -33,7 +33,7 @@ do
 	    	
 	    	# don't do the clean up now because we want to make sure the next 
 	    	# step starts first
-	    	# sh cleanup_spinfinish.sh
+	    	sh cleanup_spinfinish.sh
 
 	    	exit
 		else

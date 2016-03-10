@@ -27,13 +27,11 @@ do
 		# 2. Check to see if we have all output
 		lastyear=`ls -l -rt ${paleon_out}| tail -1 | rev | cut -c4-7 | rev`
 		
-		if [[(("${lastyear}" -eq 1300))]]
+		if [[(("${lastyear}" -eq 2000))]]
 		then
-	    	echo 'Yay, things are working! Time to move on.'
+	    	echo 'Yay, things are working! Time to clean up.'
 	    	
-	    	# don't do the clean up now because we want to make sure the next 
-	    	# step starts first
-	    	# sh cleanup_spinfinish.sh
+	    	sh cleanup_runs.sh
 
 	    	exit
 		else

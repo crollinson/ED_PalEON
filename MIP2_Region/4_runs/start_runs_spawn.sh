@@ -179,8 +179,8 @@ do
 		cp ../../post_process_runs.sh .
 		cp ${setup_dir}submit_ED_extraction.sh .
 		cp ${setup_dir}extract_output_paleon.R .
-		cp ../../sub_cleanup_runs.sh .
-		cp ../../cleanup_runs.sh .
+		cp ${setup_dir}sub_cleanup_runs.sh .
+		cp ${setup_dir}cleanup_runs.sh .
 	    sed -i "s,TEST,post_${SITE},g" sub_post_process_runs.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_runs.sh # set the file path
 

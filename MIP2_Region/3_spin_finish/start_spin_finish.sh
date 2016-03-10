@@ -29,6 +29,7 @@ ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Execut
 init_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Directory of initial spin files
 SAS_dir=${file_base}/2_SAS/SAS_init_files.v1/ # Directory of SAS initialization files
 finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Where the transient runs will go
+setup_dir=${file_base}/0_setup/
 
 finalyear=2351 # The year on which the models should top on Jan 1
 finalfull=2350 # The last year we actually care about (probably the year before finalyear)
@@ -99,8 +100,8 @@ do
 
 
 		# spawn restarts changes
-		cp $setup_dir/spawn_startloops.sh .
-		cp $setup_dir/sub_spawn_restarts.sh .
+		cp ${setup_dir}spawn_startloops.sh .
+		cp ${setup_dir}sub_spawn_restarts.sh .
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops.sh 		
@@ -109,8 +110,8 @@ do
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
 
 		# adjust integration step changes
-		cp $setup_dir/adjust_integration_restart.sh .
-		cp $setup_dir/sub_adjust_integration.sh .
+		cp ${setup_dir}adjust_integration_restart.sh .
+		cp ${setup_dir}sub_adjust_integration.sh .
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
@@ -133,8 +134,8 @@ do
 	    
 	    
 		# Clean up the spin initials since we don't need them anymore
-		cp ../../cleanup_spininit.sh .
-		cp ../../sub_cleanup_spininit.sh .
+		cp ${setup_dir}cleanup_spininit.sh .
+		cp ${setup_dir}sub_cleanup_spininit.sh .
 	    sed -i "s,/DUMMY/PATH,${init_dir}${SITE}/,g" cleanup_spininit.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spininit.sh 		
 	    sed -i "s/spin_last=.*/spin_last=${lastyear}/" cleanup_spininit.sh 		

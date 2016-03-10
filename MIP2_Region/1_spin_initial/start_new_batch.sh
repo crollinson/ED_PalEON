@@ -42,7 +42,7 @@ EDI_base=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs for you
 
 ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
-setup_dir=${file_base}/0_setup # Where some constant setup files are
+setup_dir=${file_base}/0_setup/ # Where some constant setup files are
 site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
 
 
@@ -182,8 +182,8 @@ do
 		mkdir -p histo analy
 		ln -s $ed_exec
 		cp ../../ED2IN_SpinInit_Base ED2IN
-		cp $setup_dir/PalEON_Phase2.v1.xml .
-		cp $setup_dir/paleon_ed2_smp_geo.sh .
+		cp ${setup_dir}PalEON_Phase2.v1.xml .
+		cp ${setup_dir}paleon_ed2_smp_geo.sh .
 
 		# ED2IN Changes	    
 	    sed -i "s,$BU_base_spin,$file_base,g" ED2IN #change the baseline file path everywhere
@@ -206,8 +206,8 @@ do
 	    sed -i "s,TEST,${SITE},g" paleon_ed2_smp_geo.sh #change job name
 
 		# spawn restarts changes
-		cp $setup_dir/spawn_startloops.sh .
-		cp $setup_dir/sub_spawn_restarts.sh .
+		cp ${setup_dir}spawn_startloops.sh .
+		cp ${setup_dir}sub_spawn_restarts.sh .
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops.sh 		
@@ -216,8 +216,8 @@ do
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
 
 		# adjust integration step changes
-		cp $setup_dir/adjust_integration_restart.sh .
-		cp $setup_dir/sub_adjust_integration.sh .
+		cp ${setup_dir}djust_integration_restart.sh .
+		cp ${setup_dir}sub_adjust_integration.sh .
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path

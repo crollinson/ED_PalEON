@@ -1,6 +1,6 @@
 # ED_PalEON: Scripts to Execute PalEON MIP ED Runs
 Christy Rollinson (crollinson@gmail.com)
-7 January, 2016
+10 March, 2016
 
 
 This folder contains all of the scripts necessary to execute the PalEON MIP Phase 2 

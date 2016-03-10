@@ -9,12 +9,22 @@ setup_dir=${file_base}/0_setup/
 # ---------------------
 # Clean up Spin Initial
 # ---------------------
-spininit_dir=${file_base}/1_spin_initial/phase2_spininitial.v1/ 
+spininit_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ 
 finalinit=2851
 
 pushd $spininit_dir
 	init_done=(lat*)
 popd
+
+# ------- 
+# Skip files that we can't access, etc. for now
+# ------- 
+files_skip=(lat47.75lon-82.25 lat47.75lon-92.25 lat42.75lon-77.25 lat35.25lon-89.75 lat35.25lon-84.75 lat35.25lon-79.75) # Right now these are from Betsy and Ann
+for REMOVE in ${files_skip[@]}
+do 
+	init_done=(${init_done[@]/$REMOVE/})
+done
+# ------- 
 
 for SITE in ${init_done[@]}
 do
@@ -37,8 +47,8 @@ do
 			cp ${setup_dir}post_process_spininit_cleanup.sh .
 	    	sed -i "s,TEST,post_${SITE},g" sub_post_process_spininit_cleanup.sh # change job name
 	    	sed -i "s,/dummy/path,${spath},g" sub_post_process_spininit_cleanup.sh # set the file path
-			sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit_cleanup.sh 		
-			sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spininit_cleanup.sh 		
+			sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit_cleanup.sh 
+			sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spininit_cleanup.sh 
 
 			cp ${setup_dir}submit_ED_extraction.sh .
 			cp ${setup_dir}extract_output_paleon.R .

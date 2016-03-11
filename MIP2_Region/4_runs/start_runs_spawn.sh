@@ -119,24 +119,18 @@ do
 		# ED2IN Changes	    
 	    sed -i "s,$spin_dir,$runs_dir,g" ED2IN #change the baseline file path everywhere
         sed -i "s/NL%EXPNME =.*/NL%EXPNME = 'PalEON Runs (Land Use off)'/" ED2IN # change the experiment name
-
         sed -i "s/NL%RUNTYPE  = 'INITIAL'.*/NL%RUNTYPE  = 'HISTORY'/" ED2IN # change from bare ground to .css/.pss run
-
         sed -i "s/NL%IED_INIT_MODE   = .*/NL%IED_INIT_MODE   = 5/" ED2IN # change from bare ground to .css/.pss run
         sed -i "s,SFILIN   = .*,SFILIN   = '${runs_dir}${SITE}/histo/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
-
         sed -i "s/NL%IYEARA   = .*/NL%IYEARA   = 1850/" ED2IN # Set runs start year
         sed -i "s/NL%IMONTHA  = .*/NL%IMONTHA  = 01/" ED2IN # Set runs start month
         sed -i "s/NL%IDATEA   = .*/NL%IDATEA   = 01/" ED2IN # Set runs start day
-
         sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = 3011/" ED2IN # Set runs last year
         sed -i "s/NL%IMONTHZ  = .*/NL%IMONTHZ  = 01/" ED2IN # Set runs last month
         sed -i "s/NL%IDATEZ   = .*/NL%IDATEZ   = 01/" ED2IN # Set runs last day
-
         sed -i "s/NL%IYEARH   = .*/NL%IYEARH   = 1850/" ED2IN # Set histo year
         sed -i "s/NL%IMONTHH  = .*/NL%IMONTHH  = 01/" ED2IN # Set histo month
         sed -i "s/NL%IDATEH   = .*/NL%IDATEH   = 01/" ED2IN # Set histo day
-
         sed -i "s/NL%METCYC1     =.*/NL%METCYC1     = 1850/" ED2IN # Set met start
         sed -i "s/NL%METCYCF     =.*/NL%METCYCF     = 3010/" ED2IN # Set met end
 
@@ -164,11 +158,11 @@ do
 	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
 
 		# copy & edit the files that clean up the previous step
-		cp ../../cleanup_spinfinish.sh .
-		cp ../../sub_cleanup_spinfinish.sh .
+		cp ${setup_dir}cleanup_spinfinish.sh .
+		cp ${setup_dir}sub_cleanup_spinfinish.sh .
 	    sed -i "s,/DUMMY/PATH,${spin_dir}${SITE}/,g" cleanup_spinfinish.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spinfinish.sh 		
-	    sed -i "s/spin_last=.*/spin_last=${lastyear}/" cleanup_spinfinish.sh 		
+	    sed -i "s/lastyear=.*/lastyear=${finalspin}/" cleanup_spinfinish.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spinfinish.sh # set the file path
 	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spinfinish.sh # change job name
 
@@ -186,6 +180,7 @@ do
 
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_runs.sh 		
 		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_runs.sh 		
+		sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" post_process_runs.sh # set the file path
 
 	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
@@ -193,10 +188,12 @@ do
 		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R
 	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path
 
-	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spinfinish.sh # set the file path
-	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spinfinish.sh # change job name
+		sed -i "s,/DUMMY/PATH,${file_path}/,g" cleanup_runs.sh # set the file path
+		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_runs.sh
+		sed -i "s/lastyear=.*/lastyear=3011/" cleanup_runs.sh
+		sed -i "s,/dummy/path,${file_path},g" sub_cleanup_runs.sh # set the file path
+		sed -i "s,TEST,clean_${SITE}_runs,g" sub_cleanup_runs.sh # change job name
 
-		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_runs.sh 		
 
 		qsub sub_spawn_restarts.sh
 

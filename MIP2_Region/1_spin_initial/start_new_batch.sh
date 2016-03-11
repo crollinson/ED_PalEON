@@ -232,6 +232,7 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spininit.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit.sh 		
 		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spininit.sh 		
+		sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" post_process_spininit.sh # set the file path
 
 	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path

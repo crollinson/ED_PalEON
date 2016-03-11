@@ -33,7 +33,7 @@ setup_dir=${file_base}/0_setup/
 
 finalyear=2351 # The year on which the models should top on Jan 1
 finalfull=2350 # The last year we actually care about (probably the year before finalyear)
-
+finalinit=2851
 
 n=3
 
@@ -126,6 +126,7 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spinfinish.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spinfinish.sh 		
 		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spinfinish.sh 		
+		sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" post_process_spinfinish.sh # set the file path
 
 	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
@@ -138,7 +139,7 @@ do
 		cp ${setup_dir}sub_cleanup_spininit.sh .
 	    sed -i "s,/DUMMY/PATH,${init_dir}${SITE}/,g" cleanup_spininit.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spininit.sh 		
-	    sed -i "s/spin_last=.*/spin_last=${lastyear}/" cleanup_spininit.sh 		
+	    sed -i "s/lastyear=.*/lastyear=${finalinit}/" cleanup_spininit.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spininit.sh # set the file path
 	    sed -i "s,TEST,clean_${SITE}_spininit,g" sub_cleanup_spininit.sh # change job name
 

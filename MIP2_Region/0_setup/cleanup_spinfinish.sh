@@ -17,14 +17,13 @@ file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want th
 
 SITE=latXXXlon-XXX
 spin_dir=/DUMMY/PATH
-spin_last=2351
+lastyear=2351
 
 pushd ${spin_dir}
-
 	# Put key history outputs into a new temporary folder
 	mkdir histo2
 	cp histo/*.xml histo2/ # settings file
-	cp histo/*-1850-01-01* histo2/ # first
+	cp histo/*-1850-06-01* histo2/ # first
 	cp histo/*-S-$lastyear-01-01-* histo2/ # last
 	
 	# Remove all the other history files
@@ -38,10 +37,7 @@ pushd ${spin_dir}
 	
 	# remove the uncompressed analy files
 	rm -rf analy
-	
+
+	# make sure everyone has access to the files
+	chmod -R a+rwx .
 popd
-
-# make sure everyone has access to the files
-chmod -R a+rwx ${spin_dir}
-
-

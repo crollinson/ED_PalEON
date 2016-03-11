@@ -20,6 +20,8 @@ popd
 # Skip files that we can't access, etc. for now
 # ------- 
 files_skip=(lat47.75lon-82.25 lat47.75lon-92.25 lat42.75lon-77.25 lat35.25lon-89.75 lat35.25lon-84.75 lat35.25lon-79.75) # Right now these are from Betsy and Ann
+files_skip=($files_skip lat35.25lon-94.75) # Add the one site I used as my test
+
 for REMOVE in ${files_skip[@]}
 do 
 	init_done=(${init_done[@]/$REMOVE/})
@@ -32,8 +34,6 @@ do
 
 	#get dates of last histo file
     spath=${spininit_dir}${SITE}
-    lastday=`ls -l -rt ${spath}/histo| tail -1 | rev | cut -c15-16 | rev`
-    lastmonth=`ls -l -rt ${spath}/histo| tail -1 | rev | cut -c18-19 | rev`
     lastyear=`ls -l -rt ${spath}/histo| tail -1 | rev | cut -c21-24 | rev`
 
 	# If the last year isn't the last year of the spin finish, don't do it for now
@@ -49,6 +49,7 @@ do
 	    	sed -i "s,/dummy/path,${spath},g" sub_post_process_spininit_cleanup.sh # set the file path
 			sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit_cleanup.sh 
 			sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spininit_cleanup.sh 
+			sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" post_process_spininit_cleanup.sh # set the file path
 
 			cp ${setup_dir}submit_ED_extraction.sh .
 			cp ${setup_dir}extract_output_paleon.R .

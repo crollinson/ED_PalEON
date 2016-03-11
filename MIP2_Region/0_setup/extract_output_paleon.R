@@ -12,7 +12,7 @@ block.yr=100 # number of years you want to write into each file
 
 
 site.dir <- '/dummy/path'
-out.dir  <- file.path(site.dir, paste0(site, "_paleon")
+out.dir  <- file.path(site.dir, paste0(site, "_paleon"))
 
 if(!dir.exists(out.dir)) dir.create(out.dir)
 

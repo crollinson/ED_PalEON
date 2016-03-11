@@ -11,11 +11,12 @@
 # 4. tar analy files to save space
 
 # Some useful names & paths
+paleon_out=/dummy/path
 SITE=TEST
 job_name=post_TEST
 
 # 1. submit job & check to see if it's running 
-qsub submit_ED_extraction
+qsub submit_ED_extraction.sh
 
 while true
 do
@@ -37,7 +38,7 @@ do
 		else
 	    	echo 'Output extraction in R failed!'
 	    	
-	    	EMAIL_TXT=$(echo 'R extraction failed -- site' ${SITE} '!'
+	    	EMAIL_TXT=$(echo 'R extraction failed -- site' ${SITE} '!')
 	    	fail_mail='fail_mail_R.txt'
     		echo $EMAIL_TXT >> $fail_mail
     		EMAIL_SUB=$(echo ${SITE}_'extraction_FAIL!')  

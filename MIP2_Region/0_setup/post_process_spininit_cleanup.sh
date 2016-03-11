@@ -11,11 +11,12 @@
 # 4. tar analy files to save space
 
 # Some useful names & paths
+paleon_out=/dummy/path
 SITE=TEST
 job_name=post_TEST
 
 # 1. submit job & check to see if it's running 
-qsub submit_ED_extraction
+qsub submit_ED_extraction.sh
 
 while true
 do
@@ -25,7 +26,7 @@ do
 	if [[(("${runstat}" -eq 0))]]
 	then
 		# 2. Check to see if we have all output
-		lastyear=`ls -l -rt ${paleon_out}| tail -1 | rev | cut -c4-7 | rev`
+		lastyear=`ls -l -rt ${paleon_out} | tail -1 | rev | cut -c4-7 | rev`
 		
 		if [[(("${lastyear}" -eq 1800))]]
 		then

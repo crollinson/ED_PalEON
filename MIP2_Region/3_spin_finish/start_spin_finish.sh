@@ -98,6 +98,17 @@ do
 		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
+		# spin spawn start changes -- 
+		# Note: spins require a different first script because they won't have any 
+		#       histo files to read
+		cp ${setup_dir}spawn_startloops_spinstart.sh .
+		cp ${setup_dir}sub_spawn_restarts_spinstart.sh .
+		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops_spinstart.sh
+		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops_spinstart.sh 		
+		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops_spinstart.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops_spinstart.sh # set the file path
+	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
+	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
 
 		# spawn restarts changes
 		cp ${setup_dir}spawn_startloops.sh .

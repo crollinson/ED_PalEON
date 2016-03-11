@@ -25,9 +25,6 @@
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
-# Note: Step 1 fetches from the most recent git
-
-
 
 # Load the necessary hdf5 library
 module load hdf5/1.6.10
@@ -45,6 +42,10 @@ file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will
 setup_dir=${file_base}/0_setup/ # Where some constant setup files are
 site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
 
+# Lets double check and make sure the order status file is up to date
+# Note: need to make sure you don't have to enter a password for this to work right
+git fetch --all
+git checkout origin/master -- $site_file
 
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
@@ -205,6 +206,18 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" paleon_ed2_smp_geo.sh #site=.*
 	    sed -i "s,TEST,${SITE},g" paleon_ed2_smp_geo.sh #change job name
 
+		# spin spawn start changes -- 
+		# Note: spins require a different first script because they won't have any 
+		#       histo files to read
+		cp ${setup_dir}spawn_startloops_spinstart.sh .
+		cp ${setup_dir}sub_spawn_restarts_spinstart.sh .
+		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops_spinstart.sh
+		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops_spinstart.sh 		
+		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops_spinstart.sh 		
+	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops_spinstart.sh # set the file path
+	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
+	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
+
 		# spawn restarts changes
 		cp ${setup_dir}spawn_startloops.sh .
 		cp ${setup_dir}sub_spawn_restarts.sh .
@@ -216,7 +229,7 @@ do
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
 
 		# adjust integration step changes
-		cp ${setup_dir}djust_integration_restart.sh .
+		cp ${setup_dir}adjust_integration_restart.sh .
 		cp ${setup_dir}sub_adjust_integration.sh .
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		

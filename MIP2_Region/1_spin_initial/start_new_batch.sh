@@ -253,7 +253,7 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path
 
 
- 		qsub sub_spawn_restarts.sh
+ 		qsub sub_spawn_restarts_spinstart.sh
 	popd	
 
 	chmod -R a+rwx ${file_path}

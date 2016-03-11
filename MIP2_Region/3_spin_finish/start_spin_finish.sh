@@ -154,7 +154,7 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spininit.sh # set the file path
 	    sed -i "s,TEST,clean_${SITE}_spininit,g" sub_cleanup_spininit.sh # change job name
 
- 		qsub sub_spawn_restarts.sh
+ 		qsub sub_spawn_restarts_spinstart.sh
  		
  		qsub sub_cleanup_spininit.sh
 

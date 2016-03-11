@@ -25,7 +25,7 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 24,-89.75,35.25,lat35.25lon-89.75,2.5-degree,geo,3-Feb-16,1-Mar-16,10-Mar-16
 25,-84.75,35.25,lat35.25lon-84.75,2.5-degree,geo,3-Feb-16,1-Mar-16,8-Mar-16
 26,-79.75,35.25,lat35.25lon-79.75,2.5-degree,geo,3-Feb-16,1-Mar-16,6-Mar-16
-27,-99.75,40.25,lat40.25lon-99.75,2.5-degree,,,,
+27,-99.75,40.25,lat40.25lon-99.75,2.5-degree,geo,,,
 28,-94.75,40.25,lat40.25lon-94.75,2.5-degree,,,,
 29,-89.75,40.25,lat40.25lon-89.75,2.5-degree,,,,
 30,-84.75,40.25,lat40.25lon-84.75,2.5-degree,,,,

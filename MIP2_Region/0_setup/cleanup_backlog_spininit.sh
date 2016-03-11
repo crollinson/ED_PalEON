@@ -20,7 +20,7 @@ popd
 # Skip files that we can't access, etc. for now
 # ------- 
 files_skip=(lat47.75lon-82.25 lat47.75lon-92.25 lat42.75lon-77.25 lat35.25lon-89.75 lat35.25lon-84.75 lat35.25lon-79.75) # Right now these are from Betsy and Ann
-files_skip=($files_skip lat35.25lon-94.75) # Add the one site I used as my test
+files_skip=(${files_skip[@]} lat35.25lon-94.75) # Add the one site I used as my test
 
 for REMOVE in ${files_skip[@]}
 do 

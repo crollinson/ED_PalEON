@@ -54,6 +54,7 @@ do
 		    sed -i "s,TEST,clean_${SITE}_spinfinish,g" sub_cleanup_spinfinish.sh # change job name
  		
 	 		qsub sub_post_process_spinfinish_cleanup.sh
+	 	popd
 	fi
 done
 # ---------------------

@@ -107,6 +107,7 @@ do
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops_spinstart.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops_spinstart.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops_spinstart.sh # set the file path
+	    sed -i "s,sub_post_process.sh,sub_post_process_spinfinish.sh,g" spawn_startloops_spinstart.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
 
@@ -117,6 +118,7 @@ do
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
+	    sed -i "s,sub_post_process.sh,sub_post_process_spinfinish.sh,g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
 
@@ -133,11 +135,12 @@ do
 		cp ../../sub_post_process_spinfinish.sh .
 		cp ${setup_dir}submit_ED_extraction.sh .
 		cp ${setup_dir}extract_output_paleon.R .
+		paleon_out=${spath}/${SITE}_paleon		
 	    sed -i "s,TEST,post_${SITE},g" sub_post_process_spinfinish.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spinfinish.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spinfinish.sh 		
 		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spinfinish.sh 		
-		sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" post_process_spinfinish.sh # set the file path
+		sed -i "s,/dummy/path,${paleon_out},g" post_process_spinfinish.sh # set the file path
 
 	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path

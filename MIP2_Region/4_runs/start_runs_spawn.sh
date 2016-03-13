@@ -175,12 +175,13 @@ do
 		cp ${setup_dir}extract_output_paleon.R .
 		cp ${setup_dir}sub_cleanup_runs.sh .
 		cp ${setup_dir}cleanup_runs.sh .
+		paleon_out=${spath}/${SITE}_paleon		
 	    sed -i "s,TEST,post_${SITE},g" sub_post_process_runs.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_runs.sh # set the file path
 
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_runs.sh 		
 		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_runs.sh 		
-		sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" post_process_runs.sh # set the file path
+		sed -i "s,/dummy/path,${paleon_out},g" post_process_runs.sh # set the file path
 
 	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path

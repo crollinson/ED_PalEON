@@ -21,8 +21,11 @@ qsub submit_ED_extraction.sh
 while true
 do
 	sleep 120 # check every 2 minutes
+
 	runstat=$(qstat -j ${job_name} | wc -l)	
 	
+	chmod -R a+rwx .
+
 	if [[(("${runstat}" -eq 0))]]
 	then
 		# 2. Check to see if we have all output

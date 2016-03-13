@@ -51,8 +51,8 @@
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 finalyear=3010 # the last year in the histo should actually be jan 1 3011
-outdir=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/
-site_path=${outdir}${SITE}/
+#outdir=/dummy/path/
+site_path=/dummy/path
 
 # 1. Figuring out where we're restarting from
 startday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`

@@ -316,7 +316,7 @@ var.names <- c("PFT", "poolname", "SoilDepth", "Fcomp", "BA", "Dens", "Mort", "A
 		out <- add(ncvar_get(ncT, "MMEAN_NPP_PY")*yr2sec, 17) # original units: kgC/m2/yr
 
 		# NEE - Net Ecosystem Exchange
-		out <- add(-ncvar_get(ncT, "MMEAN_NEP_PY")*yr2sec, 18) # original units: kgC/m2/yr
+		out <- add(ncvar_get(ncT, "MMEAN_NEP_PY")*yr2sec*(-1), 18) # original units: kgC/m2/yr
 
 		# Fire - Fire emissions - need to calculate from Ignition Rate
 		out <- add(ncvar_get(ncT, "IGNITION_RATE")*mo2sec, 19) # original units: kgC/m2/month (I think, definitely kgC/m2)
@@ -344,7 +344,7 @@ var.names <- c("PFT", "poolname", "SoilDepth", "Fcomp", "BA", "Dens", "Mort", "A
 	  	out <- add(ncvar_get(ncT, "MMEAN_SENSIBLE_AC_PY"), 24) # Units: W/m2
 	  	
 	  	# Qle - Latent Heat = Evapotranspiration
-        out <- add(ncvar_get(ncT, "MMEAN_VAPOR_AC_PY")*2.26e6, 25) # units: kg/m2/s x 2.5e6 (J/kg = lambda) / 1 (W = J/s)
+        out <- add(ncvar_get(ncT, "MMEAN_VAPOR_AC_PY")*(-1), 25) # units: kg/m2/s
 
 
 	  ## ----------------
@@ -362,7 +362,7 @@ var.names <- c("PFT", "poolname", "SoilDepth", "Fcomp", "BA", "Dens", "Mort", "A
 	  	out <- add(ncvar_get(ncT, "MMEAN_DRAINAGE_PY"), 28)
 
 	  	# Evap - Total Evaporation
-		out <- add(sum(ncvar_get(ncT, "MMEAN_VAPOR_GC_PY"), ncvar_get(ncT, "MMEAN_VAPOR_LC_PY"), ncvar_get(ncT, "MMEAN_VAPOR_WC_PY")), 29) # units: kg/m2/s
+		out <- add(sum(ncvar_get(ncT, "MMEAN_VAPOR_GC_PY"), ncvar_get(ncT, "MMEAN_VAPOR_LC_PY"), ncvar_get(ncT, "MMEAN_VAPOR_WC_PY"))*(-1), 29) # units: kg/m2/s
 
 	  	# Transp - Total Transpriation
   		out <- add(ncvar_get(ncT, "MMEAN_TRANSP_PY"), 30) # Units: kg/m2/s

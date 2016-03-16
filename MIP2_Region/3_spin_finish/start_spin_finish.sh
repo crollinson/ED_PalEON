@@ -82,7 +82,7 @@ do
 		# ED2IN Changes	    
 	    sed -i "s,$init_dir,$finish_dir,g" ED2IN #change the baseline file path everywhere
         sed -i "s/NL%EXPNME =.*/NL%EXPNME = 'PalEON Spin Finish'/" ED2IN # change the experiment name
-
+		sed -i "s/NL%RUNTYPE  = .*/NL%RUNTYPE  = 'INITIAL'/" ED2IN # change from bare ground to .css/.pss run
         sed -i "s/NL%IYEARA   = .*/NL%IYEARA   = 1850/" ED2IN # Set first year
         sed -i "s/NL%IMONTHA  = .*/NL%IMONTHA  = 01/" ED2IN # Set first month
         sed -i "s/NL%IDATEA   = .*/NL%IDATEA   = 01/" ED2IN # Set first day
@@ -94,7 +94,7 @@ do
         sed -i "s/NL%IMONTHZ  = .*/NL%IMONTHZ  = 01/" ED2IN # Set last month
         sed -i "s/NL%IDATEZ   = .*/NL%IDATEZ   = 01/" ED2IN # Set last day
 
-        sed -i "s/NL%IED_INIT_MODE   = 0/NL%IED_INIT_MODE   = 3/" ED2IN # change from bare ground to .css/.pss run
+        sed -i "s/NL%IED_INIT_MODE   = .*/NL%IED_INIT_MODE   = 3/" ED2IN # change from bare ground to .css/.pss run
         sed -i "s,SFILIN   = .*,SFILIN   = '${SAS_dir}${SITE}/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
         sed -i "s/NL%INCLUDE_FIRE    = 0.*/NL%INCLUDE_FIRE    = 2/" ED2IN # turn on fire
         sed -i "s/NL%SM_FIRE         = 0.*/NL%SM_FIRE         = 0.007/" ED2IN # adjust fire threshold

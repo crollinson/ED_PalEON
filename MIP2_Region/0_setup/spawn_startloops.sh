@@ -69,6 +69,7 @@ sed -i "s/IDATEH   =.*/IDATEH   = ${startday}     ! Day/" ED2IN
 sed -i "s/IMONTHH  =.*/IMONTHH  = ${startmonth}     ! Month/" ED2IN 
 sed -i 's/IED_INIT_MODE   =.*/IED_INIT_MODE   = 5/' ED2IN
 sed -i "s/RUNTYPE  =.*/RUNTYPE  = 'HISTORY'/" ED2IN
+sed -i "s,SFILIN   = .*,SFILIN   = '${site_path}histo/${SITE}',g" ED2IN # set initial file path to current directory
 
 # 3. Submit the job!
 qsub paleon_ed2_smp_geo.sh	

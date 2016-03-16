@@ -84,10 +84,10 @@ do
         sed -i "s/NL%EXPNME =.*/NL%EXPNME = 'PalEON Spin Finish'/" ED2IN # change the experiment name
 		sed -i "s/NL%RUNTYPE  = .*/NL%RUNTYPE  = 'INITIAL'/" ED2IN # change from bare ground to .css/.pss run
         sed -i "s/NL%IYEARA   = .*/NL%IYEARA   = 1850/" ED2IN # Set first year
-        sed -i "s/NL%IMONTHA  = .*/NL%IMONTHA  = 01/" ED2IN # Set first month
+        sed -i "s/NL%IMONTHA  = .*/NL%IMONTHA  = 06/" ED2IN # Set first month
         sed -i "s/NL%IDATEA   = .*/NL%IDATEA   = 01/" ED2IN # Set first day
 		sed -i "s/NL%IYEARH   = .*/NL%IYEARH   = 1850/" ED2IN # Set first year
-		sed -i "s/NL%IMONTHH  = .*/NL%IMONTHH  = 01/" ED2IN # Set first month
+		sed -i "s/NL%IMONTHH  = .*/NL%IMONTHH  = 06/" ED2IN # Set first month
 		sed -i "s/NL%IDATEH   = .*/NL%IDATEH   = 01/" ED2IN # Set first day
 
         sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = ${finalyear}/" ED2IN # Set last year

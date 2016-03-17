@@ -243,7 +243,7 @@ do
 		cp ../../sub_post_process_spininit.sh .
 		cp ${setup_dir}submit_ED_extraction.sh .
 		cp ${setup_dir}extract_output_paleon.R .
-		paleon_out=${spath}/${SITE}_paleon
+		paleon_out=${file_path}/${SITE}_paleon
 	    sed -i "s,TEST,post_${SITE},g" sub_post_process_spininit.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spininit.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit.sh 		

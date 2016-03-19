@@ -146,7 +146,7 @@ do
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
 		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalrun}/" spawn_startloops.sh 		
-		sed -i "s,sub_post_process.sh/sub_post_process_runs.sh/" spawn_startloops.sh 		
+		sed -i "s,sub_post_process.sh,sub_post_process_runs.sh,g" spawn_startloops.sh 
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name

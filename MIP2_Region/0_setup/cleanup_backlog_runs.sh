@@ -17,6 +17,18 @@ pushd $runs_dir
 	runs_done=(lat*)
 popd
 
+# ------- 
+# Skip files that were already done
+# ------- 
+files_skip=(lat35.25lon-79.75 lat35.25lon-79.75 lat35.25lon-79.75 lat35.25lon-94.75 lat35.25lon-99.75 lat37.75lon-77.25 lat37.75lon-82.25 lat47.25lon-95.25 lat47.75lon-67.25 lat47.75lon-82.25 lat47.75lon-92.25 lat47.75lon-97.25) # Right now these are from Betsy and Ann
+
+for REMOVE in ${files_skip[@]}
+do 
+	init_done=(${init_done[@]/$REMOVE/})
+done
+# ------- 
+
+
 for SITE in ${runs_done[@]}
 do
 	#get dates of last histo file

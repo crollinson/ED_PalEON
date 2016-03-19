@@ -41,7 +41,7 @@ do
 		else
 	    	echo 'Output extraction in R failed!'
 	    	
-	    	EMAIL_TXT=$(echo 'R extraction failed -- site' ${SITE} '!')
+	    	EMAIL_TXT=$(echo 'Runs extraction failed -- site' ${SITE} '!')
 	    	fail_mail='fail_mail_R.txt'
     		echo $EMAIL_TXT >> $fail_mail
     		EMAIL_SUB=$(echo ${SITE}_'extraction_FAIL!')  

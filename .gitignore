@@ -27,3 +27,9 @@ MIP2_Region/.history
 
 *.xlsx
 *.Rhistory
+
+MIP2_Region/debugging/Energy_Check_original.csv
+
+MIP2_Region/debugging/Energy_Check_testbranch.csv
+
+MIP2_Region/debugging/Energy_Check.csv

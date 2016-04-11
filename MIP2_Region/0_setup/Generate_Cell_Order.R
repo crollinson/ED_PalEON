@@ -120,6 +120,18 @@ names(paleon.order) <- c("lon", "lat", "latlon")
 summary(paleon.order)
 head(paleon.order)
 
+paleon.states <- map_data("state")
+
+ggplot(paleon.order[1:43,]) +
+	geom_raster(data=paleon.cells, aes(x=x, y=y), fill="gray50") +
+	geom_path(data=paleon.states, aes(x=long, y=lat, group=group), size=0.25) +
+	geom_point(aes(x=lon, y=lat), size=1, color="blue") +
+    scale_x_continuous(limits=range(paleon.order$lon), expand=c(0,0), name="Longitude (degrees)") +
+    scale_y_continuous(limits=range(paleon.order$lat), expand=c(0,0), name="Latitude (degrees)") +
+	coord_equal(ratio=1) +
+	theme_bw()
+
+
 write.csv(paleon.order, "Paleon_MIP_Phase2_ED_Order.csv", row.names=F, eol="\r\n")
 write.csv(paleon.order[1:10,], "TEST.csv", row.names=F, eol="\r\n")
 

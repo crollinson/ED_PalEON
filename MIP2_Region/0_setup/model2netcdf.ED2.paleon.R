@@ -514,11 +514,11 @@ names(out) <- var.names
     var[[42]] <- ncvar_def("CO2", units="ppm", dim=list(dim.t), longname="CO2 Concentration")
  
     ## write NCDF File
-print(paste0("----------  Creating ncdf File  ----------")) 
+    print(paste0("----------  Creating ncdf File  ----------")) 
 
-yr.real <- ifelse(bins[y]-1000<1000, paste0(0, bins[y]-1000), bins[y]-1000)
+    yr.real <- ifelse(bins[y]-1000<1000, paste0(0, bins[y]-1000), bins[y]-1000)
 
-nc <- nc_create(file.path(new.dir, paste(site, "ED2", yr.real, "nc", sep=".")), var)
+    nc <- nc_create(file.path(new.dir, paste(site, "ED2", yr.real, "nc", sep=".")), var)
     for(i in 1:length(var)) {
       ncvar_put(nc, var[[i]], out[[i]])
     }

@@ -15,6 +15,8 @@ paleon_out=/dummy/path
 SITE=TEST
 job_name=post_TEST
 
+tar -jxvf analy.tar.bz2
+
 # 1. submit job & check to see if it's running 
 qsub submit_ED_extraction.sh
 

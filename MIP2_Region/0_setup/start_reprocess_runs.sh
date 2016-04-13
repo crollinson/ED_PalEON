@@ -34,8 +34,6 @@ do
     spath=${runs_dir}${SITE}
 
 	pushd ${spath}
-		tar -jxvf analy.tar.bz2
-
 		cp ${setup_dir}sub_reprocess_runs.sh .
 		cp ${setup_dir}reprocess_runs.sh .
 		sed -i "s,TEST,post_${SITE},g" sub_reprocess_runs.sh # change job name
@@ -44,8 +42,7 @@ do
 		sed -i "s/job_name=.*/job_name=extract_${SITE}/" reprocess_runs.sh
 		sed -i "s,/dummy/path,${spath}/${SITE}_paleon,g" reprocess_runs.sh # set the file path
 	
-		qsub sub_post_process_runs_cleanup.sh
+		qsub sub_reprocess_runs.sh
 	popd
-	fi
 done
 # ---------------------

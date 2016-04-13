@@ -34,6 +34,7 @@ do
     spath=${runs_dir}${SITE}
 
 	pushd ${spath}
+		rm -rf analy
 		tar -jxvf analy.tar.bz2
 	popd
 done

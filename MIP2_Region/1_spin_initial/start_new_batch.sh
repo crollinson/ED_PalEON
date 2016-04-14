@@ -62,7 +62,7 @@ sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER
 mkdir -p $file_dir
 
 # Extract the file names of sites that haven't been started yet
-sites_done=($(awk -F ',' 'NR>1 && $6!="" {print $4}' ${site_file})) # Get sites that have
+sites_done=($(awk -F ',' 'NR>1 && $6!="" {print $4}' ${site_file})) # Get sites that have a location
 cells=($(awk -F ',' 'NR>1 && $6=="" {print $4}' ${site_file}))
 lat=($(awk -F ',' 'NR>1 && $6=="" {print $3}' ${site_file}))
 lon=($(awk -F ',' 'NR>1 && $6=="" {print $2}' ${site_file}))

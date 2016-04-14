@@ -3,10 +3,10 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 2,-68.75,45.25,lat45.25lon-68.75,PHO,geo,16-Jan-16,18-Jan-16,27-Jan-16
 3,-89.75,46.25,lat46.25lon-89.75,PUN,geo,16-Jan-16,18-Jan-16,25-Jan-16
 4,-94.75,46.25,lat46.25lon-94.75,PBL,geo,16-Jan-16,18-Jan-16,26-Jan-16
-5,-95.25,47.25,lat47.25lon-95.25,PDL,,,,
-6,-82.75,43.75,lat43.75lon-82.75,PMB,,,,
-7,-97.25,37.75,lat37.75lon-97.25,10-degree,,,,
-8,-87.25,37.75,lat37.75lon-87.25,10-degree,,,,
+5,-95.25,47.25,lat47.25lon-95.25,PDL,geo,*crolli,,
+6,-82.75,43.75,lat43.75lon-82.75,PMB,geo,*crolli,,
+7,-97.25,37.75,lat37.75lon-97.25,10-degree,geo,*ashiklom,,
+8,-87.25,37.75,lat37.75lon-87.25,10-degree,geo,*ashiklom,,
 9,-77.25,37.75,lat37.75lon-77.25,10-degree,,,,
 10,-97.25,47.75,lat47.75lon-97.25,10-degree,,,,
 11,-77.25,47.75,lat47.75lon-77.25,10-degree,,,,

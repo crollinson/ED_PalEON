@@ -21,29 +21,25 @@ qsub submit_ED_extraction.sh
 while true
 do
 	sleep 120 # check every 2 minutes
-
 	runstat=$(qstat -j ${job_name} | wc -l)	
 	
-	chmod -R a+rwx .
-
 	if [[(("${runstat}" -eq 0))]]
 	then
 		# 2. Check to see if we have all output
 		lastyear=`ls -l -rt ${paleon_out}| tail -1 | rev | cut -c4-7 | rev`
 		
-		if [[(("${lastyear}" -eq 1800))]]
+		if [[(("${lastyear}" -eq 2000))]]
 		then
-	    	echo 'Yay, things are working! Time to move on.'
+	    	echo 'Yay, extraction worked! Time to clean up.'
 	    	
-	    	# don't do the clean up now because we need to do the 
-	    	# SAS first
-	    	# sh cleanup_spininit.sh
+	    	rm -rf analy
 
 	    	exit
+
 		else
 	    	echo 'Output extraction in R failed!'
 	    	
-	    	EMAIL_TXT=$(echo 'SpinInitial extraction failed -- site' ${SITE} '!')
+	    	EMAIL_TXT=$(echo 'R extraction failed -- site' ${SITE} '!')
 	    	fail_mail='fail_mail_R.txt'
     		echo $EMAIL_TXT >> $fail_mail
     		EMAIL_SUB=$(echo ${SITE}_'extraction_FAIL!')  

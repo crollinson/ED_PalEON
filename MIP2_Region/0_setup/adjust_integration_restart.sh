@@ -46,7 +46,7 @@ else
 fi
 
 sed -i "s/IMONTHZ  =.*/IMONTHZ  = ${finalmonth}/" ED2IN 
-sed -i "s/IYEARZ   =.*/IYEARZ  = ${finalyear}/" ED2IN 
+sed -i "s/IYEARZ   =.*/IYEARZ   = ${finalyear}/" ED2IN 
 sed -i "s/DTLSM  =.*/DTLSM  = 320/" ED2IN 
 sed -i "s/RADFRQ  =.*/RADFRQ  = 320/" ED2IN 
 
@@ -58,7 +58,7 @@ qsub paleon_ed2_smp_geo.sh
 while true
 do
     sleep 300 #only run every 5 minutes
-	chmod -R a+rwx site_path # First make sure everyone can read/write/use ALL of these files!
+	chmod -R a+rwx $site_path # First make sure everyone can read/write/use ALL of these files!
 
     runstat=$(qstat -j ${SITE} | wc -l)
 

@@ -21,7 +21,10 @@ qsub submit_ED_extraction.sh
 while true
 do
 	sleep 120 # check every 2 minutes
+	
 	runstat=$(qstat -j ${job_name} | wc -l)	
+
+	chmod -R a+rwx .
 	
 	if [[(("${runstat}" -eq 0))]]
 	then
@@ -40,7 +43,7 @@ do
 		else
 	    	echo 'Output extraction in R failed!'
 	    	
-	    	EMAIL_TXT=$(echo 'R extraction failed -- site' ${SITE} '!')
+	    	EMAIL_TXT=$(echo 'SpinFinish extraction failed -- site' ${SITE} '!')
 	    	fail_mail='fail_mail_R.txt'
     		echo $EMAIL_TXT >> $fail_mail
     		EMAIL_SUB=$(echo ${SITE}_'extraction_FAIL!')  

@@ -2,7 +2,7 @@
 
 # This script cleans up all the spin initial & spin finish that happened before the 
 # automated file management was included in the run scripts
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 setup_dir=${file_base}/0_setup/
 
 

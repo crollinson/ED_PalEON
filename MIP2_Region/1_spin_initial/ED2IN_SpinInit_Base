@@ -303,8 +303,8 @@ $ED_NL
    ! FFILOUT -- Path and prefix for analysis files (all but history/restart).              !
    ! SFILOUT -- Path and prefix for history files.                                         !
    !---------------------------------------------------------------------------------------!
-   NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/analy/TEST'
-   NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/histo/TEST'
+   NL%FFILOUT = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/analy/TEST'
+   NL%SFILOUT = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/histo/TEST'
    !---------------------------------------------------------------------------------------!
 
 
@@ -383,7 +383,7 @@ $ED_NL
    !              path+prefix will be used, as the history for every grid must have come   !
    !              from the same simulation.                                                !
    !---------------------------------------------------------------------------------------!
-   NL%SFILIN   = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/histo/TEST'
+   NL%SFILIN   = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/TEST/histo/TEST'
    !---------------------------------------------------------------------------------------!
 
 
@@ -557,13 +557,13 @@ $ED_NL
    !                      soil temperature and moisture.                                   !
    !  SOILDEPTH_DB     -- Dataset in case you want to read in soil depth information.      !
    !---------------------------------------------------------------------------------------!
-   NL%VEG_DATABASE     = '/projectnb/dietzelab/EDI/oge2OLD/OGE2_'
-   NL%SOIL_DATABASE    = '/projectnb/dietzelab/EDI/faoOLD/FAO_'
-   NL%LU_DATABASE      = '/projectnb/dietzelab/EDI/ed_inputs/glu/glu-'
+   NL%VEG_DATABASE     = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/oge2OLD/OGE2_'
+   NL%SOIL_DATABASE    = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/faoOLD/FAO_'
+   NL%LU_DATABASE      = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ed_inputs/glu/glu-'
    NL%PLANTATION_FILE  = ''
-   NL%THSUMS_DATABASE  = '/projectnb/dietzelab/EDI/ed_inputs/'
-   NL%ED_MET_DRIVER_DB = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup/PL_MET_HEADER'
-   NL%SOILSTATE_DB     = '/projectnb/dietzelab/EDI/ed_inputs/STW1996OCT.dat'
+   NL%THSUMS_DATABASE  = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ed_inputs/'
+   NL%ED_MET_DRIVER_DB = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/0_setup/PL_MET_HEADER'
+   NL%SOILSTATE_DB     = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ed_inputs/STW1996OCT.dat'
    NL%SOILDEPTH_DB     = ''
    !---------------------------------------------------------------------------------------!
 

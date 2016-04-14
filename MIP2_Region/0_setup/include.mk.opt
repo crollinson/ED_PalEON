@@ -45,20 +45,20 @@ USE_MPIWTIME=1
 
 # Compile flags ------------------------------------------------
 CMACH=PC_LINUX1
-F_COMP=ifort
+F_COMP=mpiifort
 #F_COMP = gfortran
 #F_OPTS= -V -FR -O2 -recursive -static -Vaxlib  -check all -g -fpe0 -ftz  -debug extended \
 #        -debug inline_debug_info -debug-parameters all -traceback -ftrapuv
 F_Opts= -FR -O0 -recursive -check all-fpe0 -no-ftz -traceback -ftrapuv -fp-stack-check  \
            -implicitnone -assume byterecl -openmp
 #F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core
-C_COMP=icc
+C_COMP=mpiicc
 #C_OPTS= -O2 -DLITTLE  -g -static -traceback -debug extended
 C_OPTS = -O0 -DLITTLE -g -traceback -openmp
-LOADER=ifort
+LOADER=mpiifort
 #LOADER = gfortran
 LOADER_OPTS=${F_OPTS}
-C_LOADER=icc
+C_LOADER=mpiicc
 #C_LOADER_OPTS=-v -g -traceback -static
 LIBS=
 MOD_EXT=mod

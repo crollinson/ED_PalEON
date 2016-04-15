@@ -21,7 +21,10 @@ qsub submit_ED_extraction.sh
 while true
 do
 	sleep 120 # check every 2 minutes
-	runstat=$(qstat -j ${job_name} | wc -l)	
+	# Different, clunky way of getting runstat from BU
+	# NOTE: Needs to be in 2 steps to get rid of the stupid 'executing qstat_local' bit
+	runstat=$(qstat -a | grep -w ${SITE} | wc -l)
+	runstat=$(echo $runstat | rev | cut -c1 | rev)
 	
 	if [[(("${runstat}" -eq 0))]]
 	then

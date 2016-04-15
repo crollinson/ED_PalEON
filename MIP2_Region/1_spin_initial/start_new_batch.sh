@@ -27,8 +27,8 @@
 
 
 # Load the necessary hdf5 library
-module load hdf5/1.6.10
-module load nco/4.3.4
+module load hdf5/1.8.12
+module load nco/4.4.2
 
 # Define constants & file paths for the scripts
 BU_base_spin=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # The base original file paths in all of my scripts
@@ -54,6 +54,8 @@ file_depth=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_env_driver
 finalyear=2851
 finalfull=2850
 n=1
+
+USER=crollinson
 
 # Make sure the file paths on the Met Header have been updated for the current file structure
 sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER

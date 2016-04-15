@@ -35,6 +35,8 @@ finalyear=2351 # The year on which the models should top on Jan 1
 finalfull=2350 # The last year we actually care about (probably the year before finalyear)
 finalinit=2851
 
+USER=crollinson
+
 n=3
 
 # Making the file directory if it doesn't already exist
@@ -102,8 +104,10 @@ do
 
 		# submission script changes
 	    sed -i "s,$init_dir,$finish_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
-		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
-		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/select=.*/select=1:ncpus=12:mem=23/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=2592:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
+		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
 		# spin spawn start changes -- 
 		# Note: spins require a different first script because they won't have any 
@@ -117,6 +121,8 @@ do
 	    sed -i "s,sub_post_process.sh,sub_post_process_spinfinish.sh,g" spawn_startloops_spinstart.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
+		sed -i "s/walltime=.*/walltime=240:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=240:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate cputimes
 
 		# spawn restarts changes
 		cp ${setup_dir}spawn_startloops.sh .
@@ -128,6 +134,8 @@ do
 	    sed -i "s,sub_post_process.sh,sub_post_process_spinfinish.sh,g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+		sed -i "s/walltime=.*/walltime=240:00:00/" sub_spawn_restarts.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=240:00:00/" sub_spawn_restarts.sh # set appropriate cputimes
 
 		# adjust integration step changes
 		cp ${setup_dir}adjust_integration_restart.sh .

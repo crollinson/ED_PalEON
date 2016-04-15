@@ -28,6 +28,8 @@ sed -i "s/IDATEH   =.*/IDATEH   = ${startday}     ! Day/" ED2IN
 sed -i "s/IMONTHH  =.*/IMONTHH  = ${startmonth}     ! Month/" ED2IN 
 sed -i 's/IED_INIT_MODE   =.*/IED_INIT_MODE   = 5/' ED2IN
 sed -i "s/RUNTYPE  =.*/RUNTYPE  = 'HISTORY'/" ED2IN
+sed -i "s/walltime=.*/walltime=20:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
+sed -i "s/cput=.*/cput=240:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
 
 # 2.b. Temporarily adjust the integration time point & end dates/time
 # New timestep = old - 120 (2 minutes finer)
@@ -60,7 +62,10 @@ do
     sleep 300 #only run every 5 minutes
 	chmod -R a+rwx $site_path # First make sure everyone can read/write/use ALL of these files!
 
-    runstat=$(qstat -j ${SITE} | wc -l)
+	# Different, clunky way of getting runstat from BU
+	# NOTE: Needs to be in 2 steps to get rid of the stupid 'executing qstat_local' bit
+	runstat=$(qstat -a | grep -w ${SITE} | wc -l)
+	runstat=$(echo $runstat | rev | cut -c1 | rev)
 
     #if run has stopped go to step 5
     if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
@@ -77,6 +82,8 @@ do
 			sed -i "s/IYEARZ   =.*/IYEARZ   = 3011/" ED2IN 
 			sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
+			sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
+			sed -i "s/cput=.*/cput=2592:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
 
             qsub sub_spawn_restarts.sh # Go back to checking this as normal
 

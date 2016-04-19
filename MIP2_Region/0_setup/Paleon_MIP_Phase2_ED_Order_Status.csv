@@ -19,7 +19,7 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 18,-77.25,42.75,lat42.75lon-77.25,5-degree,geo,31-Jan-16,4-Feb-16,18-Apr-16
 19,-92.25,47.75,lat47.75lon-92.25,5-degree,geo,31-Jan-16,4-Feb-16,
 20,-82.25,47.75,lat47.75lon-82.25,5-degree,geo,31-Jan-16,2-Feb-16,
-21,-72.25,47.75,lat47.75lon-72.25,5-degree,geo,31-Jan-16,4-Feb-16,
+21,-72.25,47.75,lat47.75lon-72.25,5-degree,geo,31-Jan-16,4-Feb-16,*ashiklom
 22,-99.75,35.25,lat35.25lon-99.75,2.5-degree,geo,31-Jan-16,6-Feb-16,18-Apr-16
 23,-94.75,35.25,lat35.25lon-94.75,2.5-degree,geo,31-Jan-16,2-Feb-16,23-Feb-16
 24,-89.75,35.25,lat35.25lon-89.75,2.5-degree,geo,3-Feb-16,1-Mar-16,18-Apr-16
@@ -37,7 +37,7 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 36,-84.75,45.25,lat45.25lon-84.75,2.5-degree,geo,ERROR,,
 37,-79.75,45.25,lat45.25lon-79.75,2.5-degree,geo,26-Mar-16,5-Apr-16,13-Apr-16
 38,-74.75,45.25,lat45.25lon-74.75,2.5-degree,geo,26-Mar-16,5-Apr-16,12-Apr-16
-39,-69.75,45.25,lat45.25lon-69.75,2.5-degree,geo,26-Mar-16,5-Apr-16,*ashiklom
+39,-69.75,45.25,lat45.25lon-69.75,2.5-degree,geo,26-Mar-16,5-Apr-16,19-Apr-16
 40,-64.75,45.25,lat45.25lon-64.75,2.5-degree,geo,26-Mar-16,5-Apr-16,12-Apr-16
 41,-97.25,35.25,lat35.25lon-97.25,2.5-degree,geo,25-Mar-16,5-Apr-16,11-Apr-16
 42,-92.25,35.25,lat35.25lon-92.25,2.5-degree,geo,25-Mar-16,5-Apr-16,11-Apr-16

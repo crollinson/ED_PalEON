@@ -31,8 +31,8 @@
 # ----------------------------------------------
 library(raster); library(animation)
 library(ncdf4); library(ggplot2); library(grid)
-dir.met  <- "/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_met/"
-dir.out  <- "/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_met_qaqc/"
+dir.met  <- "/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/phase2_met/"
+dir.out  <- "/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/phase2_met_qaqc/"
 if(!dir.exists(dir.out)) dir.create(dir.out)
 
 # Variables we're graphing

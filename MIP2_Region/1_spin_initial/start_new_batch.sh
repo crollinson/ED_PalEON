@@ -19,25 +19,25 @@
 #    Things to be Modified per site:
 #     -  NL%POI_LAT  =  
 #     -  NL%POI_LON  = 
-#     -  NL%FFILOUT = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region//1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
-#     -  NL%SFILOUT = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region//1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
-#     -  NL%SFILIN  = '/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region//1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%FFILOUT = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
+#     -  NL%SFILOUT = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%SFILIN  = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
 
-# Load the necessary hdf5 library
-module load hdf5/1.8.12
-module load nco/4.4.2
+# # Load the necessary hdf5 library
+# module load hdf5/1.8.5
+# module load nco/4.0.5
 
 # Define constants & file paths for the scripts
-BU_base_spin=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # The base original file paths in all of my scripts
-BU_base_EDI=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ # The location of basic ED Inputs on the BU server
+BU_base_spin=/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/ # The base original file paths in all of my scripts
+BU_base_EDI=/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/EDI/ # The location of basic ED Inputs on the BU server
 
-file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # whatever you want the base output file path to be
-EDI_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ # The location of basic ED Inputs for you
+file_base=/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/ # whatever you want the base output file path to be
+EDI_base=/bigdata/jsteinkamp/ED/input/ # The location of basic ED Inputs for you
 
-ed_exec=/home/u7/crollinson/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+ed_exec=/home/jsteinkamp/ED/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
 setup_dir=${file_base}/0_setup/ # Where some constant setup files are
 site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
@@ -47,15 +47,15 @@ site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of
 git fetch --all
 git checkout origin/master -- $site_file
 
-file_clay=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
-file_sand=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
-file_depth=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
+file_clay=/bigdata/jsteinkamp/ED/input/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
+file_sand=/bigdata/jsteinkamp/ED/input/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
+file_depth=/bigdata/jsteinkamp/ED/input/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
 
 finalyear=2851
 finalfull=2850
 n=1
 
-USER=crollinson
+USER=jsteinkamp
 
 # Make sure the file paths on the Met Header have been updated for the current file structure
 sed -i "s,$BU_base_spin,$file_base,g" ${file_base}/0_setup/PL_MET_HEADER
@@ -265,3 +265,4 @@ do
 
 done
 
+git stash # stash the updated status file or any other changes to make life easier

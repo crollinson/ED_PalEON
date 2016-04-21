@@ -13,7 +13,7 @@
 
 
 # Define constants & file paths for the scripts
-file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
+file_base=/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
 SITE=latXXXlon-XXX
 spin_dir=/DUMMY/PATH

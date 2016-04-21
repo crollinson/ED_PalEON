@@ -18,14 +18,14 @@
 #   turn on disturbance (fire, treefall)
 #   all fille paths from initial spin to final spin
 
-# Load the necessary hdf5 library
-module load hdf5/1.6.10
+# # Load the necessary hdf5 library
+# module load hdf5/1.8.5
 
 # Define constants & file paths for the scripts
 # Note: do not need to re
-file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
+file_base=/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
-ed_exec=/home/u7/crollinson/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+ed_exec=/home/jsteinkamp/ED/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 init_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Directory of initial spin files
 SAS_dir=${file_base}/2_SAS/SAS_init_files.v1/ # Directory of SAS initialization files
 finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Where the transient runs will go
@@ -35,7 +35,7 @@ finalyear=2351 # The year on which the models should top on Jan 1
 finalfull=2350 # The last year we actually care about (probably the year before finalyear)
 finalinit=2851
 
-USER=crollinson
+USER=jsteinkamp
 
 n=3
 
@@ -104,9 +104,8 @@ do
 
 		# submission script changes
 	    sed -i "s,$init_dir,$finish_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
-		sed -i "s/select=.*/select=1:ncpus=12:mem=23/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/nodes=.*/nodes=1:ppn=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
-		sed -i "s/cput=.*/cput=2592:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
 		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
 		# spin spawn start changes -- 
@@ -122,7 +121,6 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
 		sed -i "s/walltime=.*/walltime=240:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate walltimes
-		sed -i "s/cput=.*/cput=240:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate cputimes
 
 		# spawn restarts changes
 		cp ${setup_dir}spawn_startloops.sh .

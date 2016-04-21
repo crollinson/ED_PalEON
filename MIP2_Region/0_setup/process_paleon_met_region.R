@@ -21,7 +21,7 @@ library(rhdf5)
 library(abind)
 
 in.path  <- "/projectnb/dietzelab/paleon/met_regional/phase2_met_regional_v2"
-out.path <- "/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_met"
+out.path <- "/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/phase2_met"
 dir.create(file.path(out.path), showWarnings = FALSE)
 
 orig.vars <- c("lwdown", "precipf", "psurf", "qair", "swdown", "tair", "wind")

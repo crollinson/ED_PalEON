@@ -48,7 +48,7 @@
 #          $$ qsub spawn_startloops.sh
 #          -- can I call a file within itself?
 
-USER=crolli # or whoever is in charge of this site
+USER=jsteinkamp # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 finalyear=3010 # the last year in the histo should actually be jan 1 3011
 #outdir=/dummy/path/

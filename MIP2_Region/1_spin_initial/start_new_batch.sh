@@ -42,10 +42,10 @@ file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will
 setup_dir=${file_base}/0_setup/ # Where some constant setup files are
 site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
 
-# Lets double check and make sure the order status file is up to date
-# Note: need to make sure you don't have to enter a password for this to work right
-git fetch --all
-git checkout origin/master -- $site_file
+# # Lets double check and make sure the order status file is up to date
+# # Note: need to make sure you don't have to enter a password for this to work right
+# git fetch --all
+# git checkout origin/master -- $site_file
 
 file_clay=/bigdata/jsteinkamp/ED/input/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
 file_sand=/bigdata/jsteinkamp/ED/input/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
@@ -195,6 +195,7 @@ do
         sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = $finalyear/" ED2IN # Set last year
 	    sed -i "s,$old_analy,$new_analy,g" ED2IN #change output paths
 	    sed -i "s,$old_histo,$new_histo,g" ED2IN #change output paths
+	    sed -i "s,TEST,$SITE,g" ED2IN #change output paths
         sed -i "s/POI_LAT  =.*/POI_LAT  = $lat_now/" ED2IN # set site latitude
         sed -i "s/POI_LON  =.*/POI_LON  = $lon_now/" ED2IN # set site longitude
         sed -i "s/SLXCLAY =.*/SLXCLAY = $clay/" ED2IN # set fraction soil clay
@@ -258,11 +259,11 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path
 
 
- 		qsub sub_spawn_restarts_spinstart.sh
+#  		qsub sub_spawn_restarts_spinstart.sh
 	popd	
 
 	chmod -R a+rwx ${file_path}
 
 done
 
-git stash # stash the updated status file or any other changes to make life easier
+# git stash # stash the updated status file or any other changes to make life easier

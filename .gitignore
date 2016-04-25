@@ -33,3 +33,7 @@ MIP2_Region/debugging/Energy_Check/*.csv
 MIP2_Region/debugging/Met_Check/phase2_met
 MIP2_Region/debugging/Met_Check/afshin
 MIP2_Region/debugging/Met_Check/phase1_met
+
+*.Rout
+
+MIP2_Region/0_setup/.RData

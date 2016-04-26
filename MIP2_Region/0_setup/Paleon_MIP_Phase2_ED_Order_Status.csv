@@ -42,10 +42,10 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 41,-97.25,35.25,lat35.25lon-97.25,2.5-degree,geo,25-Mar-16,5-Apr-16,11-Apr-16
 42,-92.25,35.25,lat35.25lon-92.25,2.5-degree,geo,25-Mar-16,5-Apr-16,11-Apr-16
 43,-87.25,35.25,lat35.25lon-87.25,2.5-degree,geo,26-Mar-16,5-Apr-16,11-Apr-16
-44,-82.25,35.25,lat35.25lon-82.25,2.5-degree,,,,
-45,-77.25,35.25,lat35.25lon-77.25,2.5-degree,,,,
-46,-99.75,37.75,lat37.75lon-99.75,2.5-degree,,,,
-47,-94.75,37.75,lat37.75lon-94.75,2.5-degree,,,,
+44,-82.25,35.25,lat35.25lon-82.25,2.5-degree,BIKF,*jsteinkamp,,
+45,-77.25,35.25,lat35.25lon-77.25,2.5-degree,BIKF,*jsteinkamp,,
+46,-99.75,37.75,lat37.75lon-99.75,2.5-degree,BIKF,*jsteinkamp,,
+47,-94.75,37.75,lat37.75lon-94.75,2.5-degree,BIKF,*jsteinkamp,,
 48,-89.75,37.75,lat37.75lon-89.75,2.5-degree,,,,
 49,-84.75,37.75,lat37.75lon-84.75,2.5-degree,,,,
 50,-79.75,37.75,lat37.75lon-79.75,2.5-degree,,,,

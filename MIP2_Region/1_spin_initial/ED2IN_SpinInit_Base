@@ -557,13 +557,13 @@ $ED_NL
    !                      soil temperature and moisture.                                   !
    !  SOILDEPTH_DB     -- Dataset in case you want to read in soil depth information.      !
    !---------------------------------------------------------------------------------------!
-   NL%VEG_DATABASE     = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/EDI/oge2OLD/OGE2_'
-   NL%SOIL_DATABASE    = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/EDI/faoOLD/FAO_'
-   NL%LU_DATABASE      = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/EDI/ed_inputs/glu/glu-'
+   NL%VEG_DATABASE     = '/bigdata/jsteinkamp/ED/input/oge2OLD/OGE2_'
+   NL%SOIL_DATABASE    = '/bigdata/jsteinkamp/ED/input/faoOLD/FAO_'
+   NL%LU_DATABASE      = '/bigdata/jsteinkamp/ED/input/glu/glu-'
    NL%PLANTATION_FILE  = ''
-   NL%THSUMS_DATABASE  = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/EDI/ed_inputs/'
+   NL%THSUMS_DATABASE  = '/bigdata/jsteinkamp/ED/input/'
    NL%ED_MET_DRIVER_DB = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/0_setup/PL_MET_HEADER'
-   NL%SOILSTATE_DB     = '/bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/EDI/ed_inputs/STW1996OCT.dat'
+   NL%SOILSTATE_DB     = '/bigdata/jsteinkamp/ED/input/STW1996OCT.dat'
    NL%SOILDEPTH_DB     = ''
    !---------------------------------------------------------------------------------------!
 

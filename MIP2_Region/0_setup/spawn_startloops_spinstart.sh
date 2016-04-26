@@ -48,7 +48,7 @@
 #          $$ qsub spawn_startloops.sh
 #          -- can I call a file within itself?
 
-USER=jsteinkamp # or whoever is in charge of this site
+USER=jsteinkampqsub # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 finalyear=3010 # the last year in the histo should actually be jan 1 3011
 #outdir=/dummy/path/
@@ -68,8 +68,8 @@ do
 
 	# Different, clunky way of getting runstat from BU
 	# NOTE: Needs to be in 2 steps to get rid of the stupid 'executing qstat_local' bit
-	runstat=$(qstat -a | grep -w ${SITE} | wc -l)
-	runstat=$(echo $runstat | rev | cut -c1 | rev)
+	SITE2=$(echo $SITE | cut -c1-16) 
+	runstat=$(qstat -a | grep -w ${SITE2} | wc -l)
 
     #if run has stopped go to step 5
     if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5

@@ -24,8 +24,8 @@ do
 
 	# Different, clunky way of getting runstat from BU
 	# NOTE: Needs to be in 2 steps to get rid of the stupid 'executing qstat_local' bit
-	runstat=$(qstat -a | grep -w ${SITE} | wc -l)
-	runstat=$(echo $runstat | rev | cut -c1 | rev)
+	SITE2=$(echo $SITE | cut -c1-16) 
+	runstat=$(qstat -a | grep -w ${SITE2} | wc -l)
 	
 	chmod -R a+rwx .
 

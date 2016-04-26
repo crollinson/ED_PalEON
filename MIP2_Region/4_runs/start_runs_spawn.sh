@@ -180,10 +180,10 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_runs.sh # set the file path
 
 		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_runs.sh 		
-		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_runs.sh 		
+		sed -i "s/job_name=.*/job_name=${SITE}_extract/" post_process_runs.sh 		
 		sed -i "s,/dummy/path,${paleon_out},g" post_process_runs.sh # set the file path
 
-	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
+	    sed -i "s,TEST,${SITE}_extract,g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
 
 		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R

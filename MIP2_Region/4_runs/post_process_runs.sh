@@ -22,7 +22,8 @@ while true
 do
 	sleep 120 # check every 2 minutes
 
-	runstat=$(qstat -j ${job_name} | wc -l)	
+	SITE2=$(echo $SITE | cut -c1-16) 
+	runstat=$(qstat -a | grep -w ${SITE2} | wc -l)
 
 	chmod -R a+rwx .
 	

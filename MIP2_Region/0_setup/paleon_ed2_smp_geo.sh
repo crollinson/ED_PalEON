@@ -3,7 +3,7 @@
 #PBS -l nodes=1:ppn=4
 #PBS -l walltime=100:00:00
 
-export OMP_NUM_THREADS 4
+export OMP_NUM_THREADS=4
 
 cd /dummy/path
 

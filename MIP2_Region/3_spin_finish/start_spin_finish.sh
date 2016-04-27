@@ -106,7 +106,7 @@ do
 	    sed -i "s,$init_dir,$finish_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
 		sed -i "s/nodes=.*/nodes=1:ppn=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
-		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
 		# spin spawn start changes -- 
 		# Note: spins require a different first script because they won't have any 
@@ -133,7 +133,6 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
 		sed -i "s/walltime=.*/walltime=240:00:00/" sub_spawn_restarts.sh # set appropriate walltimes
-		sed -i "s/cput=.*/cput=240:00:00/" sub_spawn_restarts.sh # set appropriate cputimes
 
 		# adjust integration step changes
 		cp ${setup_dir}adjust_integration_restart.sh .

@@ -139,7 +139,7 @@ do
 	    sed -i "s,$spin_dir,$runs_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
 		sed -i "s/nodes=.*/nodes=1:ppn=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
-		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
 		# spawn restarts changes
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh

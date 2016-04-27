@@ -10,6 +10,11 @@
 #    - keep 850, 1350, 1850, 2010 (names 1850, 2350, 2850, 3010)
 # 4. tar analy files to save space
 
+# A function to let qsub work on non-login nodes
+function qsub {
+  ssh login cd ${PWD} \&\& /usr/bin/qsub $@
+}
+
 # Some useful names & paths
 paleon_out=/dummy/path
 SITE=TEST

@@ -48,6 +48,11 @@
 #          $$ qsub spawn_startloops.sh
 #          -- can I call a file within itself?
 
+# A function to let qsub work on non-login nodes
+function qsub {
+  ssh login cd ${PWD} \&\& /usr/bin/qsub $@
+}
+
 USER=jsteinkampqsub # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 finalyear=3010 # the last year in the histo should actually be jan 1 3011

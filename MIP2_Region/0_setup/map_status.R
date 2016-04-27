@@ -3,9 +3,8 @@ library(ggplot2)
 paleon.status <- read.csv("Paleon_MIP_Phase2_ED_Order_Status.csv", na.strings="")
 paleon.states <- map_data("state")
 
-paleon.status$Status <- as.factor(ifelse(is.na(paleon.status$runs), "in queue", ifelse(substr(paleon.status$runs,1,1)=="*", "in progress", "completed")))
+paleon.status$Status <- as.factor(ifelse(is.na(paleon.status$location) | paleon.status$spininital=="ERROR", "in queue", ifelse(substr(paleon.status$runs,1,1)=="*" | is.na(paleon.status$runs), "in progress", "completed")))
 summary(paleon.status)
-
 
 if(length(unique(paleon.status$Status))==3){ 
   stat.color <- c("red", "blue", "gray50") 

@@ -37,7 +37,7 @@ finalinit=2851
 
 USER=jsteinkamp
 
-n=3
+n=4
 
 # Making the file directory if it doesn't already exist
 mkdir -p $finish_dir

@@ -53,7 +53,7 @@ file_depth=/bigdata/jsteinkamp/ED/input/phase2_env_drivers_v2/soil/paleon_soil_s
 
 finalyear=2851
 finalfull=2850
-n=1
+n=4
 
 USER=jsteinkamp
 

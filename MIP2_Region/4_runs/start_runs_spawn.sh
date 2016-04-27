@@ -32,7 +32,7 @@ finalrun=3010 # The last full year of the runs
 
 USER=jsteinkamp
 
-n=1 # number of sites to start in this batch
+n=4 # number of sites to start in this batch
 
 # Making the file directory if it doesn't already exist
 mkdir -p $runs_dir

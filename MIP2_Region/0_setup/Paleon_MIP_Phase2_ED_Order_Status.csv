@@ -11,7 +11,7 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 10,-97.25,47.75,lat47.75lon-97.25,10-degree,geo,17-Apr-16,23-Apr-16,*ashiklom
 11,-77.25,47.75,lat47.75lon-77.25,10-degree,geo,18-Apr-16,24-Apr-16,*ashiklom
 12,-67.25,47.75,lat47.75lon-67.25,10-degree,geo,17-Apr-16,23-Apr-16,*crolli
-13,-92.25,42.75,lat42.75lon-92.25,5-degree,geo,17-Apr-16,22-Apr-16,*crolli
+13,-92.25,42.75,lat42.75lon-92.25,5-degree,geo,17-Apr-16,22-Apr-16,28-Apr-16
 14,-82.25,42.75,lat42.75lon-82.25,5-degree,geo,17-Apr-16,21-Apr-16,28-Apr-16
 15,-92.25,37.75,lat37.75lon-92.25,5-degree,geo,24-Feb-16,3-Mar-16,9-Mar-16
 16,-82.25,37.75,lat37.75lon-82.25,5-degree,geo,24-Feb-16,3-Mar-16,17-Apr-16
@@ -49,11 +49,11 @@ order,lon,lat,latlon,notes,location,spininital,spinfinish,runs
 48,-89.75,37.75,lat37.75lon-89.75,2.5-degree,geo,*crolli,,
 49,-84.75,37.75,lat37.75lon-84.75,2.5-degree,geo,*crolli,,
 50,-79.75,37.75,lat37.75lon-79.75,2.5-degree,geo,*crolli,,
-51,-97.25,40.25,lat40.25lon-97.25,2.5-degree,,,,
-52,-92.25,40.25,lat40.25lon-92.25,2.5-degree,,,,
-53,-87.25,40.25,lat40.25lon-87.25,2.5-degree,,,,
-54,-82.25,40.25,lat40.25lon-82.25,2.5-degree,,,,
-55,-77.25,40.25,lat40.25lon-77.25,2.5-degree,,,,
+51,-97.25,40.25,lat40.25lon-97.25,2.5-degree,geo,*crolli,,
+52,-92.25,40.25,lat40.25lon-92.25,2.5-degree,geo,*crolli,,
+53,-87.25,40.25,lat40.25lon-87.25,2.5-degree,geo,*crolli,,
+54,-82.25,40.25,lat40.25lon-82.25,2.5-degree,geo,*crolli,,
+55,-77.25,40.25,lat40.25lon-77.25,2.5-degree,geo,*crolli,,
 56,-99.75,42.75,lat42.75lon-99.75,2.5-degree,,,,
 57,-94.75,42.75,lat42.75lon-94.75,2.5-degree,,,,
 58,-89.75,42.75,lat42.75lon-89.75,2.5-degree,,,,

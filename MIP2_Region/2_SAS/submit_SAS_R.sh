@@ -5,6 +5,6 @@
 #PBS -m e
 #PBS -M crollinson@gmail.com
 
-cd /rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/2_SAS/
+cd /bigdata/jsteinkamp/ED/ED_PalEON/MIP2_Region/2_SAS/S
 
 R CMD BATCH compile_SAS_runs.R

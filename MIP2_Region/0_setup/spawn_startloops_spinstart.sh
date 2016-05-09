@@ -74,34 +74,51 @@ do
 		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
 	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
 	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
+	    nout=$(ls ${site_path}/histo | wc -l)
 
 		# Check cases    
-	    if [[(("${lastyear}" -gt "${finalyear}"))]]
-    	then # case a: we're done and everything's happy, send an email telling me so
-    		# Send an email saying the site is done
-    		email_file='status_mail.txt'
-    		echo "We're done, Mission Accomplished! Runs finished without problems -- " ${SITE} >> $email_file
-    		EMAIL_SUB=$(echo ${SITE}_'ED_Run_Succeeded!') 
-	    	mail -s $EMAIL_SUB crollinson@gmail.com < $email_file
-	    	rm -f $email_file
-    		
-    		qsub sub_post_process.sh
-    		
-    		exit
-    	else
-    		if [[(("${lastyear}" -eq "${startyear}"))]]
-	    	then # case b: we're crashing, try again with lower integration step
-	    		echo "something's wrong. trying again with a smaller timestep"
-	    		qsub sub_adjust_integration.sh
+		
+		#
+		if [[(("${nout}" == 1))]]
+		then
+	    	echo 'THIS SITE DOES NOT RUN!'
 	    	
-	    		exit
-	    	else # case c: we're not done, but so far so good
-				echo "We stopped for gas.  Restarting with sunny skies"
-				qsub sub_spawn_restarts.sh
-	    	
-	    		exit
-	    	fi
-    	fi
-    fi # No else because we just keep going until we're not running anymore
+	    	EMAIL_TXT=$(echo ${SITE} 'failing.  Will not start!'
+	    	fail_mail='fail_mail.txt'
+    		echo $EMAIL_TXT >> $fail_mail
+    		EMAIL_SUB=$(echo ${SITE}_'ED_Run_FAIL!')  
+	    	mail -s $EMAIL_SUB crollinson@gmail.com < $fail_mail
+	    	rm -f $fail_mail
+
+	    	exit
+		else
+			if [[(("${lastyear}" -gt "${finalyear}"))]]
+			then # case a: we're done and everything's happy, send an email telling me so
+				# Send an email saying the site is done
+				email_file='status_mail.txt'
+				echo "We're done, Mission Accomplished! Runs finished without problems -- " ${SITE} >> $email_file
+				EMAIL_SUB=$(echo ${SITE}_'ED_Run_Succeeded!') 
+				mail -s $EMAIL_SUB crollinson@gmail.com < $email_file
+				rm -f $email_file
+			
+				qsub sub_post_process.sh
+			
+				exit
+			else
+				if [[(("${lastyear}" -eq "${startyear}"))]]
+				then # case b: we're crashing, try again with lower integration step
+					echo "something's wrong. trying again with a smaller timestep"
+					qsub sub_adjust_integration.sh
+			
+					exit
+				else # case c: we're not done, but so far so good
+					echo "We stopped for gas.  Restarting with sunny skies"
+					qsub sub_spawn_restarts.sh
+			
+					exit
+				fi
+			fi
+		fi
+    fi  # No else because we just keep going until we're not running anymore
     done
 done

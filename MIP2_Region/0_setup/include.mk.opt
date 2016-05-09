@@ -47,8 +47,6 @@ USE_MPIWTIME=1
 
 # Compile flags ------------------------------------------------
 CMACH=PC_LINUX1
-#F_COMP=mpiifort
-#F_COMP = gfortran
 F_COMP=mpif90
 #F_OPTS= -V -FR -O2 -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
 #F_OPTS=-pedantic -Wall -Wextra -Wunderflow -Wimplicit-interface -Wsurprising -Wno-c-binding-type  -s -O2 -fopenmp

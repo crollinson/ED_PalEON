@@ -21,16 +21,16 @@
 module load hdf5/1.6.10
 
 # Define constants & file paths for the scripts
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
-ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+ed_exec=/home/u7/crollinson/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 spin_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Directory of initial spin files
 runs_dir=${file_base}/4_runs/phase2_runs.v1/ # Where the transient runs will go
 setup_dir=${file_base}/0_setup/
 finalspin=2351 # The last year of the spin finish
 finalrun=3010 # The last full year of the runs
 
-USER=crolli
+USER=crollinson
 
 n=1 # number of sites to start in this batch
 
@@ -137,10 +137,10 @@ do
 
 		# submission script changes
 	    sed -i "s,$spin_dir,$runs_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
-		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
-		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
-		sed -i "s/h_rt=.*/h_rt=100:00:00/" paleon_ed2_smp_geo.sh # Sets the run time below the max
-		sed -i "s/-N .*/-N ${SITE}/" paleon_ed2_smp_geo.sh
+		sed -i "s/select=.*/select=1:ncpus=12:mem=23/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=2592:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
+		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
 		# spawn restarts changes
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
@@ -150,6 +150,8 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+		sed -i "s/walltime=.*/walltime=240:00:00/" sub_spawn_restarts.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=240:00:00/" sub_spawn_restarts.sh # set appropriate cputimes
 
 		# adjust integration step changes
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh

@@ -81,7 +81,10 @@ do
     sleep 300 #only run every 5 minutes
 	chmod -R a+rwx ${site_path} # First make sure everyone can read/write/use ALL of these files!
 
-    runstat=$(qstat -j ${SITE} | wc -l)
+	# Different, clunky way of getting runstat from BU
+	# NOTE: Needs to be in 2 steps to get rid of the stupid 'executing qstat_local' bit
+	runstat=$(qstat -a | grep -w ${SITE} | wc -l)
+	runstat=$(echo $runstat | rev | cut -c1 | rev)
 
     #if run has stopped go to step 5
     if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5

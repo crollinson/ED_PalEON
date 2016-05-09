@@ -104,6 +104,7 @@ do
 	    sed -i "s,$init_dir,$finish_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
 		sed -i "s/omp .*/omp 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/OMP_NUM_THREADS=.*/OMP_NUM_THREADS=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+        sed -i "s/h_rt=.*/h_rt=40:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
 
 		# spin spawn start changes -- 
 		# Note: spins require a different first script because they won't have any 
@@ -117,6 +118,7 @@ do
 	    sed -i "s,sub_post_process.sh,sub_post_process_spinfinish.sh,g" spawn_startloops_spinstart.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
+        sed -i "s/h_rt=.*/h_rt=48:00:00/" sub_spawn_restarts_spinstart.sh # Sets the run time around what we should need
 
 		# spawn restarts changes
 		cp ${setup_dir}spawn_startloops.sh .
@@ -128,6 +130,7 @@ do
 	    sed -i "s,sub_post_process.sh,sub_post_process_spinfinish.sh,g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+        sed -i "s/h_rt=.*/h_rt=48:00:00/" sub_spawn_restarts.sh # Sets the run time around what we should need
 
 		# adjust integration step changes
 		cp ${setup_dir}adjust_integration_restart.sh .
@@ -136,6 +139,7 @@ do
 		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
 	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
+        sed -i "s/h_rt=.*/h_rt=24:00:00/" sub_adjust_integration.sh # Sets the run time around what we should need
 		
 		# post-processing
 		cp ../../post_process_spinfinish.sh .

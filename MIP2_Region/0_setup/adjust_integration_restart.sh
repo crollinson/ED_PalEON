@@ -50,6 +50,9 @@ sed -i "s/IYEARZ   =.*/IYEARZ   = ${finalyear}/" ED2IN
 sed -i "s/DTLSM  =.*/DTLSM  = 320/" ED2IN 
 sed -i "s/RADFRQ  =.*/RADFRQ  = 320/" ED2IN 
 
+# Crank down the time needed for the adjust integration step
+sed -i "s/h_rt=.*/h_rt=20:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
+
 # 3. Submit the job!
 qsub paleon_ed2_smp_geo.sh	
 
@@ -77,6 +80,9 @@ do
 			sed -i "s/IYEARZ   =.*/IYEARZ   = 3011/" ED2IN 
 			sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
+
+			# Put the time step back to where it should be
+			sed -i "s/h_rt=.*/h_rt=100:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
 
             qsub sub_spawn_restarts.sh # Go back to checking this as normal
 

@@ -15,10 +15,12 @@ BASE=$(ED_ROOT)/build/
 # For 64-bit
 #HDF5HOME=/usr/local/hdf5/pgi
 #HDF5HOME=/project/earth/packages/hdf5-1.8.11
-HDF5HOME=/uaopt/modulefiles/hdf5/1.8.12
+HDF5HOME=/uaopt/hdf5/1.10.0
+LIBZHOME=/uaopt/zlim/1.2.8
 USE_HDF5=1
 HDF5_INCS=-I${HDF5HOME}/include
-HDF5_LIBS=-L${HDF5HOME}/lib -lhdf5 -lm -lhdf5_fortran -lhdf5 -lhdf5_hl -lz
+#HDF5_LIBS=-d -L${LIBZHOM}/lib -lz -lm -L${HDF5HOME}/lib -lhdf5 -lhdf5_fortran -lhdf5_hl
+HDF5_LIBS=-d -L${HDF5HOME}/lib -lhdf5 -lhdf5_fortran -lhdf5_hl  -lz
 USE_COLLECTIVE_MPIO=1
  
 # netCDF libraries ---------------------------------------------
@@ -45,32 +47,55 @@ USE_MPIWTIME=1
 
 # Compile flags ------------------------------------------------
 CMACH=PC_LINUX1
-F_COMP=ifort
+#F_COMP=mpiifort
 #F_COMP = gfortran
+F_COMP=mpif90
+#F_OPTS= -V -FR -O2 -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
+#F_OPTS=-pedantic -Wall -Wextra -Wunderflow -Wimplicit-interface -Wsurprising -Wno-c-binding-type  -s -O2 -fopenmp
 #F_OPTS= -V -FR -O2 -recursive -static -Vaxlib  -check all -g -fpe0 -ftz  -debug extended \
 #        -debug inline_debug_info -debug-parameters all -traceback -ftrapuv
-F_Opts= -FR -O0 -recursive -check all-fpe0 -no-ftz -traceback -ftrapuv -fp-stack-check  \
-           -implicitnone -assume byterecl -openmp
+#F_Opts= -FR -O3 -recursive -check all-fpe0 -no-ftz -traceback -ftrapuv -fp-stack-check  \
+#           -implicitnone -assume byterecl
+F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
+#F_OPTS=-O3 -ffree-line-length-none -fno-whole-file
+#F_Opts= -O0 -fopenmp
 #F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core
-C_COMP=icc
+#C_COMP=mpiicc
+C_COMP=mpicc
 #C_OPTS= -O2 -DLITTLE  -g -static -traceback -debug extended
-C_OPTS = -O0 -DLITTLE -g -traceback -openmp
-LOADER=ifort
+C_OPTS = -O3 -DLITTLE
+#C_OPTS =-g O2
+#C_OPTS = -O3
+#LOADER=mpiifort
 #LOADER = gfortran
+LOADER=mpif90
 LOADER_OPTS=${F_OPTS}
-C_LOADER=icc
+#C_LOADER=mpiicc
+C_LOADER=mpicc
 #C_LOADER_OPTS=-v -g -traceback -static
+#F_OPTS= -FR -O0 -recursive  -check all -g -debug extended -debug-parameters used        \
+#        -fpe0 -no-ftz -traceback -ftrapuv -fp-stack-check -implicitnone                 \
+#        -assume byterecl -static
+#C_OPTS= -O0 -DLITTLE  -g -traceback -static
+#LOADER_OPTS=-FR -O0 -recursive  -check all -g -debug extended -debug-parameters used        \
+#            -fpe0 -no-ftz -traceback -ftrapuv -fp-stack-check -implicitnone             \
+#            -assume byterecl
 LIBS=
 MOD_EXT=mod
 
 # MPI Flags ----------------------------------------------------
-#MPI_PATH=/uaopt/modulefiles/openmpi/1.4.4
+#MPI_PATH=/uaopt/intel/2012.0.032/impi/4.0.3.008/intel64/
 #MPI_PATH=/uaopt/modulefiles/mpich2/1.4.1p1
+#MPI_PATH=/uaopt/modulefiles/intel/
+#MPI_PATH=
 #PAR_INCS=-I$(MPI_PATH)/include
 #PAR_LIBS=-L$(MPI_PATH)/lib -lmpi -lmpifh
 #PAR_DEFS=-DRAMS_MPI
 
-MPI_Path=
+#MPI_PATH=/uaopt/intel/2012.0.032/impi/4.0.3.008/intel64/
+#PAR_INCS=-I${MPI_PATH}/include
+#PAR_LIBS=-L${MPI_PATH}/lib -lmpi -lmpifh
+MPI_PATH=
 PAR_INCS=
 PAR_LIBS=
 PAR_DEFS=-DRAMS_MPI

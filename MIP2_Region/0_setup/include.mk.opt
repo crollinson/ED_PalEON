@@ -16,6 +16,7 @@ BASE=$(ED_ROOT)/build/
 #HDF5HOME=/usr/local/hdf5/pgi
 #HDF5HOME=/project/earth/packages/hdf5-1.8.11
 HDF5HOME=/uaopt/hdf5/1.10.0
+#HDF5HOM=/uaopt/hdf5/1.8.12-icc
 LIBZHOME=/uaopt/zlim/1.2.8
 USE_HDF5=1
 HDF5_INCS=-I${HDF5HOME}/include
@@ -47,6 +48,8 @@ USE_MPIWTIME=1
 
 # Compile flags ------------------------------------------------
 CMACH=PC_LINUX1
+#F_COMP=mpiifort
+#F_COMP = gfortran
 F_COMP=mpif90
 #F_OPTS= -V -FR -O2 -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
 #F_OPTS=-pedantic -Wall -Wextra -Wunderflow -Wimplicit-interface -Wsurprising -Wno-c-binding-type  -s -O2 -fopenmp
@@ -55,6 +58,7 @@ F_COMP=mpif90
 #F_Opts= -FR -O3 -recursive -check all-fpe0 -no-ftz -traceback -ftrapuv -fp-stack-check  \
 #           -implicitnone -assume byterecl
 F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
+#F_OTPS=-g -Wall -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core -fopenmp
 #F_OPTS=-O3 -ffree-line-length-none -fno-whole-file
 #F_Opts= -O0 -fopenmp
 #F_OPTS= -g -Wall -W -ffpe-trap=invalid,zero,overflow -Wconversion -fbounds-check -fbacktrace -fdump-core

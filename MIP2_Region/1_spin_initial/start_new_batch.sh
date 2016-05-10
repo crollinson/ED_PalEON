@@ -29,7 +29,7 @@
 # Load the necessary hdf5 library
 module load hdf5/1.10.0
 module load nco/4.4.2
-module load netcdef/4.1.3-intel
+module load netcdf/4.1.3-intel
 
 # Define constants & file paths for the scripts
 BU_base_spin=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # The base original file paths in all of my scripts

@@ -27,7 +27,7 @@
 
 
 # Load the necessary hdf5 library
-module load hdf5/1.8.12
+module load hdf5/1.10.0
 module load nco/4.4.2
 
 # Define constants & file paths for the scripts
@@ -44,8 +44,8 @@ site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of
 
 # Lets double check and make sure the order status file is up to date
 # Note: need to make sure you don't have to enter a password for this to work right
-git fetch --all
-git checkout origin/master -- $site_file
+#git fetch --all
+#git checkout origin/master -- $site_file
 
 file_clay=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
 file_sand=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file

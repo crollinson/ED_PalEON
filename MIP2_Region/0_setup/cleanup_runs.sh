@@ -12,6 +12,9 @@
 #  - do not tar the whole folder because that would screw up my referencing system
 file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
+# Loading the qsub function
+alias 'qsub=/usr/pbs/bin/qsub'
+
 SITE=latXXXlon-XXX
 runs_dir=/DUMMY/PATH
 lastyear=3011

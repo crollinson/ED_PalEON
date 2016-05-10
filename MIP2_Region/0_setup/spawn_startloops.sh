@@ -48,6 +48,9 @@
 #          $$ qsub spawn_startloops.sh
 #          -- can I call a file within itself?
 
+# Loading the qsub function
+alias 'qsub=/usr/pbs/bin/qsub'
+
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 finalyear=3010 # the last year in the histo should actually be jan 1 3011
@@ -69,7 +72,7 @@ sed -i "s/IDATEH   =.*/IDATEH   = ${startday}     ! Day/" ED2IN
 sed -i "s/IMONTHH  =.*/IMONTHH  = ${startmonth}     ! Month/" ED2IN 
 sed -i 's/IED_INIT_MODE   =.*/IED_INIT_MODE   = 5/' ED2IN
 sed -i "s/RUNTYPE  =.*/RUNTYPE  = 'HISTORY'/" ED2IN
-sed -i "s,SFILIN   = .*,SFILIN   = '${site_path}histo/${SITE}',g" ED2IN # set initial file path to current directory
+sed -i "s,SFILIN   = .*,SFILIN   = '${site_path}/histo/${SITE}',g" ED2IN # set initial file path to current directory
 
 # 3. Submit the job!
 qsub paleon_ed2_smp_geo.sh	

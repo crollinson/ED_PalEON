@@ -4,7 +4,8 @@
 #  To solve this problem, we need to manually adjust the model timestep 
 #  for a month or two and then restart it
 
-
+# Loading the qsub function
+alias 'qsub=/usr/pbs/bin/qsub'
 
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name

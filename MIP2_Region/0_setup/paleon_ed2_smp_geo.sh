@@ -1,7 +1,7 @@
 #!/bin/csh
 #PBS -N TEST
 #PBS -m e
-#PBS -M crollinson@gmail.com
+#PBS -M crollinson@email.arizona.edu
 #PBS -W group_list=davidjpmoore
 #PBS -q standard
 #PBS -l jobtype=small_smp

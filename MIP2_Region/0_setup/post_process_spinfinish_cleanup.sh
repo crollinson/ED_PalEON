@@ -10,6 +10,9 @@
 #    - keep 850, 1350, 1850, 2010 (names 1850, 2350, 2850, 3010)
 # 4. tar analy files to save space
 
+# Loading the qsub function
+alias 'qsub=/usr/pbs/bin/qsub'
+
 # Some useful names & paths
 paleon_out=/dummy/path
 SITE=TEST

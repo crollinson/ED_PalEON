@@ -2,7 +2,7 @@
 #PBS -N Untar
 #PBS -W group_list=davidjpmoore
 #PBS -m e
-#PBS -M crollinson@gmail.com
+#PBS -M crollinson@email.arizona.edu
 #PBS -q windfall
 #PBS -l jobtype=serial
 #PBS -l select=1:ncpus=1:mem=1.5gb

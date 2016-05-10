@@ -18,8 +18,12 @@
 #   turn on disturbance (fire, treefall)
 #   all fille paths from initial spin to final spin
 
+# Loading the qsub function
+alias 'qsub=/usr/pbs/bin/qsub'
+alias 'qstat=/usr/pbs/bin/qstat'
+
 # Load the necessary hdf5 library
-module load hdf5/1.6.10
+module load hdf5/1.10.0
 
 # Define constants & file paths for the scripts
 # Note: do not need to re

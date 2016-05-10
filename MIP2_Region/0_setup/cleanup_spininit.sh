@@ -13,6 +13,7 @@
 
 # Loading the qsub function
 alias 'qsub=/usr/pbs/bin/qsub'
+alias 'qstat=/usr/pbs/bin/qstat'
 
 # Define constants & file paths for the scripts
 file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be

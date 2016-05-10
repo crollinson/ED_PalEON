@@ -2,6 +2,7 @@
 
 # Loading the qsub function
 alias 'qsub=/usr/pbs/bin/qsub'
+alias 'qstat=/usr/pbs/bin/qstat'
 
 # This script cleans up all the spin initial & spin finish that happened before the 
 # automated file management was included in the run scripts

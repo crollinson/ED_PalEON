@@ -25,6 +25,9 @@
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
+# Loading the qsub function
+alias 'qsub=/usr/pbs/bin/qsub'
+alias 'qstat=/usr/pbs/bin/qstat'
 
 # Load the necessary hdf5 library
 module load hdf5/1.10.0

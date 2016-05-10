@@ -12,6 +12,7 @@
 
 # Loading the qsub function
 alias 'qsub=/usr/pbs/bin/qsub'
+alias 'qstat=/usr/pbs/bin/qstat'
 
 # Some useful names & paths
 paleon_out=/dummy/path

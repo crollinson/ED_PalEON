@@ -14,6 +14,7 @@ file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you wan
 
 # Loading the qsub function
 alias 'qsub=/usr/pbs/bin/qsub'
+alias 'qstat=/usr/pbs/bin/qstat'
 
 SITE=latXXXlon-XXX
 runs_dir=/DUMMY/PATH

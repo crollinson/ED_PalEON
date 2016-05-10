@@ -29,6 +29,7 @@
 # Load the necessary hdf5 library
 module load hdf5/1.10.0
 module load nco/4.4.2
+module load netcdef/4.1.3-intel
 
 # Define constants & file paths for the scripts
 BU_base_spin=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # The base original file paths in all of my scripts
@@ -174,7 +175,9 @@ do
     newbase=${file_dir}/$SITE
     oldbase=${file_dir}/TEST
 	oldname=TESTinit
-
+	
+	# PBS System only allows 14 characters for the job name, so we need to modify our naming scheme
+	SITE2=$( echo ${SITE} | cut -c4-18)
 
 	file_path=${file_dir}/${SITE}
 
@@ -195,6 +198,7 @@ do
         sed -i "s/NL%IYEARZ   = .*/NL%IYEARZ   = $finalyear/" ED2IN # Set last year
 	    sed -i "s,$old_analy,$new_analy,g" ED2IN #change output paths
 	    sed -i "s,$old_histo,$new_histo,g" ED2IN #change output paths
+        sed -i "s,TEST,${SITE},g" ED2IN # Make sure the site gets written where it shoudl
         sed -i "s/POI_LAT  =.*/POI_LAT  = $lat_now/" ED2IN # set site latitude
         sed -i "s/POI_LON  =.*/POI_LON  = $lon_now/" ED2IN # set site longitude
         sed -i "s/SLXCLAY =.*/SLXCLAY = $clay/" ED2IN # set fraction soil clay
@@ -206,7 +210,9 @@ do
 
 		# submission script changes
 	    sed -i "s,/dummy/path,${file_path},g" paleon_ed2_smp_geo.sh #site=.*
-	    sed -i "s,TEST,${SITE},g" paleon_ed2_smp_geo.sh #change job name
+	    sed -i "s,TEST,${SITE2},g" paleon_ed2_smp_geo.sh #change job name
+		sed -i "s/walltime=.*/walltime=40:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=160:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
 
 		# spin spawn start changes -- 
 		# Note: spins require a different first script because they won't have any 
@@ -214,31 +220,39 @@ do
 		cp ${setup_dir}spawn_startloops_spinstart.sh .
 		cp ${setup_dir}sub_spawn_restarts_spinstart.sh .
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops_spinstart.sh
-		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops_spinstart.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" spawn_startloops_spinstart.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops_spinstart.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops_spinstart.sh # set the file path
 	    sed -i "s,sub_post_process.sh,sub_post_process_spininit.sh,g" spawn_startloops_spinstart.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts_spinstart.sh # set the file path
-	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts_spinstart.sh # change job name
+	    sed -i "s,TEST,check_spininit,g" sub_spawn_restarts_spinstart.sh # change job name
+		sed -i "s/walltime=.*/walltime=48:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=48:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate cputimes
 
 		# spawn restarts changes
 		cp ${setup_dir}spawn_startloops.sh .
 		cp ${setup_dir}sub_spawn_restarts.sh .
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
-		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
 	    sed -i "s,sub_post_process.sh,sub_post_process_spininit.sh,g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
-	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+	    sed -i "s,TEST,check_spininit,g" sub_spawn_restarts.sh # change job name
+		sed -i "s/walltime=.*/walltime=48:00:00/" sub_spawn_restarts.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=48:00:00/" sub_spawn_restarts.sh # set appropriate cputimes
 
 		# adjust integration step changes
 		cp ${setup_dir}adjust_integration_restart.sh .
 		cp ${setup_dir}sub_adjust_integration.sh .
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
-		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" adjust_integration_restart.sh 		
+		sed -i "s,walltime=99:99:99,walltime=20:00:00," adjust_integration_restart.sh # set appropriate walltimes
+		sed -i "s,cput=99:99:99,cput=80:00:00," adjust_integration_restart.sh # set appropriate walltimes
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
-	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
+	    sed -i "s,TEST,adj_spininit,g" sub_adjust_integration.sh # change job name
+		sed -i "s/walltime=.*/walltime=24:00:00/" sub_adjust_integration.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=24:00:00/" sub_adjust_integration.sh # set appropriate cputimes
 		
 		# post-processing
 		cp ../../post_process_spininit.sh .
@@ -246,13 +260,13 @@ do
 		cp ${setup_dir}submit_ED_extraction.sh .
 		cp ${setup_dir}extract_output_paleon.R .
 		paleon_out=${file_path}/${SITE}_paleon
-	    sed -i "s,TEST,post_${SITE},g" sub_post_process_spininit.sh # change job name
+	    sed -i "s,TEST,post_spininit,g" sub_post_process_spininit.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spininit.sh # set the file path
-		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_spininit.sh 		
-		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_spininit.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" post_process_spininit.sh 		
+		sed -i "s/job_name=.*/job_name=ext_spininit/" post_process_spininit.sh 		
 		sed -i "s,/dummy/path,${paleon_out},g" post_process_spininit.sh # set the file path
 
-	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
+	    sed -i "s,TEST,${SITE2},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
 		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R
 	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path

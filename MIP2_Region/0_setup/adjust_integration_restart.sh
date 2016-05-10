@@ -52,6 +52,11 @@ sed -i "s/IYEARZ   =.*/IYEARZ   = ${finalyear}/" ED2IN
 sed -i "s/DTLSM  =.*/DTLSM  = 320/" ED2IN 
 sed -i "s/RADFRQ  =.*/RADFRQ  = 320/" ED2IN 
 
+
+# Crank down the time needed for the adjust integration step
+sed -i "s/walltime=.*/walltime=99:99:99/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
+sed -i "s/cput=.*/cput=99:99:99/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
+
 # 3. Submit the job!
 qsub paleon_ed2_smp_geo.sh	
 
@@ -64,7 +69,7 @@ do
 
 	# Different, clunky way of getting runstat from BU
 	# NOTE: Needs to be in 2 steps to get rid of the stupid 'executing qstat_local' bit
-	runstat=$(qstat -a | grep -w ${SITE} | wc -l)
+	runstat=$(qstat -a -w | grep -w ${SITE} | wc -l)
 	runstat=$(echo $runstat | rev | cut -c1 | rev)
 
     #if run has stopped go to step 5

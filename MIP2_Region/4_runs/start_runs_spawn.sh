@@ -79,6 +79,9 @@ do
 	# Site Name and Lat/Lon
 	SITE=${cells[FILE]}
 	echo $SITE
+
+	# PBS System only allows 14 characters for the job name, so we need to modify our naming scheme
+	SITE2=$( echo ${SITE} | cut -c4-18)
 	
 	# Make a new folder for this site
 	file_path=${runs_dir}/${SITE}/
@@ -137,27 +140,31 @@ do
 
 		# submission script changes
 	    sed -i "s,$spin_dir,$runs_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
-		sed -i "s/select=.*/select=1:ncpus=12:mem=23/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
-		sed -i "s/walltime=.*/walltime=216:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
-		sed -i "s/cput=.*/cput=2592:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
+		sed -i "s/select=.*/select=1:ncpus=12:mem=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/walltime=.*/walltime=230:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=2760:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
 		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 
 		# spawn restarts changes
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
-		sed -i "s/SITE=.*/SITE=${SITE}/" spawn_startloops.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalrun}/" spawn_startloops.sh 		
 		sed -i "s,sub_post_process.sh,sub_post_process_runs.sh,g" spawn_startloops.sh 
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
-	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
+	    sed -i "s,TEST,check_run,g" sub_spawn_restarts.sh # change job name
 		sed -i "s/walltime=.*/walltime=240:00:00/" sub_spawn_restarts.sh # set appropriate walltimes
 		sed -i "s/cput=.*/cput=240:00:00/" sub_spawn_restarts.sh # set appropriate cputimes
 
 		# adjust integration step changes
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
-		sed -i "s/SITE=.*/SITE=${SITE}/" adjust_integration_restart.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" adjust_integration_restart.sh 		
+		sed -i "s,walltime=99:99:99,walltime=20:00:00," adjust_integration_restart.sh # set appropriate walltimes
+		sed -i "s,cput=99:99:99,cput=240:00:00," adjust_integration_restart.sh # set appropriate walltimes
 	    sed -i "s,/dummy/path,${file_path},g" sub_adjust_integration.sh # set the file path
-	    sed -i "s,TEST,adjust_${SITE},g" sub_adjust_integration.sh # change job name
+	    sed -i "s,TEST,adjust_run,g" sub_adjust_integration.sh # change job name
+		sed -i "s/walltime=.*/walltime=24:00:00/" sub_adjust_integration.sh # set appropriate walltimes
+		sed -i "s/cput=.*/cput=24:00:00/" sub_adjust_integration.sh # set appropriate cputimes
 
 		# copy & edit the files that clean up the previous step
 		cp ${setup_dir}cleanup_spinfinish.sh .
@@ -166,7 +173,7 @@ do
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spinfinish.sh 		
 	    sed -i "s/lastyear=.*/lastyear=${finalspin}/" cleanup_spinfinish.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spinfinish.sh # set the file path
-	    sed -i "s,TEST,clean_${SITE}_spinfin,g" sub_cleanup_spinfinish.sh # change job name
+	    sed -i "s,TEST,clean_spinfin,g" sub_cleanup_spinfinish.sh # change job name
 
 
 
@@ -178,14 +185,14 @@ do
 		cp ${setup_dir}sub_cleanup_runs.sh .
 		cp ${setup_dir}cleanup_runs.sh .
 		paleon_out=${file_path}/${SITE}_paleon		
-	    sed -i "s,TEST,post_${SITE},g" sub_post_process_runs.sh # change job name
+	    sed -i "s,TEST,post_run,g" sub_post_process_runs.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_runs.sh # set the file path
 
-		sed -i "s/SITE=.*/SITE=${SITE}/" post_process_runs.sh 		
-		sed -i "s/job_name=.*/job_name=extract_${SITE}/" post_process_runs.sh 		
+		sed -i "s/SITE=.*/SITE=${SITE2}/" post_process_runs.sh 		
+		sed -i "s/job_name=.*/job_name=extract_run/" post_process_runs.sh 		
 		sed -i "s,/dummy/path,${paleon_out},g" post_process_runs.sh # set the file path
 
-	    sed -i "s,TEST,extract_${SITE},g" submit_ED_extraction.sh # change job name
+	    sed -i "s,TEST,extract_${SITE2},g" submit_ED_extraction.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" submit_ED_extraction.sh # set the file path
 
 		sed -i "s/site=.*/site='${SITE}'/" extract_output_paleon.R
@@ -195,7 +202,7 @@ do
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_runs.sh
 		sed -i "s/lastyear=.*/lastyear=3011/" cleanup_runs.sh
 		sed -i "s,/dummy/path,${file_path},g" sub_cleanup_runs.sh # set the file path
-		sed -i "s,TEST,clean_${SITE}_runs,g" sub_cleanup_runs.sh # change job name
+		sed -i "s,TEST,clean_run,g" sub_cleanup_runs.sh # change job name
 
 
 		qsub sub_spawn_restarts.sh

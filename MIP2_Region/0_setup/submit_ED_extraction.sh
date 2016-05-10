@@ -10,5 +10,7 @@
 #PBS -l cput=24:00:00
 
 cd /dummy/path
+source /usr/share/Modules/init/csh
+module load R/3.2.1
 
 R CMD BATCH extract_output_paleon.R

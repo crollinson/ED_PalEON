@@ -47,6 +47,7 @@
 #     c. if run.end < sim.finish & run.end > run.start, everything's fine & we just need to restart
 #          $$ qsub spawn_startloops.sh
 #          -- can I call a file within itself?
+module load hdf5
 
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name

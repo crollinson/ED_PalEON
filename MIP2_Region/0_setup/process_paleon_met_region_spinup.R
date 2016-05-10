@@ -21,7 +21,7 @@ library(rhdf5)
 library(abind)
 
 in.path  <- "/projectnb/dietzelab/paleon/met_regional/phase2_met_regional_v2"
-out.path <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met"
+out.path <- "/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/phase2_met"
 dir.create(file.path(out.path), showWarnings = FALSE)
 
 # sites <- c("PHA",   "PHO",  "PUN",  "PBL",  "PDL",  "PMB")

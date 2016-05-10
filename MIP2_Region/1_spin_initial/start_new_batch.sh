@@ -19,25 +19,25 @@
 #    Things to be Modified per site:
 #     -  NL%POI_LAT  =  
 #     -  NL%POI_LON  = 
-#     -  NL%FFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
-#     -  NL%SFILOUT = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
-#     -  NL%SFILIN  = '/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%FFILOUT = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/analy/XXXXX'
+#     -  NL%SFILOUT = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
+#     -  NL%SFILIN  = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/XXXXX/histo/XXXXX'
 #     -  NL%SLXCLAY = 
 #     -  NL%SLXSAND = 
 
 
 # Load the necessary hdf5 library
-module load hdf5/1.6.10
-module load nco/4.3.4
+module load hdf5
+module load nco
 
 # Define constants & file paths for the scripts
-BU_base_spin=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # The base original file paths in all of my scripts
+BU_base_spin=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region # The base original file paths in all of my scripts
 BU_base_EDI=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs on the BU server
 
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 EDI_base=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs for you
 
-ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+ed_exec=/afs/crc.nd.edu/user/c/crollin1/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
 setup_dir=${file_base}/0_setup/ # Where some constant setup files are
 site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
@@ -47,9 +47,9 @@ site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of
 git fetch --all
 git checkout origin/master -- $site_file
 
-file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
-file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
-file_depth=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
+file_clay=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
+file_sand=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
+file_depth=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/phase2_env_drivers_v2/soil/paleon_soil_soil_depth.nc # Location of soil depth file
 
 finalyear=2851
 finalfull=2850

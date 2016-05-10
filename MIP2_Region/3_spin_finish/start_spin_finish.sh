@@ -19,13 +19,13 @@
 #   all fille paths from initial spin to final spin
 
 # Load the necessary hdf5 library
-module load hdf5/1.6.10
+module load hdf5
 
 # Define constants & file paths for the scripts
 # Note: do not need to re
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
-ed_exec=/usr2/postdoc/crolli/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
+ed_exec=/afs/crc.nd.edu/user/c/crollin1/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 init_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Directory of initial spin files
 SAS_dir=${file_base}/2_SAS/SAS_init_files.v1/ # Directory of SAS initialization files
 finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Where the transient runs will go

@@ -1,5 +1,5 @@
 #!/bin/sh
-#$ -wd /projectnb/dietzelab/paleon/ED_runs/MIP2_Region/2_SAS/
+#$ -wd /afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/2_SAS/
 #$ -j y
 #$ -S /bin/bash
 #$ -V
@@ -7,6 +7,6 @@
 #$ -M crollinson@gmail.com
 #$ -l h_rt=24:00:00
 #$ -N SAS
-#cd /projectnb/dietzelab/paleon/ED_runs/MIP2_Region/2_SAS/
+#cd /afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/2_SAS/
 
 R CMD BATCH compile_SAS_runs.R

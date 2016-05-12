@@ -83,7 +83,7 @@ do
 		then
 	    	echo 'THIS SITE DOES NOT RUN!'
 	    	
-	    	EMAIL_TXT=$(echo ${SITE} 'failing.  Will not start!'
+	    	EMAIL_TXT=$(echo ${SITE} 'failing.  Will not start!')
 	    	fail_mail='fail_mail.txt'
     		echo $EMAIL_TXT >> $fail_mail
     		EMAIL_SUB=$(echo ${SITE}_'ED_Run_FAIL!')  

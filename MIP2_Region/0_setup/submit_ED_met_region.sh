@@ -5,7 +5,7 @@
 #PBS -M crollinson@email.arizona.edu
 #PBS -q standard
 #PBS -l jobtype=serial
-#PBS -l select=1:ncpus=1:mem=1.5gb
+#PBS -l select=1:ncpus=1:mem=2gb
 #PBS -l walltime=48:00:00
 #PBS -l cput=48:00:00
 

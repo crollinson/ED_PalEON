@@ -9,4 +9,6 @@
 
 cd /dummy/path
 
+source /usr/share/Modules/init/bash
+
 sh spawn_startloops.sh

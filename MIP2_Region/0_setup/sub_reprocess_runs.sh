@@ -9,4 +9,6 @@
 
 cd /dummy/path
 
+source /usr/share/Modules/init/bash
+
 sh reprocess_runs.sh

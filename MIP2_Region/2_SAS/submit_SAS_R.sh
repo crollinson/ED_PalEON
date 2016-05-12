@@ -11,4 +11,11 @@
 
 cd /rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/2_SAS/
 
+source /usr/share/Modules/init/bash
+
+module load R/3.2.1
+module load netcdf/4.1.3
+
+export R_LIBS=/home/u7/crollinson/R_libs
+
 R CMD BATCH compile_SAS_runs.R

@@ -9,4 +9,8 @@
 
 cd /dummy/path
 
+source /usr/share/Modules/init/bash
+
+unlimit
+
 sh post_process_spininit.sh

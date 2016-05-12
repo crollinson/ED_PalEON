@@ -144,7 +144,7 @@ do
 
 		# submission script changes
 	    sed -i "s,$spin_dir,$runs_dir,g" paleon_ed2_smp_geo.sh # change the baseline file path in submit
-		sed -i "s/select=.*/select=1:ncpus=12:mem=12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
+		sed -i "s/select=.*/select=1:ncpus=12:mem=12gb/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)
 		sed -i "s/walltime=.*/walltime=230:00:00/" paleon_ed2_smp_geo.sh # set appropriate walltimes
 		sed -i "s/cput=.*/cput=2760:00:00/" paleon_ed2_smp_geo.sh # set appropriate cputimes
 		sed -i "s/OMP_NUM_THREADS .*/OMP_NUM_THREADS 12/" paleon_ed2_smp_geo.sh # run the spin finish on 12 cores (splits by patch)

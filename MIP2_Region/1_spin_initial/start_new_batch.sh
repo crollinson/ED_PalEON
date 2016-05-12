@@ -42,7 +42,7 @@ file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # whatever you wa
 EDI_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ # The location of basic ED Inputs for you
 
 ed_exec=/home/u7/crollinson/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
-file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go
+file_dir=${file_base}/1_spin_initial/phase2_spininit.v1 # Where everything will go
 setup_dir=${file_base}/0_setup/ # Where some constant setup files are
 site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of ED sites w/ status
 
@@ -171,10 +171,10 @@ do
 	# -----------------------------------------------------------------------------
 
 	# File Paths
-    new_analy="'${file_dir}${SITE}/analy/${SITE}'"
-    new_histo="'${file_dir}${SITE}/histo/${SITE}'"
-    old_analy="'${file_dir}TEST/analy/TEST'"
-    old_histo="'${file_dir}TEST/histo/TEST'"
+    new_analy="'${file_dir}/${SITE}/analy/${SITE}'"
+    new_histo="'${file_dir}/${SITE}/histo/${SITE}'"
+    old_analy="'${file_dir}/TEST/analy/TEST'"
+    old_histo="'${file_dir}/TEST/histo/TEST'"
     newbase=${file_dir}/$SITE
     oldbase=${file_dir}/TEST
 	oldname=TESTinit

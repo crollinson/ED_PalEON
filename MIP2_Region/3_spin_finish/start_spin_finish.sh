@@ -30,10 +30,10 @@ module load hdf5/1.10.0
 file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
 ed_exec=/home/u7/crollinson/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
-init_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Directory of initial spin files
-SAS_dir=${file_base}/2_SAS/SAS_init_files.v1/ # Directory of SAS initialization files
-finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v1/ # Where the transient runs will go
-setup_dir=${file_base}/0_setup/
+init_dir=${file_base}/1_spin_initial/phase2_spininit.v1 # Directory of initial spin files
+SAS_dir=${file_base}/2_SAS/SAS_init_files.v1 # Directory of SAS initialization files
+finish_dir=${file_base}/3_spin_finish/phase2_spinfinish.v/ # Where the transient runs will go
+setup_dir=${file_base}/0_setup
 
 finalyear=2351 # The year on which the models should top on Jan 1
 finalfull=2350 # The last year we actually care about (probably the year before finalyear)
@@ -77,16 +77,16 @@ do
 	SITE2=$( echo ${SITE} | cut -c4-18)
 	
 	# Make a new folder for this site
-	file_path=${finish_dir}/${SITE}/
+	file_path=${finish_dir}/${SITE}
 	mkdir -p ${file_path} 
 
 	pushd ${file_path}
 		# Creating the default file structure and copying over the base files to be modified
 		mkdir -p histo analy
 		ln -s $ed_exec
-		cp ${init_dir}${SITE}/ED2IN .
-		cp ${init_dir}${SITE}/PalEON_Phase2.v1.xml .
-		cp ${init_dir}${SITE}/paleon_ed2_smp_geo.sh .
+		cp ${init_dir}/${SITE}/ED2IN .
+		cp ${init_dir}/${SITE}/PalEON_Phase2.v1.xml .
+		cp ${init_dir}/${SITE}/paleon_ed2_smp_geo.sh .
 
 		# ED2IN Changes	    
 	    sed -i "s,$init_dir,$finish_dir,g" ED2IN #change the baseline file path everywhere
@@ -104,7 +104,7 @@ do
         sed -i "s/NL%IDATEZ   = .*/NL%IDATEZ   = 01/" ED2IN # Set last day
 
         sed -i "s/NL%IED_INIT_MODE   = .*/NL%IED_INIT_MODE   = 3/" ED2IN # change from bare ground to .css/.pss run
-        sed -i "s,SFILIN   = .*,SFILIN   = '${SAS_dir}${SITE}/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
+        sed -i "s,SFILIN   = .*,SFILIN   = '${SAS_dir}/${SITE}/${SITE}',g" ED2IN # set initial file path to the SAS spin folder
         sed -i "s/NL%INCLUDE_FIRE    = 0.*/NL%INCLUDE_FIRE    = 2/" ED2IN # turn on fire
         sed -i "s/NL%SM_FIRE         = 0.*/NL%SM_FIRE         = 0.007/" ED2IN # adjust fire threshold
         sed -i "s/NL%TREEFALL_DISTURBANCE_RATE  = 0.*/NL%TREEFALL_DISTURBANCE_RATE  = 0.004/" ED2IN # turn on treefall
@@ -159,8 +159,8 @@ do
 		# post-processing
 		cp ../../post_process_spinfinish.sh .
 		cp ../../sub_post_process_spinfinish.sh .
-		cp ${setup_dir}submit_ED_extraction.sh .
-		cp ${setup_dir}extract_output_paleon.R .
+		cp ${setup_dir}/submit_ED_extraction.sh .
+		cp ${setup_dir}/extract_output_paleon.R .
 		paleon_out=${file_path}/${SITE}_paleon		
 	    sed -i "s,TEST,post_spinfin,g" sub_post_process_spinfinish.sh # change job name
 	    sed -i "s,/dummy/path,${file_path},g" sub_post_process_spinfinish.sh # set the file path
@@ -177,7 +177,7 @@ do
 		# Clean up the spin initials since we don't need them anymore
 		cp ${setup_dir}cleanup_spininit.sh .
 		cp ${setup_dir}sub_cleanup_spininit.sh .
-	    sed -i "s,/DUMMY/PATH,${init_dir}${SITE}/,g" cleanup_spininit.sh # set the file path
+	    sed -i "s,/DUMMY/PATH,${init_dir}/${SITE},g" cleanup_spininit.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spininit.sh 		
 	    sed -i "s/lastyear=.*/lastyear=${finalinit}/" cleanup_spininit.sh 		
 	    sed -i "s,/dummy/path,${file_path},g" sub_cleanup_spininit.sh # set the file path

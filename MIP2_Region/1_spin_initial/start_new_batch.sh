@@ -32,14 +32,14 @@ alias 'qstat=/usr/pbs/bin/qstat'
 # Load the necessary hdf5 library
 module load hdf5/1.10.0
 module load nco/4.4.2
-module load netcdf/4.1.3-intel
+module load netcdf/4.1.3
 
 # Define constants & file paths for the scripts
-BU_base_spin=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # The base original file paths in all of my scripts
-BU_base_EDI=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ # The location of basic ED Inputs on the BU server
+BU_base_spin=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # The base original file paths in all of my scripts
+BU_base_EDI=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI # The location of basic ED Inputs on the BU server
 
-file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/ # whatever you want the base output file path to be
-EDI_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI/ # The location of basic ED Inputs for you
+file_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
+EDI_base=/rsgrps/davidjpmoore/projects/ED_PalEON/MIP2_Region/EDI # The location of basic ED Inputs for you
 
 ed_exec=/home/u7/crollinson/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1 # Where everything will go

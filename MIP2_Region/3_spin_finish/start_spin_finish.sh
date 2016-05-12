@@ -119,8 +119,8 @@ do
 		# spin spawn start changes -- 
 		# Note: spins require a different first script because they won't have any 
 		#       histo files to read
-		cp ${setup_dir}spawn_startloops_spinstart.sh .
-		cp ${setup_dir}sub_spawn_restarts_spinstart.sh .
+		cp ${setup_dir}/spawn_startloops_spinstart.sh .
+		cp ${setup_dir}/sub_spawn_restarts_spinstart.sh .
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops_spinstart.sh
 		sed -i "s/SITE=.*/SITE=${SITE2}/" spawn_startloops_spinstart.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops_spinstart.sh 		
@@ -132,8 +132,8 @@ do
 		sed -i "s/cput=.*/cput=48:00:00/" sub_spawn_restarts_spinstart.sh # set appropriate cputimes
 
 		# spawn restarts changes
-		cp ${setup_dir}spawn_startloops.sh .
-		cp ${setup_dir}sub_spawn_restarts.sh .
+		cp ${setup_dir}/spawn_startloops.sh .
+		cp ${setup_dir}/sub_spawn_restarts.sh .
 		sed -i "s/USER=.*/USER=${USER}/" spawn_startloops.sh
 		sed -i "s/SITE=.*/SITE=${SITE2}/" spawn_startloops.sh 		
 		sed -i "s/finalyear=.*/finalyear=${finalfull}/" spawn_startloops.sh 		
@@ -145,8 +145,8 @@ do
 		sed -i "s/cput=.*/cput=48:00:00/" sub_spawn_restarts.sh # set appropriate cputimes
 
 		# adjust integration step changes
-		cp ${setup_dir}adjust_integration_restart.sh .
-		cp ${setup_dir}sub_adjust_integration.sh .
+		cp ${setup_dir}/adjust_integration_restart.sh .
+		cp ${setup_dir}/sub_adjust_integration.sh .
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh
 		sed -i "s/SITE=.*/SITE=${SITE2}/" adjust_integration_restart.sh 		
 		sed -i "s,walltime=99:99:99,walltime=20:00:00," adjust_integration_restart.sh # set appropriate walltimes
@@ -175,8 +175,8 @@ do
 	    
 	    
 		# Clean up the spin initials since we don't need them anymore
-		cp ${setup_dir}cleanup_spininit.sh .
-		cp ${setup_dir}sub_cleanup_spininit.sh .
+		cp ${setup_dir}/cleanup_spininit.sh .
+		cp ${setup_dir}/sub_cleanup_spininit.sh .
 	    sed -i "s,/DUMMY/PATH,${init_dir}/${SITE},g" cleanup_spininit.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spininit.sh 		
 	    sed -i "s/lastyear=.*/lastyear=${finalinit}/" cleanup_spininit.sh 		

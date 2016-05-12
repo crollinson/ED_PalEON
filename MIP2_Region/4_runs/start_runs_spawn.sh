@@ -171,8 +171,8 @@ do
 		sed -i "s/cput=.*/cput=24:00:00/" sub_adjust_integration.sh # set appropriate cputimes
 
 		# copy & edit the files that clean up the previous step
-		cp ${setup_dir}cleanup_spinfinish.sh .
-		cp ${setup_dir}sub_cleanup_spinfinish.sh .
+		cp ${setup_dir}/cleanup_spinfinish.sh .
+		cp ${setup_dir}/sub_cleanup_spinfinish.sh .
 	    sed -i "s,/DUMMY/PATH,${spin_dir}/${SITE}/,g" cleanup_spinfinish.sh # set the file path
 		sed -i "s/SITE=.*/SITE=${SITE}/" cleanup_spinfinish.sh 		
 	    sed -i "s/lastyear=.*/lastyear=${finalspin}/" cleanup_spinfinish.sh 		

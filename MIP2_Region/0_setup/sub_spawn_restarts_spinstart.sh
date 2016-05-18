@@ -10,5 +10,6 @@
 cd /dummy/path
 
 source /usr/share/Modules/init/bash
+module load hdf5/1.10.0
 
 sh spawn_startloops_spinstart.sh

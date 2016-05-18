@@ -52,6 +52,8 @@
 alias 'qsub=/usr/pbs/bin/qsub'
 alias 'qstat=/usr/pbs/bin/qstat'
 
+module load hdf5/1.10.0
+
 USER=crolli # or whoever is in charge of this site
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 finalyear=3010 # the last year in the histo should actually be jan 1 3011

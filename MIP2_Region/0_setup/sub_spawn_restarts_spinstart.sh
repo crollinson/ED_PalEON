@@ -5,4 +5,8 @@
 
 cd /dummy/path
 
+function qsub {
+  ssh login cd ${PWD} \&\& /usr/bin/qsub $@
+}
+
 sh spawn_startloops_spinstart.sh

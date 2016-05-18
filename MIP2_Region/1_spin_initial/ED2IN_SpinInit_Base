@@ -557,13 +557,13 @@ $ED_NL
    !                      soil temperature and moisture.                                   !
    !  SOILDEPTH_DB     -- Dataset in case you want to read in soil depth information.      !
    !---------------------------------------------------------------------------------------!
-   NL%VEG_DATABASE     = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputsoge2OLD/OGE2_'
-   NL%SOIL_DATABASE    = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputsfaoOLD/FAO_'
-   NL%LU_DATABASE      = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputsed_inputs/glu/glu-'
+   NL%VEG_DATABASE     = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputs/oge2OLD/OGE2_'
+   NL%SOIL_DATABASE    = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputs/faoOLD/FAO_'
+   NL%LU_DATABASE      = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputs/glu/glu-'
    NL%PLANTATION_FILE  = ''
-   NL%THSUMS_DATABASE  = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputsed_inputs/'
+   NL%THSUMS_DATABASE  = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputs/'
    NL%ED_MET_DRIVER_DB = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/0_setup/PL_MET_HEADER'
-   NL%SOILSTATE_DB     = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputsed_inputs/STW1996OCT.dat'
+   NL%SOILSTATE_DB     = '/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region/ed_inputs/STW1996OCT.dat'
    NL%SOILDEPTH_DB     = ''
    !---------------------------------------------------------------------------------------!
 

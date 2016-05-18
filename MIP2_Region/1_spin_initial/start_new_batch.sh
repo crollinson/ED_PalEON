@@ -35,7 +35,7 @@ BU_base_spin=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region # The base or
 BU_base_EDI=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs on the BU server
 
 file_base=/afs/crc.nd.edu/user/c/crollin1/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
-EDI_base=/projectnb/dietzelab/EDI/ # The location of basic ED Inputs for you
+EDI_base=${file_base}/ed_inputs # The location of basic ED Inputs for you
 
 ed_exec=/afs/crc.nd.edu/user/c/crollin1/ED2/ED/build/ed_2.1-opt # Location of the ED Executable
 file_dir=${file_base}/1_spin_initial/phase2_spininit.v1/ # Where everything will go

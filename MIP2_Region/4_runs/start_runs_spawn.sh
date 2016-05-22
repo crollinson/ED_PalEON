@@ -150,7 +150,7 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" spawn_startloops.sh # set the file path
 	    sed -i "s,/dummy/path,${file_path},g" sub_spawn_restarts.sh # set the file path
 	    sed -i "s,TEST,check_${SITE},g" sub_spawn_restarts.sh # change job name
-        sed -i "s/h_rt=.*/h_rt=120:00:00/" sub_spawn_restarts_spinstart.sh # Sets the run time around what we should need
+        sed -i "s/h_rt=.*/h_rt=120:00:00/" sub_spawn_restarts.sh # Sets the run time around what we should need
 
 		# adjust integration step changes
 		sed -i "s/USER=.*/USER=${USER}/" adjust_integration_restart.sh

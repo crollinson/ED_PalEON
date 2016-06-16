@@ -44,8 +44,8 @@ site_file=${setup_dir}/Paleon_MIP_Phase2_ED_Order_Status.csv # # Path to list of
 
 # # Lets double check and make sure the order status file is up to date
 # # Note: need to make sure you don't have to enter a password for this to work right
-git fetch --all
-git checkout origin/master -- $site_file
+# git fetch --all
+# git checkout origin/master -- $site_file
 
 file_clay=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_clay.nc # Location of percent clay file
 file_sand=/projectnb/dietzelab/paleon/env_regional/phase2_env_drivers_v2/soil/paleon_soil_t_sand.nc # Location of percent sand file
@@ -267,5 +267,5 @@ do
 
 done
 
-git stash # stash the pulled file so we don't get confilcts
+# git stash # stash the pulled file so we don't get confilcts
 

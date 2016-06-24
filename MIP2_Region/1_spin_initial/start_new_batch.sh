@@ -174,7 +174,7 @@ do
 	oldname=TESTinit
 
 
-	file_path=${file_dir}/${SITE}
+	file_path=${file_dir}/${SITE}/
 
 	mkdir -p ${file_path} 
 	

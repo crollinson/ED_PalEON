@@ -23,3 +23,15 @@ ggplot() +
 	coord_equal(ratio=1) +
 	theme_bw()
 dev.off()
+
+# png("ED_Regional_FillOrder.png", height=4, width=10, units="in", res=180)
+# ggplot() +
+	# geom_raster(data=paleon.status, aes(x=lon, y=lat, fill=num)) +
+	# geom_path(data=paleon.states, aes(x=long, y=lat, group=group), size=0.25) +
+	# # geom_point(aes(x=lon, y=lat), size=1, color="blue") +
+    # scale_x_continuous(limits=range(paleon.status$lon), expand=c(0,0), name="Longitude (degrees)") +
+    # scale_y_continuous(limits=range(paleon.status$lat), expand=c(0,0), name="Latitude (degrees)") +
+    # # scale_fill_manual(values=stat.color) +
+	# coord_equal(ratio=1) +
+	# theme_bw()
+# dev.off()

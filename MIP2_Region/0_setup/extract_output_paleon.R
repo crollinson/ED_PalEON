@@ -1,6 +1,6 @@
 # Script to extract monthly output from ED and put it into a netcdf 
 
-mod2paleon <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/0_setup/model2netcdf.ED2.paleon.R"
+mod2paleon <- "/home/crollinson/ED_PalEON/MIP2_Region/0_setup/model2netcdf.ED2.paleon.R"
 
 source(mod2paleon, chdir = TRUE)
 

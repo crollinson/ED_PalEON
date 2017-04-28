@@ -99,8 +99,8 @@ rh_wet_smoist  <- 0.98
 #---------------------------------------
 # Site Info
 #Setup analysis file structure
-in.base  <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/1_spin_initial/phase2_spininit.v1/"
-out.base <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/2_SAS/SAS_init_files.v1/"
+in.base  <- "/home/crollinson/ED_PalEON/MIP2_Region/1_spin_initial/phase2_spininit.v1/"
+out.base <- "/home/crollinson/ED_PalEON/MIP2_Region/2_SAS/SAS_init_files.v1/"
 
 if(!dir.exists(out.base)) dir.create(out.base)
 

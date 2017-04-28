@@ -1,48 +1,48 @@
 # See README is at the bottom of this file.
 8 # No met vars
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/dlwrf/dlwrf_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/dlwrf/dlwrf_
 80 30 0.5 0.5 -100.00 35.00
 5
 'dlwrf' 'hgt' 'vddsf' 'nbdsf' 'nddsf'
 21600. 30. 0. 0. 0.
 1 4 4 4 4
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/prate/prate_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/prate/prate_
 80 30 0.5 0.5 -100.00 35.00
 1
 'prate'
 21600.
 1
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/pres/pres_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/pres/pres_
 80 30 0.5 0.5 -100.00 35.00
 1
 'pres'
 21600.
 1
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/sh/sh_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/sh/sh_
 80 30 0.5 0.5 -100.00 35.00
 1
 'sh'
 21600.
 1
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/vbdsf/vbdsf_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/vbdsf/vbdsf_
 80 30 0.5 0.5 -100.00 35.00
 1
 'vbdsf'
 21600.
 1
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/tmp/tmp_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/tmp/tmp_
 80 30 0.5 0.5 -100.00 35.00
 1
 'tmp'
 21600.
 1
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/ugrd/ugrd_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/ugrd/ugrd_
 80 30 0.5 0.5 -100.00 35.00
 1
 'ugrd'
 21600.
 1
-/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/co2/co2_
+/home/crollinson/ED_PalEONMIP2_Region/phase2_met/co2/co2_
 80 30 0.5 0.5 -100.00 35.00
 1
 'co2'

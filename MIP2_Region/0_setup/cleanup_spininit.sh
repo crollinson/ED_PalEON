@@ -13,7 +13,7 @@
 
 
 # Define constants & file paths for the scripts
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/home/crollinson/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
 SITE=latXXXlon-XXX
 spin_dir=/DUMMY/PATH

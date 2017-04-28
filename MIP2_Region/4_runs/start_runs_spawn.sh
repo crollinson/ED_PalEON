@@ -18,7 +18,7 @@
 #   met dates 
 
 # Load the necessary hdf5 library
-module load hdf5/1.6.10
+# module load hdf5/1.6.10
 
 # Define constants & file paths for the scripts
 file_base=/home/crollinson/ED_PalEON/MIP2_Region # whatever you want the base output file path to be

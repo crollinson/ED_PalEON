@@ -10,7 +10,7 @@
 # NOTES: 
 #  - Keep any & all log files untarred so we can can easily check settings etc. 
 #  - do not tar the whole folder because that would screw up my referencing system
-file_base=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # whatever you want the base output file path to be
+file_base=/home/crollinson/ED_PalEON/MIP2_Region # whatever you want the base output file path to be
 
 SITE=latXXXlon-XXX
 runs_dir=/DUMMY/PATH

@@ -7,7 +7,7 @@
 SITE=latXXXlon-XXX # Site can be indexed off some file name
 SITE
 finalyear=3010
-outdir=/projectnb/paleon/ED_runs/MIP2_Region/4_runs/phase2_runs.v1/$SITE
+outdir=/home/crollinson/ED_PalEON/MIP2_Region/4_runs/phase2_runs.v1/$SITE
 
 while true
 do

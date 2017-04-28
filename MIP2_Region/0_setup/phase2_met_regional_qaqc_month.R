@@ -31,8 +31,8 @@
 # ----------------------------------------------
 library(raster); library(animation)
 library(ncdf4); library(ggplot2); library(grid)
-dir.met  <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met/"
-dir.out  <- "/projectnb/dietzelab/paleon/ED_runs/MIP2_Region/phase2_met_qaqc/"
+dir.met  <- "/home/crollinson/ED_PalEON/phase2_met/"
+dir.out  <- "/home/crollinson/ED_PalEON/MIP2_Region/phase2_met_qaqc/"
 if(!dir.exists(dir.out)) dir.create(dir.out)
 
 # Variables we're graphing

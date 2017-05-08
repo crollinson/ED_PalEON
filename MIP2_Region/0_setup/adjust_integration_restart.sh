@@ -51,56 +51,56 @@ sed -i "s/DTLSM  =.*/DTLSM  = 320/" ED2IN
 sed -i "s/RADFRQ  =.*/RADFRQ  = 320/" ED2IN 
 
 # Crank down the time needed for the adjust integration step
-sed -i "s/h_rt=.*/h_rt=20:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
+#sed -i "s/h_rt=.*/h_rt=20:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
 
 # 3. Submit the job!
-qsub paleon_ed2_smp_geo.sh	
-
-# 4. Check for it to get through the finish point
-# 4. Enter a loop checking the status
-while true
-do
-    sleep 300 #only run every 5 minutes
-	chmod -R a+rwx $site_path # First make sure everyone can read/write/use ALL of these files!
-
-    runstat=$(qstat -j ${SITE} | wc -l)
-
-    #if run has stopped go to step 5
-    if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
-    then
-		echo 'NOT RUNNING!'
-		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
-	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
-	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
-
-	    if [[(("lastmonth" -eq "finalmonth"))]] # NEED To match year & Month
-    	then # # 5. If we succeeded, put the end point back to where it should be
-    		echo 'WE ARE DONE!'
-    		sed -i "s/IMONTHZ  =.*/IMONTHZ  = 01/" ED2IN 
-			sed -i "s/IYEARZ   =.*/IYEARZ   = 3011/" ED2IN 
-			sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
-			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
-
-			# Put the time step back to where it should be
-			sed -i "s/h_rt=.*/h_rt=100:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
-
-            qsub sub_spawn_restarts.sh # Go back to checking this as normal
-
-    		exit
-    	else
-	    	echo 'WE HAVE A SERIOUS PROBLEM!'
-	    	
-	    	EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
-	    	echo 'Last Year/Mo/day ' $lastyear $lastmonth $lastday)
-	    	fail_mail='fail_mail.txt'
-    		echo $EMAIL_TXT >> $fail_mail
-    		EMAIL_SUB=$(echo ${SITE}_'ED_Run_FAIL!')  
-
-	    	mail -s $EMAIL_SUB crollinson@gmail.com < $fail_mail
-	    	rm -f $fail_mail
-
-	    	exit
-    	fi
-    fi # No else because we just keep going until we're not running anymore
-    done
-done
+#qsub paleon_ed2_smp_geo.sh	
+# 
+# # 4. Check for it to get through the finish point
+# # 4. Enter a loop checking the status
+# while true
+# do
+#     sleep 300 #only run every 5 minutes
+# 	chmod -R a+rwx $site_path # First make sure everyone can read/write/use ALL of these files!
+# 
+#     runstat=$(qstat -j ${SITE} | wc -l)
+# 
+#     #if run has stopped go to step 5
+#     if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
+#     then
+# 		echo 'NOT RUNNING!'
+# 		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
+# 	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
+# 	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
+# 
+# 	    if [[(("lastmonth" -eq "finalmonth"))]] # NEED To match year & Month
+#     	then # # 5. If we succeeded, put the end point back to where it should be
+#     		echo 'WE ARE DONE!'
+#     		sed -i "s/IMONTHZ  =.*/IMONTHZ  = 01/" ED2IN 
+# 			sed -i "s/IYEARZ   =.*/IYEARZ   = 3011/" ED2IN 
+# 			sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
+# 			sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
+# 
+# 			# Put the time step back to where it should be
+# 			sed -i "s/h_rt=.*/h_rt=100:00:00/" paleon_ed2_smp_geo.sh # Sets the run time around what we should need
+# 
+#             qsub sub_spawn_restarts.sh # Go back to checking this as normal
+# 
+#     		exit
+#     	else
+# 	    	echo 'WE HAVE A SERIOUS PROBLEM!'
+# 	    	
+# 	    	EMAIL_TXT=$(echo 'Houston we have a problem! site' ${SITE} 'failed.  NEED TO LOOK AT IT!'
+# 	    	echo 'Last Year/Mo/day ' $lastyear $lastmonth $lastday)
+# 	    	fail_mail='fail_mail.txt'
+#     		echo $EMAIL_TXT >> $fail_mail
+#     		EMAIL_SUB=$(echo ${SITE}_'ED_Run_FAIL!')  
+# 
+# 	    	mail -s $EMAIL_SUB crollinson@gmail.com < $fail_mail
+# 	    	rm -f $fail_mail
+# 
+# 	    	exit
+#     	fi
+#     fi # No else because we just keep going until we're not running anymore
+#     done
+# done

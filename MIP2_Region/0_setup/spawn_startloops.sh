@@ -71,52 +71,58 @@ sed -i 's/IED_INIT_MODE   =.*/IED_INIT_MODE   = 5/' ED2IN
 sed -i "s/RUNTYPE  =.*/RUNTYPE  = 'HISTORY'/" ED2IN
 sed -i "s,SFILIN   = .*,SFILIN   = '${site_path}histo/${SITE}',g" ED2IN # set initial file path to current directory
 
-# 3. Submit the job!
-qsub paleon_ed2_smp_geo.sh	
+# taking this out of adjust start loops
+sed -i "s/IMONTHZ  =.*/IMONTHZ  = 01/" ED2IN 
+sed -i "s/IYEARZ   =.*/IYEARZ   = 3011/" ED2IN 
+sed -i "s/DTLSM  =.*/DTLSM  = 540/" ED2IN 
+sed -i "s/RADFRQ  =.*/RADFRQ  = 540/" ED2IN 
 
-
-# 4. Enter a loop checking the status
-while true
-do
-    sleep 300 #only run every 5 minutes
-	chmod -R a+rwx ${site_path} # First make sure everyone can read/write/use ALL of these files!
-
-    runstat=$(qstat -j ${SITE} | wc -l)
-
-    #if run has stopped go to step 5
-    if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
-    then
-		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
-	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
-	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
-
-		# Check cases    
-	    if [[(("${lastyear}" -gt "${finalyear}"))]]
-    	then # case a: we're done and everything's happy, send an email telling me so
-    		# Send an email saying the site is done
-    		email_file='status_mail.txt'
-    		echo "We're done, Mission Accomplished! Runs finished without problems -- " ${SITE} >> $email_file
-    		EMAIL_SUB=$(echo ${SITE}_'ED_Run_Succeeded!') 
-	    	mail -s $EMAIL_SUB crollinson@gmail.com < $email_file
-	    	rm -f $email_file
-    		
-    		qsub sub_post_process.sh
-    		
-    		exit
-    	else
-    		if [[(("${lastyear}" -eq "${startyear}"))]]
-	    	then # case b: we're crashing, try again with lower integration step
-	    		echo "something's wrong. trying again with a smaller timestep"
-	    		qsub sub_adjust_integration.sh
-	    	
-	    		exit
-	    	else # case c: we're not done, but so far so good
-				echo "We stopped for gas.  Restarting with sunny skies"
-				qsub sub_spawn_restarts.sh
-	    	
-	    		exit
-	    	fi
-    	fi
-    fi # No else because we just keep going until we're not running anymore
-    done
-done
+# # 3. Submit the job!
+# qsub paleon_ed2_smp_geo.sh	
+# 
+# 
+# # 4. Enter a loop checking the status
+# while true
+# do
+#     sleep 300 #only run every 5 minutes
+# 	chmod -R a+rwx ${site_path} # First make sure everyone can read/write/use ALL of these files!
+# 
+#     runstat=$(qstat -j ${SITE} | wc -l)
+# 
+#     #if run has stopped go to step 5
+#     if [[(("${runstat}" -eq 0))]] # If run has stopped, go to step 5
+#     then
+# 		lastday=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c15-16 | rev`
+# 	    lastmonth=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c18-19 | rev`
+# 	    lastyear=`ls -l -rt ${site_path}/histo| tail -1 | rev | cut -c21-24 | rev`
+# 
+# 		# Check cases    
+# 	    if [[(("${lastyear}" -gt "${finalyear}"))]]
+#     	then # case a: we're done and everything's happy, send an email telling me so
+#     		# Send an email saying the site is done
+#     		email_file='status_mail.txt'
+#     		echo "We're done, Mission Accomplished! Runs finished without problems -- " ${SITE} >> $email_file
+#     		EMAIL_SUB=$(echo ${SITE}_'ED_Run_Succeeded!') 
+# 	    	mail -s $EMAIL_SUB crollinson@gmail.com < $email_file
+# 	    	rm -f $email_file
+#     		
+#     		qsub sub_post_process.sh
+#     		
+#     		exit
+#     	else
+#     		if [[(("${lastyear}" -eq "${startyear}"))]]
+# 	    	then # case b: we're crashing, try again with lower integration step
+# 	    		echo "something's wrong. trying again with a smaller timestep"
+# 	    		qsub sub_adjust_integration.sh
+# 	    	
+# 	    		exit
+# 	    	else # case c: we're not done, but so far so good
+# 				echo "We stopped for gas.  Restarting with sunny skies"
+# 				qsub sub_spawn_restarts.sh
+# 	    	
+# 	    		exit
+# 	    	fi
+#     	fi
+#     fi # No else because we just keep going until we're not running anymore
+#     done
+# done

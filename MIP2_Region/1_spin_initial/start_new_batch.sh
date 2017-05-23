@@ -26,9 +26,9 @@
 #     -  NL%SLXSAND = 
 
 
-# Load the necessary hdf5 library
-module load hdf5/1.6.10
-module load nco/4.3.4
+## Load the necessary hdf5 library
+# module load hdf5/1.6.10
+# module load nco/4.3.4
 
 # Define constants & file paths for the scripts
 BU_base_spin=/projectnb/dietzelab/paleon/ED_runs/MIP2_Region # The base original file paths in all of my scripts
@@ -260,7 +260,7 @@ do
 	    sed -i "s,/dummy/path,${file_path},g" extract_output_paleon.R # set the file path
 
 
- 		sh spawn_startloops_spinstart.sh
+#  		sh spawn_startloops_spinstart.sh
 	popd	
 
 	chmod -R a+rwx ${file_path}

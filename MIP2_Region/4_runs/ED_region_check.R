@@ -1,7 +1,8 @@
 # Checking the ED quasi-regional output
 library(ncdf4)
+library(ggplot2)
 
-ed.file <- nc_open("~/Desktop/ED2.v1.2016-04-14/ED2_0850.nc")
+ed.file <- nc_open("~/Desktop/Research/paleon/MIP2_Region/model_output/ED2.v1.2017-05-09/ED2_0850.nc")
 summary(ed.file$var)
 
 ed.lon <- ncvar_get(ed.file, "lon")

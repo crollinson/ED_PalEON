@@ -20,7 +20,7 @@ library(zoo)
 ## Creating a funciton that can be executed
 ## --------------------------------------------------------------
 ## --------------------------------------------------------------
-model2netcdf.ED2.paleon <- function(site, raw.dir, new.dir, sitelat, sitelon, start.run, end.run, bins) {
+model2netcdf.ED2.paleon <- function(site, raw.dir, new.dir, sitelat, sitelon, start.run, end.run) {
 
 
 ## --------------------------------------------------------------

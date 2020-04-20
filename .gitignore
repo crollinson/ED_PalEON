@@ -37,3 +37,4 @@ MIP2_Region/debugging/Met_Check/phase1_met
 *.Rout
 
 MIP2_Region/0_setup/.RData
+.DS_Store
